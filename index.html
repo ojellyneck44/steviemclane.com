@@ -1,0 +1,2299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stevie McLane — UI/UX Designer</title>
+<meta name="description" content="Portfolio of Stevie McLane, a product and UI/UX designer.">
+
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ===================================================================
+     DESIGN TOKENS — edit these to reskin the entire site
+     =================================================================== */
+  :root {
+    /* Color — unified blue & white */
+    --canvas: #F4F8FD;
+    --canvas-raised: #FFFFFF;
+    --ink: #111111;
+    --ink-soft: #55698A;
+    --line: #DCE7F5;
+
+    --blue-deep: #0B3D91;
+    --blue-bright: #2F6FED;
+    --blue-sky: #6FA8FF;
+    --blue-navy: #133A66;
+
+    /* the "active" accent — swapped live by the palette strip */
+    --accent: var(--blue-bright);
+    --accent-ink: #FFFFFF;
+
+    /* Type — one family throughout, differentiated by weight only */
+    --font-display: 'Work Sans', -apple-system, sans-serif;
+    --font-body: 'Work Sans', -apple-system, sans-serif;
+    --font-mono: 'Work Sans', -apple-system, sans-serif;
+
+    /* Layout */
+    --container: 1160px;
+    --gutter: clamp(1.25rem, 4vw, 3rem);
+    --radius-sm: 10px;
+    --radius-md: 18px;
+    --radius-lg: 28px;
+
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* ===================================================================
+     RESET
+     =================================================================== */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    transition: background 0.4s var(--ease);
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.01em; margin: 0; line-height: 1.15; }
+  p { margin: 0; }
+  ul { margin: 0; padding: 0; list-style: none; }
+  button { font: inherit; cursor: pointer; }
+
+  :focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .wrap {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    transition: color 0.4s var(--ease);
+  }
+
+  /* ===================================================================
+     NAV
+     =================================================================== */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(247, 245, 255, 0.92);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    will-change: backdrop-filter;
+    border-bottom: 1px solid var(--line);
+  }
+  .nav .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 76px;
+  }
+  .logo {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    font-size: 1.15rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+  .nav-links a { text-decoration: none; position: relative; padding: 4px 0; }
+  .nav-link-arrow { display: none; }
+  .nav-links a::after {
+    content: '';
+    position: absolute; left: 0; bottom: -2px;
+    width: 0; height: 2px;
+    background: var(--accent);
+    transition: width 0.3s var(--ease), background 0.4s var(--ease);
+  }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-cta {
+    background: var(--ink);
+    color: var(--canvas);
+    padding: 0.6rem 1.3rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    border: none;
+  }
+
+  .menu-btn {
+    display: none;
+    background: none;
+    border: 2px solid var(--ink);
+    border-radius: 8px;
+    width: 40px; height: 40px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color 0.3s var(--ease), transform 0.35s var(--ease-bounce), background 0.3s var(--ease);
+  }
+  .menu-btn:hover { transform: translateY(-1px) rotate(-8deg) scale(1.08); }
+  .menu-btn:active { transform: scale(0.92); }
+  .menu-btn span, .menu-btn span::before, .menu-btn span::after {
+    content: '';
+    display: block;
+    width: 18px; height: 2px;
+    background: var(--ink);
+    position: relative;
+    transition: transform 0.35s var(--ease), opacity 0.25s var(--ease), background 0.3s var(--ease);
+  }
+  .menu-btn span::before { position: absolute; top: -6px; }
+  .menu-btn span::after { position: absolute; top: 6px; }
+  .menu-btn[aria-expanded="true"] { border-color: var(--accent); }
+  .menu-btn[aria-expanded="true"] span { background: transparent; }
+  .menu-btn[aria-expanded="true"] span::before { background: var(--accent); transform: rotate(45deg) translate(4px, 5px); }
+  .menu-btn[aria-expanded="true"] span::after { background: var(--accent); transform: rotate(-45deg) translate(4px, -5px); }
+
+  /* ===================================================================
+     PALETTE STRIP — signature element. Click a swatch to re-theme the
+     whole page live. This *is* the portfolio's thesis: a designer who
+     thinks in systems, not just screens.
+     =================================================================== */
+  .palette-strip {
+    display: flex;
+    height: 6px;
+    position: relative;
+  }
+  .palette-strip button {
+    flex: 1;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: flex 0.3s var(--ease);
+  }
+  .palette-strip button:hover { flex: 1.6; transform: translateY(-2px); }
+  .palette-strip button { transition: flex 0.3s var(--ease), transform 0.25s var(--ease); }
+  .swatch-deep { background: #0B3D91; }
+  .swatch-bright { background: #2F6FED; }
+  .swatch-sky { background: #6FA8FF; }
+  .swatch-navy { background: #133A66; }
+
+  /* Mobile-friendly twin of the hero notecard easter egg — clicking the
+     logo pops the same tiny photo up from behind the palette strip,
+     since the hero illustration isn't shown on small screens. Uses a
+     fade+scale instead of the hero version's z-index occlusion trick,
+     since the strip itself is only 6px tall and can't physically cover
+     anything larger. */
+  .logo-peek {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 74px;
+    z-index: 40;
+    pointer-events: none;
+    opacity: 0;
+    transform-origin: center center;
+    transform: translate(-50%, -60%) scale(0.55) rotate(180deg);
+    transition: transform 0.5s var(--ease-bounce), opacity 0.3s var(--ease);
+  }
+  .logo-peek.is-visible {
+    opacity: 1;
+    transform: translate(-50%, 8%) scale(1) rotate(180deg);
+  }
+  #logo-trigger { cursor: pointer; }
+
+  /* ===================================================================
+     HERO
+     =================================================================== */
+  .hero {
+    padding: clamp(3.5rem, 10vw, 7rem) 0 clamp(3rem, 8vw, 5rem);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+  .hero h1 {
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-top: 0.75rem;
+  }
+  .hero h1 .accent-word {
+    color: var(--accent);
+    transition: color 0.4s var(--ease);
+    display: inline-block;
+    white-space: nowrap;
+    perspective: 400px;
+  }
+  .accent-letter {
+    display: inline-block;
+    transform: translateY(0) rotateX(0deg);
+    opacity: 1;
+    transition: transform 0.4s var(--ease), opacity 0.32s var(--ease);
+    transform-origin: 50% 100%;
+  }
+  .accent-letter.is-out {
+    transform: translateY(0.5em) rotateX(-80deg);
+    opacity: 0;
+  }
+  .accent-letter.is-in-start {
+    transform: translateY(-0.5em) rotateX(80deg);
+    opacity: 0;
+  }
+  .hero p.lede {
+    margin-top: 1.25rem;
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    color: var(--ink-soft);
+    max-width: 46ch;
+  }
+  .hero-actions {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .btn-primary, .btn-secondary {
+    padding: 0.85rem 1.6rem;
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    border: 2px solid transparent;
+    background: transparent;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+    transition: transform 0.4s var(--ease-bounce), background 0.3s var(--ease), border-color 0.3s, color 0.3s;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+  .btn-primary:hover { transform: translateY(-4px) scale(1.06) rotate(-1.5deg); }
+  .btn-primary:active { transform: scale(0.94); }
+  .btn-secondary {
+    border-color: var(--ink);
+    color: var(--ink);
+    background: transparent;
+  }
+  .btn-secondary:hover { transform: translateY(-4px) scale(1.06) rotate(1.5deg); }
+  .btn-secondary:active { transform: scale(0.94); }
+  .btn-secondary-inverted {
+    border-color: var(--canvas);
+    color: var(--canvas);
+    background: transparent;
+  }
+  .btn-secondary-inverted:hover {
+    background: var(--canvas);
+    color: var(--ink);
+  }
+
+  /* hero visual: stacked "artboard" cards, a nod to design-file layers */
+  .hero-visual {
+    position: relative;
+    aspect-ratio: 1 / 1;
+  }
+  .artboard {
+    position: absolute;
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--ink);
+    background: var(--canvas-raised);
+    will-change: transform;
+  }
+  .artboard-1 { inset: 12% 0 0 12%; background: var(--blue-sky); transform: rotate(-4deg); animation: float-a 6s ease-in-out infinite; }
+  .artboard-2 { inset: 4% 8% 12% 0; background: var(--blue-deep); transform: rotate(3deg); animation: float-b 7s ease-in-out infinite; }
+  @keyframes float-a {
+    0%, 100% { transform: rotate(-4deg) translateY(0); }
+    50% { transform: rotate(-4deg) translateY(-14px); }
+  }
+  @keyframes float-b {
+    0%, 100% { transform: rotate(3deg) translateY(0); }
+    50% { transform: rotate(3deg) translateY(10px); }
+  }
+  .artboard-3-float {
+    position: absolute;
+    inset: 0 12% 8% 4%;
+    z-index: 2;
+    cursor: pointer;
+    animation: float-c 8s ease-in-out infinite;
+  }
+  .artboard-3 {
+    position: absolute;
+    inset: 0;
+    background: var(--canvas-raised);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10%;
+    transform: rotate(-1deg) scale(1);
+    transition: transform 0.35s var(--ease-bounce);
+  }
+  .artboard-3-float:active .artboard-3 {
+    transform: rotate(-1deg) scale(0.92);
+  }
+
+  /* A tiny cutout photo that hides behind the notecard artboard and pops
+     up from behind its top edge when clicked — purely for delight, no
+     functional purpose. Percentages are relative to the peek image's
+     own size, so the pop stays consistent regardless of exact pixel
+     dimensions at any breakpoint. */
+  .artboard-peek {
+    position: absolute;
+    top: 0;
+    left: 46%;
+    width: 42%;
+    max-width: 160px;
+    z-index: 1;
+    pointer-events: none;
+    transform: translate(-50%, 96%);
+    transition: transform 0.5s var(--ease-bounce);
+  }
+  .artboard-peek.is-visible {
+    transform: translate(-50%, -62%);
+  }
+  @keyframes float-c {
+    0%, 100% { transform: rotate(-1deg) translateY(0); }
+    50% { transform: rotate(-1deg) translateY(-8px); }
+  }
+  .artboard-3 .line { height: 10px; border-radius: 6px; background: var(--line); }
+  .artboard-3 .line.short { width: 55%; }
+  .artboard-3 .chip {
+    margin-top: auto;
+    width: 44%;    height: 32px;
+    border-radius: 999px;
+    background: var(--blue-bright);
+  }
+
+  /* ===================================================================
+     SECTION HEADERS
+     =================================================================== */
+  section { padding: clamp(3rem, 8vw, 5.5rem) 0; }
+  .section-head { margin-bottom: clamp(2rem, 5vw, 3rem); max-width: 60ch; }
+  .section-head h2 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 600;
+    margin-top: 0.5rem;
+  }
+
+  /* ===================================================================
+     PROJECTS
+     =================================================================== */
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(1.25rem, 3vw, 2rem);
+  }
+  .project-card {
+    background: var(--canvas-raised);
+    border: 2px solid var(--ink);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+    text-align: left;
+    font: inherit;
+    transition: transform 0.45s var(--ease-bounce), box-shadow 0.4s var(--ease), opacity 0.6s var(--ease), translate 0.6s var(--ease);
+    opacity: 0;
+    translate: 0 30px;
+    will-change: opacity, translate, transform;
+  }
+  .project-card.in-view {
+    opacity: 1;
+    translate: 0 0;
+  }
+  .project-card:hover {
+    transform: translateY(-10px) scale(1.03) rotate(-1.2deg);
+    box-shadow: 0 24px 40px -16px rgba(17, 17, 17, 0.28);
+  }
+  .project-card:nth-child(even):hover {
+    transform: translateY(-10px) scale(1.03) rotate(1.2deg);
+  }
+  .project-card:active {
+    transform: scale(0.97);
+  }
+  .project-thumb {
+    aspect-ratio: 16 / 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: rgba(0,0,0,0.35);
+    border-bottom: 2px solid var(--ink);
+    overflow: hidden;
+  }
+  .project-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+  .project-body { padding: 1.4rem 1.5rem 1.6rem; }
+  .project-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+  }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    border: 1.5px solid var(--ink);
+  }
+  .project-card h3 { font-size: 1.3rem; font-weight: 600; }
+  .project-card p { margin-top: 0.5rem; color: var(--ink-soft); font-size: 0.95rem; }
+
+  /* ===================================================================
+     CONTACT
+     =================================================================== */
+  .contact {
+    background: var(--ink);
+    color: var(--canvas);
+    border-radius: var(--radius-lg);
+    margin: 0 var(--gutter) clamp(3rem, 8vw, 5rem);
+    padding: clamp(2.5rem, 6vw, 4.5rem);
+    text-align: center;
+  }
+  .contact .eyebrow { color: var(--blue-sky); }
+  .contact h2 {
+    color: var(--canvas);
+    font-size: clamp(1.9rem, 5vw, 3rem);
+    margin-top: 0.75rem;
+  }
+  .contact p {
+    color: rgba(247,245,255,0.7);
+    margin-top: 1rem;
+    max-width: 50ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .contact-actions {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .contact .btn-primary { border: 2px solid var(--accent); }
+
+  /* ===================================================================
+     FOOTER
+     =================================================================== */
+  footer {
+    padding: 2rem var(--gutter) 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  footer .socials { display: flex; gap: 1.25rem; }
+  footer a { text-decoration: none; }
+  footer a:hover { color: var(--ink); }
+
+
+  /* ===================================================================
+     CASE STUDY MODAL — click a project card to open an immersive
+     overlay: carousel on the left, description on the right.
+     =================================================================== */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    background: rgba(11, 20, 35, 0.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(1rem, 4vw, 3rem);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s var(--ease), visibility 0.35s var(--ease);
+  }
+  .modal-overlay.open {
+    opacity: 1;
+    visibility: visible;
+  }
+  .modal-box {
+    position: relative;
+    background: var(--canvas-raised);
+    border-radius: var(--radius-lg);
+    width: min(1080px, 100%);
+    height: min(720px, 90vh);
+    max-height: min(720px, 90vh);
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    overflow: hidden;
+    box-shadow: 0 40px 80px -20px rgba(11, 20, 35, 0.45);
+    transform: translateY(24px) scale(0.97);
+    transition: transform 0.4s var(--ease), grid-template-columns 0.3s var(--ease);
+  }
+  .modal-box.has-audio {
+    grid-template-columns: 108px 1.35fr 1fr;
+  }
+  .modal-overlay.open .modal-box {
+    transform: translateY(0) scale(1);
+  }
+  .modal-close {
+    position: absolute;
+    top: clamp(1rem, 3vw, 1.75rem);
+    right: clamp(1rem, 3vw, 1.75rem);
+    z-index: 10;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(17, 17, 17, 0.55);
+    color: #fff;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.25s var(--ease), transform 0.4s var(--ease-bounce);
+  }
+  .modal-close:hover { background: rgba(17, 17, 17, 0.8); transform: scale(1.15) rotate(90deg); }
+
+  /* Vertical audio visualizer panel (SLD project only) */
+  .modal-visualizer {
+    display: none;
+    position: relative;
+    background: #0a0a0a;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+  }
+  .modal-box.has-audio .modal-visualizer { display: flex; }
+  .viz-top {
+    flex: 1;
+    width: 100%;
+    min-height: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+    padding: 10px 8px 0;
+  }
+  .viz-canvas-mount {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    container-type: size;
+  }
+  /* The library sizes itself to this inner div's own box, so instead of
+     rotating the canvas after the fact (fragile — depends on measuring
+     the outer box at exactly the right moment), we use container query
+     units to give the inner div the OUTER box's dimensions pre-swapped.
+     The library then fluidly renders into that correctly-shaped box on
+     its own, and we just rotate + center the whole thing into place. */
+  .viz-canvas-inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100cqh;
+    height: 100cqw;
+    transform: translate(-50%, -50%) rotate(-90deg);
+    transform-origin: center center;
+  }
+  .viz-canvas-inner canvas {
+    display: block;
+    filter: saturate(1.55) brightness(1.2) contrast(1.08);
+  }
+  .viz-progress {
+    position: relative;
+    flex: 0 0 14px;
+    width: 14px;
+    height: 100%;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    cursor: pointer;
+    touch-action: none;
+  }
+  .viz-progress-fill {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 0%;
+    background: var(--accent);
+    transition: height 0.1s linear, width 0.1s linear;
+  }
+  .viz-toggle,
+  .viz-mute {
+    flex: 0 0 auto;
+    width: 40px;
+    height: 40px;
+    margin: 0.4rem 0;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.25s var(--ease), transform 0.35s var(--ease-bounce);
+  }
+  .viz-toggle:hover,
+  .viz-mute:hover { background: rgba(255, 255, 255, 0.25); transform: scale(1.12); }
+  .viz-toggle:active,
+  .viz-mute:active { transform: scale(0.9); }
+  .viz-toggle.playing { background: var(--accent); }
+  .viz-mute.muted { background: rgba(255, 255, 255, 0.25); color: rgba(255, 255, 255, 0.5); }
+  .viz-mute { margin-bottom: 0.8rem; }
+  .modal-carousel {
+    position: relative;
+    background: var(--ink);
+    overflow: hidden;
+    touch-action: pan-y;
+  }
+  .carousel-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.45s var(--ease);
+  }
+  .carousel-slide {
+    flex: 0 0 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .carousel-slide .slide-fill {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+  }
+  /* Real product screenshots (as opposed to the flat placeholder-color
+     fills above) are shown uncropped — object-fit: contain — so the
+     whole vertical screen is always visible while swiping through.
+     The letterboxed space on either side is filled with a darkened,
+     blurred blow-up of the same image rather than flat black. */
+  .carousel-slide .slide-bg {
+    position: absolute;
+    inset: -5%;
+    background-size: cover;
+    background-position: center;
+    filter: blur(28px) brightness(0.42) saturate(1.15);
+    transform: scale(1.15);
+  }
+  .carousel-slide .slide-img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .slide-caption {
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    padding: 0 1.4rem;
+  }
+  /* A frosted, horizontal pill behind the caption text. backdrop-filter
+     only blurs whatever sits directly behind THIS element's own box, so
+     the blur stays contained to the pill's rounded-rect shape rather
+     than bleeding across the whole image. */
+  .slide-caption-pill {
+    display: inline-block;
+    max-width: 100%;
+    padding: 0.65rem 1.4rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    color: var(--ink);
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-align: center;
+    line-height: 1.4;
+  }
+  .carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: background 0.25s var(--ease), transform 0.35s var(--ease-bounce);
+  }
+  .carousel-arrow:hover { background: rgba(255, 255, 255, 0.3); }
+  .carousel-arrow.prev { left: 1rem; }
+  .carousel-arrow.next { right: 1rem; }
+  .carousel-arrow.prev:hover { transform: translateY(-50%) translateX(-4px) scale(1.1); }
+  .carousel-arrow.next:hover { transform: translateY(-50%) translateX(4px) scale(1.1); }
+
+  /* Category dropdown (top-left) and fullscreen toggle (top-right) —
+     only shown for projects that opt into multiple asset categories /
+     fullscreen viewing; otherwise stay out of the way entirely. */
+  .carousel-category-select {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 6;
+    max-width: calc(100% - 5rem);
+    padding: 0.5rem 2rem 0.5rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--ink);
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.7rem center;
+    background-size: 14px;
+  }
+  .carousel-category-select:hover { background-color: rgba(255, 255, 255, 0.98); }
+  .carousel-fullscreen-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 6;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.25s var(--ease), transform 0.4s var(--ease-bounce);
+  }
+  .carousel-fullscreen-toggle svg { width: 17px; height: 17px; }
+  .carousel-fullscreen-toggle:hover { background: rgba(255, 255, 255, 0.3); transform: scale(1.1); }
+
+  /* Document/slide-deck viewer — a white "page" centered in the slide,
+     used for PDF and PPTX entries instead of the image treatment. */
+  .carousel-slide .slide-doc {
+    position: relative;
+    z-index: 1;
+    width: 84%;
+    height: 88%;
+    margin: auto auto 0;
+    background: #fff;
+    box-shadow: 0 10px 30px -10px rgba(17, 17, 17, 0.4);
+    overflow: hidden;
+  }
+  .carousel-slide .slide-doc iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+
+  /* Full screen carousel viewing — same "expand to fill the viewport"
+     treatment as the resume viewer, reused here so any slide (image,
+     PDF, or embedded slide deck) can be viewed large. */
+  .modal-overlay.is-fullscreen-active {
+    background: #000 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    padding: 0 !important;
+  }
+  .modal-overlay.is-fullscreen-active .modal-box {
+    width: 100vw !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    border-radius: 0 !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: 1fr !important;
+    animation: resume-zoom-in 0.5s var(--ease);
+  }
+  .modal-overlay.is-fullscreen-active .modal-info,
+  .modal-overlay.is-fullscreen-active .modal-visualizer,
+  .modal-overlay.is-fullscreen-active .modal-close,
+  .modal-overlay.is-fullscreen-active .carousel-category-select,
+  .modal-overlay.is-fullscreen-active .carousel-fullscreen-toggle {
+    display: none !important;
+  }
+  .modal-exit-full {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    z-index: 20;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(17, 17, 17, 0.55);
+    color: #fff;
+    font-size: 1.1rem;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: background 0.25s var(--ease), transform 0.4s var(--ease-bounce), opacity 0.35s var(--ease) 0.15s;
+  }
+  .modal-exit-full:hover { background: rgba(17, 17, 17, 0.8); transform: scale(1.15) rotate(90deg); }
+  .modal-overlay.is-fullscreen-active .modal-exit-full { display: flex; opacity: 1; }
+
+  .carousel-dots {
+    position: absolute;
+    bottom: 0.9rem;
+    left: 0;
+    right: 0;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    gap: 0.45rem;
+  }
+  .carousel-dots button {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.4);
+    padding: 0;
+    transition: background 0.25s var(--ease), transform 0.25s var(--ease);
+  }
+  .carousel-dots button.active {
+    background: #fff;
+    transform: scale(1.25);
+  }
+
+  /* Description (right pane) */
+  .modal-info {
+    padding: clamp(1.75rem, 4vw, 2.75rem);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .modal-info .project-tags { margin-top: 1rem; margin-bottom: 0; }
+  .modal-info h2 {
+    font-size: clamp(1.5rem, 3vw, 1.9rem);
+    margin-top: 0.9rem;
+  }
+  .modal-info .modal-summary {
+    margin-top: 0.9rem;
+    color: var(--ink-soft);
+    font-size: 0.98rem;
+    line-height: 1.6;
+  }
+  .modal-info .modal-detail {
+    margin-top: 1.25rem;
+    color: var(--ink);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 720px) {
+    .modal-overlay { padding: 0; align-items: flex-end; }
+    .modal-box {
+      grid-template-columns: 1fr;
+      grid-template-rows: 46vh auto 1fr;
+      height: 94vh;
+      max-height: 94vh;
+      width: 100%;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+    .modal-box.has-audio { grid-template-columns: 1fr; }
+    .modal-carousel { grid-row: 1; grid-column: 1; }
+    .modal-visualizer {
+      grid-row: 2;
+      grid-column: 1;
+      flex-direction: row;
+      align-items: center;
+      height: 76px;
+      padding: 0 14px;
+      gap: 12px;
+    }
+    .modal-info { grid-row: 3; grid-column: 1; padding: 1.5rem 1.4rem 2rem; }
+    .carousel-arrow { display: none; }
+    .carousel-fullscreen-toggle { top: auto; bottom: 0.7rem; left: 0.75rem; right: auto; }
+    .carousel-category-select { max-width: calc(100% - 5rem); }
+
+    /* The visualizer panel switches from a vertical column (desktop) to
+       a horizontal strip here: canvas + horizontal scrub bar stacked in
+       the middle, with play/mute at the end. The rotation that orients
+       things along the Y axis on desktop is undone — a wide-short strip
+       reads better as a normal left-to-right wave. */
+    .viz-top {
+      flex: 1;
+      min-width: 0;
+      height: 100%;
+      flex-direction: column;
+      padding: 10px 0;
+      gap: 6px;
+    }
+    .viz-canvas-mount {
+      flex: 1;
+      width: 100%;
+      height: auto;
+      container-type: normal;
+    }
+    .viz-canvas-inner {
+      position: static;
+      width: 100%;
+      height: 100%;
+      transform: none;
+    }
+    .viz-progress {
+      flex: 0 0 auto;
+      width: 100%;
+      height: 6px;
+    }
+    .viz-toggle,
+    .viz-mute {
+      flex: 0 0 auto;
+      margin: 0;
+    }
+  }
+
+
+  /* ===================================================================
+     RESUME MODAL — same overlay language as the case study modal,
+     but a single stacked panel with a PDF viewer inside.
+     =================================================================== */
+  .resume-box {
+    background: var(--canvas-raised);
+    border-radius: var(--radius-lg);
+    width: min(760px, 100%);
+    height: min(820px, 92vh);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 40px 80px -20px rgba(11, 20, 35, 0.45);
+    transform: translateY(24px) scale(0.97);
+    transition: transform 0.4s var(--ease);
+  }
+  .modal-overlay.open .resume-box {
+    transform: translateY(0) scale(1);
+  }
+  .resume-header {
+    padding: 1.5rem clamp(1.5rem, 4vw, 2.25rem);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .resume-header h2 { font-size: clamp(1.4rem, 3vw, 1.7rem); }
+  .resume-header .eyebrow { display: block; margin-bottom: 0.4rem; }
+  .resume-icon-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: var(--canvas);
+    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: border-color 0.25s var(--ease), background 0.25s var(--ease), transform 0.25s var(--ease), color 0.25s var(--ease);
+  }
+  .resume-icon-btn svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .resume-icon-btn:hover {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--accent-ink);
+    transform: translateY(-2px);
+  }
+  .resume-viewer {
+    flex: 1;
+    background: var(--canvas);
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 1.25rem;
+  }
+  .resume-page {
+    height: 100%;
+    max-height: 100%;
+    aspect-ratio: 8.5 / 11;
+    max-width: 100%;
+    background: #fff;
+    box-shadow: 0 6px 24px -8px rgba(17,17,17,0.2);
+  }
+  .resume-page iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+
+
+  /* Full screen mode — drop the dimmed/blurred backdrop and card chrome,
+     the PDF fills the entire viewport, with a punchy little zoom-in
+     transition to sell the "expanding" feeling. */
+  .resume-box,
+  .resume-viewer,
+  .resume-page {
+    transition: width 0.5s var(--ease), height 0.5s var(--ease),
+      max-height 0.5s var(--ease), border-radius 0.5s var(--ease),
+      padding 0.5s var(--ease), background 0.5s var(--ease);
+  }
+  .resume-overlay {
+    transition: opacity 0.35s var(--ease), visibility 0.35s var(--ease),
+      background 0.5s var(--ease), backdrop-filter 0.5s var(--ease);
+  }
+  .resume-overlay-full {
+    background: #000 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    padding: 0 !important;
+  }
+  .resume-overlay-full .resume-box {
+    width: 100vw !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    border-radius: 0 !important;
+    transform: none !important;
+    animation: resume-zoom-in 0.5s var(--ease);
+  }
+  .resume-overlay-full .resume-header,
+  .resume-overlay-full .modal-close {
+    display: none !important;
+  }
+  .resume-overlay-full .resume-viewer {
+    padding: 0;
+    background: #000;
+  }
+  .resume-overlay-full .resume-page {
+    height: 100%;
+    max-height: 100vh;
+    box-shadow: none;
+  }
+  @keyframes resume-zoom-in {
+    from { transform: scale(0.94); opacity: 0.6; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  .resume-exit-full {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    z-index: 20;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(17, 17, 17, 0.55);
+    color: #fff;
+    font-size: 1.1rem;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: background 0.25s var(--ease), transform 0.4s var(--ease-bounce), opacity 0.35s var(--ease) 0.15s;
+  }
+  .resume-exit-full:hover { background: rgba(17, 17, 17, 0.8); transform: scale(1.15) rotate(90deg); }
+  .resume-overlay-full .resume-exit-full { display: flex; opacity: 1; }
+
+  /* Link tree contact modal — same dimmed/blurred overlay as other
+     modals, but a simple stacked card of contact links. */
+  .linktree-box {
+    position: relative;
+    background: var(--canvas-raised);
+    border-radius: var(--radius-lg);
+    width: min(420px, 100%);
+    padding: clamp(2rem, 5vw, 2.75rem);
+    box-shadow: 0 40px 80px -20px rgba(11, 20, 35, 0.45);
+    transform: translateY(24px) scale(0.97);
+    transition: transform 0.4s var(--ease);
+    text-align: center;
+  }
+  .modal-overlay.open .linktree-box {
+    transform: translateY(0) scale(1);
+  }
+  .linktree-box h2 { margin-top: 0.3rem; }
+  .linktree-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+  }
+  .linktree-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem 1.25rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--line);
+    text-decoration: none;
+    color: var(--ink);
+    font-weight: 600;
+    background: var(--canvas);
+    transition: border-color 0.25s var(--ease), transform 0.25s var(--ease), background 0.25s var(--ease);
+  }
+  .linktree-link:hover {
+    border-color: var(--accent);
+    background: var(--canvas-raised);
+    transform: translateY(-2px);
+  }
+  .linktree-arrow {
+    color: var(--accent);
+    font-weight: 700;
+    display: inline-block;
+    transition: transform 0.3s var(--ease);
+  }
+  .linktree-link:hover .linktree-arrow {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 720px) {
+    .resume-box {
+      width: 100%;
+      height: 94vh;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+  }
+
+  /* ===================================================================
+     RESPONSIVE — mobile first breakpoints
+     =================================================================== */
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-visual { max-width: 420px; margin: 0 auto; order: -1; }
+    .project-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Drop the floating artboard illustration entirely on smaller/narrower
+     screens rather than shrinking and reordering it — avoids stray
+     slivers of the animated shapes peeking out near the hero text.
+     Matches the same breakpoint where the layout goes single-column,
+     so there's no in-between zone where it half-shows. */
+  @media (max-width: 900px) {
+    .hero-visual { display: none !important; }
+  }
+
+  @media (max-width: 720px) {
+    .nav-cta { display: none; }
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: absolute;
+      top: calc(100% + 10px); left: var(--gutter); right: var(--gutter);
+      background: var(--canvas-raised);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      box-shadow: 0 24px 48px -16px rgba(11, 20, 35, 0.32);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      overflow: hidden;
+      opacity: 0;
+      visibility: hidden;
+      padding: 0.5rem 1.25rem 0.75rem;
+      pointer-events: none;
+      transform-origin: top right;
+      transform: translateY(-10px) scale(0.96);
+      will-change: transform, opacity;
+      transition:
+        opacity 0.3s var(--ease),
+        transform 0.4s var(--ease),
+        visibility 0s linear 0.3s;
+    }
+    .nav-links.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+      transition:
+        opacity 0.3s var(--ease),
+        transform 0.4s var(--ease),
+        visibility 0s linear 0s;
+    }
+    .nav-links a {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--line);
+      width: 100%;
+      color: var(--ink);
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity 0.35s var(--ease), transform 0.35s var(--ease), color 0.25s var(--ease);
+    }
+    .nav-links a::after { display: none; }
+    .nav-links a:last-child { border-bottom: none; }
+    .nav-links.open a { opacity: 1; transform: translateY(0); }
+    .nav-link-label { flex: 1; font-weight: 500; }
+    .nav-link-arrow {
+      display: inline-block;
+      opacity: 0;
+      transform: translateX(-4px);
+      transition: opacity 0.25s var(--ease), transform 0.3s var(--ease);
+      color: var(--accent);
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a:hover .nav-link-arrow { opacity: 1; transform: translateX(0); }
+    .menu-btn { display: flex; }
+    .contact { margin: 0 1rem clamp(2.5rem, 8vw, 4rem); }
+    footer { justify-content: center; text-align: center; }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main" style="position: absolute; left: -999px; top: 0; background: var(--ink); color: var(--canvas); padding: 0.75rem 1.25rem; border-radius: 0 0 8px 0; z-index: 200;" onfocus="this.style.left='0'" onblur="this.style.left='-999px'">Skip to content</a>
+<header class="nav">
+<div class="wrap"><a class="logo" href="#top" id="logo-trigger">Stevie McLane</a><nav>
+<ul class="nav-links" id="nav-links">
+<li><a href="#work"><span class="nav-link-label">Work</span><span class="nav-link-arrow">&rarr;</span></a></li>
+<li><a href="#contact" id="nav-contact-link"><span class="nav-link-label">Contact</span><span class="nav-link-arrow">&rarr;</span></a></li>
+</ul>
+</nav><button class="menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links"> <span></span> </button></div>
+<!-- Signature element: click a swatch, the whole site re-themes live -->
+<div class="palette-strip" role="group" aria-label="Theme color switcher"><button class="swatch-deep" aria-label="Set accent to deep blue" data-accent="#0B3D91"></button> <button class="swatch-bright" aria-label="Set accent to bright blue" data-accent="#2F6FED"></button> <button class="swatch-sky" aria-label="Set accent to sky blue" data-accent="#6FA8FF"></button> <button class="swatch-navy" aria-label="Set accent to navy" data-accent="#133A66"></button>
+<img class="logo-peek" id="logo-peek" src="images/stevie.webp" alt="" aria-hidden="true">
+</div>
+</header><main id="main">
+<section class="hero" id="top">
+<div class="wrap hero-grid">
+<div>
+<p class="eyebrow">UI/UX Designer</p>
+<h1>I design systems people <span class="accent-word">benefit from</span> using.</h1>
+<p class="lede">Two years turning messy problems into clear, usable products — from early sketches to shipped screens. Based in Denton, TX, working with teams everywhere.</p>
+<div class="hero-actions"><a class="btn-primary" href="#work">See the work</a> <a class="btn-secondary" href="#contact" id="hero-contact-link">Get in touch</a></div>
+</div>
+<div class="hero-visual" aria-hidden="true">
+<div class="artboard artboard-1"></div>
+<div class="artboard artboard-2"></div>
+<img class="artboard-peek" id="artboard-peek" src="images/stevie.webp" alt="" aria-hidden="true">
+<div class="artboard-3-float" id="artboard-3-trigger">
+<div class="artboard artboard-3">
+<div class="line"></div>
+<div class="line short"></div>
+<div class="line"></div>
+<div class="chip"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="work">
+<div class="wrap">
+<div class="section-head">
+<p class="eyebrow">Selected work</p>
+<h2>Projects worth a closer look</h2>
+</div>
+<div class="project-grid">
+<button type="button" class="project-card" data-project="0">
+<div class="project-thumb" id="thumb-0"></div>
+<div class="project-body">
+<div class="project-tags"><span class="tag">Mobile app</span><span class="tag">Healthcare</span></div>
+<h3>FlexiDoc</h3>
+<p>An end-to-end medical appointment scheduling app tailored to the needs of users with agoraphobia.</p>
+</div>
+</button>
+<button type="button" class="project-card" data-project="1">
+<div class="project-thumb" id="thumb-1"></div>
+<div class="project-body">
+<div class="project-tags"><span class="tag">BRAND IDENTITY</span><span class="tag">DESIGN LANGUAGE</span></div>
+<h3>SLD</h3>
+<p>A complete overhaul of a small artist's visual brand identity, complete with a unified design language,  a simple yet effective logo, and everything an artist could need to market themselves.</p>
+</div>
+</button>
+<button type="button" class="project-card" data-project="2" style="display:none;">
+<div class="project-thumb" style="background: #AFCBF2;">project-03.png</div>
+<div class="project-body">
+<div class="project-tags"><span class="tag">Design system</span></div>
+<h3>Project title three</h3>
+<p>One line on the problem and what shipped. Swap in your real case study.</p>
+</div>
+</button>
+<button type="button" class="project-card" data-project="3" style="display:none;">
+<div class="project-thumb" style="background: #E4EEFB;">project-04.png</div>
+<div class="project-body">
+<div class="project-tags"><span class="tag">Branding</span><span class="tag">UI</span></div>
+<h3>Project title four</h3>
+<p>One line on the problem and what shipped. Swap in your real case study.</p>
+</div>
+</button>
+</div>
+
+<!-- Case study modal -->
+<div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+<div class="modal-box">
+<button type="button" class="modal-close" id="modal-close" aria-label="Close project details">&times;</button>
+<div class="modal-visualizer" id="modal-visualizer">
+<div class="viz-top">
+<div class="viz-canvas-mount" id="viz-canvas-mount"><div class="viz-canvas-inner" id="viz-canvas-inner"></div></div>
+<div class="viz-progress" id="viz-progress"><div class="viz-progress-fill" id="viz-progress-fill"></div></div>
+</div>
+<button type="button" class="viz-toggle" id="viz-toggle" aria-label="Play track">&#9654;</button>
+<button type="button" class="viz-mute" id="viz-mute" aria-label="Mute"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 5V4L8 9H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/><path d="M19 6a9 9 0 0 1 0 12"/></svg></button>
+<audio id="viz-audio" crossorigin="anonymous" preload="none"></audio>
+</div>
+<div class="modal-carousel" id="modal-carousel">
+<select class="carousel-category-select" id="carousel-category-select" aria-label="Choose asset category" hidden></select>
+<button type="button" class="carousel-fullscreen-toggle" id="carousel-fullscreen-toggle" aria-label="Full screen" title="Full screen">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+</button>
+<div class="carousel-track" id="carousel-track"></div>
+<button type="button" class="carousel-arrow prev" id="carousel-prev" aria-label="Previous image">&#8249;</button>
+<button type="button" class="carousel-arrow next" id="carousel-next" aria-label="Next image">&#8250;</button>
+<div class="carousel-dots" id="carousel-dots"></div>
+</div>
+<button type="button" class="modal-exit-full" id="modal-exit-full" aria-label="Exit full screen">&times;</button>
+<div class="modal-info">
+<p class="eyebrow" id="modal-eyebrow">Case study</p>
+<h2 id="modal-title">Project title</h2>
+<div class="project-tags" id="modal-tags"></div>
+<p class="modal-summary" id="modal-summary"></p>
+<p class="modal-detail" id="modal-detail"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="contact-section">
+<div class="contact" id="contact">
+<p class="eyebrow">Let's talk</p>
+<h2>Have a project in mind?</h2>
+<p>I'm always open to taking on a new freelance project. Tell me a bit about what you're building!</p>
+<div class="contact-actions"><a class="btn-primary" href="mailto:steviegmclane@gmail.com">Email me</a> <button type="button" class="btn-secondary btn-secondary-inverted" id="resume-open">View resume</button></div>
+</div>
+</section>
+<!-- Resume modal -->
+<div class="modal-overlay" id="resume-overlay" role="dialog" aria-modal="true" aria-labelledby="resume-title">
+<div class="resume-box">
+<div class="resume-header">
+<div>
+<span class="eyebrow">On file</span>
+<h2 id="resume-title">My resume</h2>
+</div>
+<div style="display:flex; align-items:center; gap:0.75rem;">
+<a class="resume-icon-btn" id="resume-download" href="#" download aria-label="Download PDF" title="Download PDF">
+<svg viewBox="0 0 24 24"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
+</a>
+<button type="button" class="resume-icon-btn" id="resume-fullscreen-toggle" aria-label="Full screen" title="Full screen">
+<svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+</button>
+<button type="button" class="modal-close" id="resume-close" aria-label="Close resume" style="position:static; background: var(--ink);">&times;</button>
+</div>
+</div>
+<div class="resume-viewer">
+<div class="resume-page">
+<iframe id="resume-frame" src="" title="Stevie McLane resume PDF"></iframe>
+</div>
+</div>
+<button type="button" class="resume-exit-full" id="resume-exit-full" aria-label="Exit full screen">&times;</button>
+</div>
+</div>
+<!-- Link tree contact modal -->
+<div class="modal-overlay" id="linktree-overlay" role="dialog" aria-modal="true" aria-labelledby="linktree-title">
+<div class="linktree-box">
+<button type="button" class="modal-close" id="linktree-close" aria-label="Close contact links">&times;</button>
+<p class="eyebrow">Find me</p>
+<h2 id="linktree-title">Let's connect</h2>
+<div class="linktree-list">
+<a class="linktree-link" href="mailto:steviegmclane@gmail.com">
+<span>Email</span>
+<span class="linktree-arrow">&rarr;</span>
+</a>
+<a class="linktree-link" href="https://www.linkedin.com/in/stevie-mclane-bb3a3337b/" target="_blank" rel="noopener">
+<span>LinkedIn</span>
+<span class="linktree-arrow">&rarr;</span>
+</a>
+</div>
+</div>
+</div>
+</main><footer>
+<p>© 2026 Stevie McLane. Built with care.</p>
+</footer>
+<script>
+  // Tiny haptic buzz on tap — only Android Chrome actually supports the
+  // vibration API (iOS Safari and desktop just skip it silently), so this
+  // is a free enhancement everywhere it works and a no-op elsewhere.
+  function buzz(ms) {
+    if (navigator.vibrate) navigator.vibrate(ms);
+  }
+
+  // Easter egg — clicking either trigger pops the same tiny photo out
+  // from behind an element, plays a little sound, then tucks it away.
+  // Two triggers share this: the hero notecard (desktop, where the
+  // illustration is visible) and the logo (works everywhere, including
+  // mobile where the hero illustration is hidden).
+  function wirePeekTrigger(triggerId, peekId, mobileOnly) {
+    const trigger = document.getElementById(triggerId);
+    const peek = document.getElementById(peekId);
+    if (!trigger || !peek) return;
+    let peekTimer = null;
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      // The logo trigger only makes sense where the hero notecard isn't
+      // visible to click instead — same breakpoint used to hide it.
+      if (mobileOnly && !window.matchMedia('(max-width: 900px)').matches) return;
+      buzz(25);
+      new Audio('audio/stevie.mp3').play().catch(() => {});
+      peek.classList.add('is-visible');
+      clearTimeout(peekTimer);
+      peekTimer = setTimeout(() => {
+        peek.classList.remove('is-visible');
+      }, 2000);
+    });
+  }
+  wirePeekTrigger('artboard-3-trigger', 'artboard-peek');
+  wirePeekTrigger('logo-trigger', 'logo-peek', true);
+
+  // Scroll-reveal for project cards — a staggered fade-and-rise as they
+  // enter the viewport, a bit of playful motion without being distracting.
+  const revealCards = document.querySelectorAll('.project-card');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const card = entry.target;
+        card.style.transitionDelay = (card.dataset.project * 0.1) + 's';
+        card.classList.add('in-view');
+        revealObserver.unobserve(card);
+        // Once the reveal itself is done, drop the opacity/translate layer
+        // hint — the card doesn't need its own compositing layer just to
+        // sit there, only transform still matters for the hover effect.
+        card.addEventListener('transitionend', () => {
+          card.style.willChange = 'transform';
+        }, { once: true });
+      }
+    });
+  }, { threshold: 0.2 });
+  revealCards.forEach((card) => revealObserver.observe(card));
+
+  // Mobile menu toggle
+  const menuBtn = document.getElementById('menu-btn');
+  const navLinks = document.getElementById('nav-links');
+  const navLinkItems = navLinks.querySelectorAll('a');
+  menuBtn.addEventListener('click', () => {
+    buzz(15);
+    const isOpen = navLinks.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', String(isOpen));
+    menuBtn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+
+    if (isOpen) {
+      // Cascade the links in one after another rather than all at once.
+      navLinkItems.forEach((link, i) => {
+        link.style.transitionDelay = `${80 + i * 60}ms`;
+      });
+    } else {
+      // Collapse should feel snappy, not staggered.
+      navLinkItems.forEach((link) => { link.style.transitionDelay = '0ms'; });
+    }
+  });
+  // Close mobile menu after tapping a link
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Palette strip — live re-theme (the site's signature interaction),
+  // paired with a letter-by-letter wave transition in the headline so
+  // each accent color gets its own flavor of phrase.
+  const accentWordEl = document.querySelector('.accent-word');
+  const accentPhrases = {
+    'swatch-deep': 'actually enjoy',
+    'swatch-bright': 'benefit from',
+    'swatch-sky': 'will be',
+    'swatch-navy': 'should be',
+  };
+  const LETTER_STAGGER = 22; // ms between each letter's animation start
+  const OUT_DURATION = 320;  // matches the CSS transform/opacity transition
+
+  // Build individual <span> letters inside the accent word so each one
+  // can animate independently.
+  function renderLetters(el, text) {
+    el.innerHTML = '';
+    return [...text].map((ch) => {
+      const span = document.createElement('span');
+      span.className = 'accent-letter';
+      span.textContent = ch === ' ' ? ' ' : ch;
+      el.appendChild(span);
+      return span;
+    });
+  }
+
+  let accentLetters = accentWordEl ? renderLetters(accentWordEl, accentWordEl.textContent.trim()) : [];
+  let accentGeneration = 0; // bumped on every call so a fast re-click can cancel a run in progress
+
+  function swapAccentWord(newText) {
+    if (!accentWordEl) return;
+    const myGeneration = ++accentGeneration;
+
+    // Wave the current letters out, staggered left to right. Using a
+    // short, quick-start easing here (rather than the slower entry
+    // curve) keeps rapid re-clicks feeling snappy instead of laggy.
+    accentLetters.forEach((span, i) => {
+      span.style.transitionDelay = `${i * LETTER_STAGGER}ms`;
+      span.classList.add('is-out');
+    });
+
+    const outTotal = OUT_DURATION + (accentLetters.length - 1) * LETTER_STAGGER;
+
+    setTimeout(() => {
+      if (myGeneration !== accentGeneration) return; // superseded by a newer click
+
+      // Rebuild with the new phrase, starting each letter pre-rotated
+      // and invisible so they can wave in from the opposite direction.
+      accentLetters = renderLetters(accentWordEl, newText);
+      accentLetters.forEach((span) => {
+        span.classList.add('is-in-start');
+        span.style.transitionDelay = '0ms';
+      });
+
+      // Force layout so the browser registers the start state before
+      // we transition away from it.
+      void accentWordEl.offsetWidth;
+
+      accentLetters.forEach((span, i) => {
+        span.style.transitionDelay = `${i * LETTER_STAGGER}ms`;
+        span.classList.remove('is-in-start');
+      });
+    }, outTotal);
+  }
+
+  document.querySelectorAll('.palette-strip button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      buzz(25);
+      const color = btn.getAttribute('data-accent');
+      document.documentElement.style.setProperty('--accent', color);
+
+      const swatchClass = [...btn.classList].find(c => accentPhrases[c]);
+      if (swatchClass) {
+        swapAccentWord(accentPhrases[swatchClass]);
+      }
+    });
+  });
+
+  // ===================================================================
+  // CASE STUDY MODAL — carousel + description panel
+  // ===================================================================
+  const projects = [
+    {
+      eyebrow: "Case study",
+      title: "FlexiDoc",
+      tags: ["Mobile app", "Healthcare"],
+      summary: "An end-to-end medical appointment scheduling app tailored to the needs of users with agoraphobia.",
+      detail: "FlexiDoc is a digital appointment planner built specifically for people managing agoraphobia, reframing scheduling around flexibility instead of rigid fixed times. Users pick a booking window set by their provider (four days, five days, a week) and choose how they're seen: in-office, telehealth, or an in-home visit. If plans change, a \"bump\" feature lets them push their appointment forward a day (usually to a different time slot) for a reduced fee versus a full cancellation. The result is a scheduling experience that puts safety and predictability in the user's hands rather than the clinic's.",
+      thumb: "images/fdcover2.png",
+      defaultCategory: "Final Renders",
+      categories: {
+        "Personas": [
+          { pdf: "images/04_20_26_McLaneS_FinalPersona01.pdf", caption: "John Granger — 65, retired Navy veteran managing agoraphobia and rheumatoid arthritis." },
+          { pdf: "images/04_20_26_McLaneS_FinalPersona02.pdf", caption: "Sarah Harper — 28, freelance graphic designer navigating agoraphobia from her apartment." }
+        ],
+        "Prototypes": [
+          { img: "images/04_22_26_McLaneS_FinalPrototype.jpg", caption: "Early hand-drawn wireframes — role selection, home calendar, doctor search, and about screens." }
+        ],
+        "Site Map": [
+          { pdf: "images/McLane_Stevie_04_29_26-FinalSiteMap_IA.pdf", caption: "Site map / information architecture — Doctor and Patient flows from the startup page." }
+        ],
+        "Empathy Maps": [
+          { img: "images/05_02_26_McLaneS_FinalEmpathyMaps_01.png", caption: "Empathy map — Sarah (28), mapping says / thinks / does / feels around appointment anxiety." },
+          { img: "images/05_02_26_McLaneS_FinalEmpathyMaps_02.png", caption: "Empathy map — John (65), mapping says / thinks / does / feels around appointment anxiety." }
+        ],
+        "User Journey Maps": [
+          { pdf: "images/05_04_26_McLaneS_FinalUserJourneyMapping.pdf", caption: "Sarah's customer journey map — Calendar, Search, Information, Booking, and Bump stages." }
+        ],
+        "Final Renders": [
+          { img: "images/fd1.png", caption: "Placeholder — choosing a role (Doctor or Patient) on first launch." },
+          { img: "images/fd2.png", caption: "Placeholder — the home calendar view, where users see upcoming appointments and jot quick notes." },
+          { img: "images/fd3.png", caption: "Placeholder — searching nearby providers by specialty or name." },
+          { img: "images/fd4.png", caption: "Placeholder — an office's detail page, showing location, rating, and visit type." },
+          { img: "images/fd5.png", caption: "Placeholder — choosing a multi-day booking window offered by the office." },
+          { img: "images/fd6.png", caption: "Placeholder — picking a specific appointment time within that window." },
+          { img: "images/fd7.png", caption: "Placeholder — the confirmed appointment on the home calendar." },
+          { img: "images/fd8.png", caption: "Placeholder — starting a \"bump\" to shift the appointment forward a day." },
+          { img: "images/fd9.png", caption: "Placeholder — selecting a new time and paying the reduced bump fee." },
+          { img: "images/fd10.png", caption: "Placeholder — the calendar reflecting the bumped appointment." }
+        ],
+        "Presentation": [
+          { pptx: "images/_MCLANE_stevie_finpres26.pptx", caption: "Final presentation deck." }
+        ]
+      }
+    },
+    {
+      eyebrow: "Case study",
+      title: "SLD",
+      tags: ["BRAND IDENTITY", "DESIGN LANGUAGE"],
+      summary: "A complete overhaul of a small artist's visual brand identity, complete with a unified design language,  a simple yet effective logo, and everything an artist could need to market themselves.",
+      detail: "I set out to create a brand system flexible enough to survive the artist's range without disappearing into it: a simple wordmark and a compact \"SLD\" glyph that could fit in anywhere on any cover, no matter how loud the artwork underneath got, plus a lightweight set of rules for color, type, and logo placement so every release still reads as part of the same body of work. The result is a catalog that can jump genres and moods freely while still looking unmistakably like one artist's brand.",
+      thumb: "images/sldcover3.webp",
+      tracks: [
+        { name: "#BORING", mp3: "audio/%23BORING.mp3", wav: "audio/%23BORING.wav" },
+        { name: "Bankroll", mp3: "audio/Bankroll.mp3", wav: "audio/Bankroll.wav" },
+        { name: "College Ruled", mp3: "audio/College%20Ruled.mp3", wav: "audio/College%20Ruled.wav" },
+        { name: "get away", mp3: "audio/get%20away.mp3", wav: "audio/get%20away.wav" },
+        { name: "Heartless", mp3: "audio/Heartless.mp3", wav: "audio/Heartless.wav" },
+        { name: "HOT N' COLD", mp3: "audio/HOT%20N'%20COLD.mp3", wav: "audio/HOT%20N'%20COLD.wav" },
+        { name: "MADE 4 THIS", mp3: "audio/MADE%204%20THIS.mp3", wav: "audio/MADE%204%20THIS.wav" },
+        { name: "northstar", mp3: "audio/northstar.mp3", wav: "audio/northstar.wav" },
+        { name: "PAPER PLANES", mp3: "audio/PAPER%20PLANES.mp3", wav: "audio/PAPER%20PLANES.wav" },
+        { name: "YAO MING", mp3: "audio/YAO%20MING.mp3", wav: "audio/YAO%20MING.wav" },
+        { name: "Came 2 Far", mp3: "audio/Came%202%20Far.mp3", wav: "audio/Came%202%20Far.wav" },
+        { name: "Pinch Me", mp3: "audio/Pinch%20Me.mp3", wav: "audio/Pinch%20Me.wav" },
+        { name: "Globetrotter", mp3: "audio/Globetrotter.mp3", wav: "audio/Globetrotter.wav" },
+        { name: "till' the speakers bleed", mp3: "audio/till'%20the%20speakers%20bleed.mp3", wav: "audio/till'%20the%20speakers%20bleed.wav" },
+        { name: "Far From Home (Way 2 Long)", mp3: "audio/Far%20From%20Home%20(Way%202%20Long).mp3", wav: "audio/Far%20From%20Home%20(Way%202%20Long).wav" }
+      ],
+      slides: [
+        { img: "images/%23BORING.webp", caption: "#BORING" },
+        { img: "images/Bankroll.webp", caption: "Bankroll" },
+        { img: "images/College%20Ruled.webp", caption: "College Ruled" },
+        { img: "images/get%20away.webp", caption: "get away" },
+        { img: "images/Heartless.webp", caption: "Heartless" },
+        { img: "images/HOT%20N'%20COLD.webp", caption: "HOT N' COLD" },
+        { img: "images/MADE%204%20THIS.webp", caption: "MADE 4 THIS" },
+        { img: "images/northstar.webp", caption: "northstar" },
+        { img: "images/PAPER%20PLANES.webp", caption: "PAPER PLANES" },
+        { img: "images/YAO%20MING.webp", caption: "YAO MING" },
+        { img: "images/Came%202%20Far.webp", caption: "Came 2 Far" },
+        { img: "images/Pinch%20Me.webp", caption: "Pinch Me" },
+        { img: "images/Globetrotter.webp", caption: "Globetrotter" },
+        { img: "images/till'%20the%20speakers%20bleed.webp", caption: "till' the speakers bleed" },
+        { img: "images/Far%20From%20Home%20(Way%202%20Long).webp", caption: "Far From Home (Way 2 Long)" }
+      ]
+    },
+    {
+      eyebrow: "Case study",
+      title: "Project title three",
+      tags: ["Design system"],
+      summary: "One line on the problem and what shipped. Swap in your real case study.",
+      detail: "Add more detail here: the goal, your role, the constraints, and the outcome. This is the space for the fuller story behind the work.",
+      slides: [
+        { color: "#AFCBF2", caption: "Token architecture and naming conventions." },
+        { color: "#6FA8FF", caption: "Component library in Figma." },
+        { color: "#133A66", caption: "Adoption across three product teams." }
+      ]
+    },
+    {
+      eyebrow: "Case study",
+      title: "Project title four",
+      tags: ["Branding", "UI"],
+      summary: "One line on the problem and what shipped. Swap in your real case study.",
+      detail: "Add more detail here: the goal, your role, the constraints, and the outcome. This is the space for the fuller story behind the work.",
+      slides: [
+        { color: "#E4EEFB", caption: "Brand exploration and moodboards." },
+        { color: "#2F6FED", caption: "Logo and color system." },
+        { color: "#0B3D91", caption: "Applied across the product UI." }
+      ]
+    }
+  ];
+
+  // Render the static thumbnails for any project that has a real
+  // screenshot (as opposed to the flat placeholder-color fill).
+  document.querySelectorAll('.project-thumb').forEach((thumbEl) => {
+    const card = thumbEl.closest('.project-card');
+    const index = parseInt(card.getAttribute('data-project'), 10);
+    const proj = projects[index];
+    if (proj && proj.thumb) {
+      thumbEl.innerHTML = `<img src="${proj.thumb}" alt="${proj.title} cover" loading="lazy" decoding="async">`;
+    }
+  });
+
+  const overlay = document.getElementById('modal-overlay');
+  const modalBox = document.querySelector('.modal-box');
+  const track = document.getElementById('carousel-track');
+  const dotsWrap = document.getElementById('carousel-dots');
+  const prevBtn = document.getElementById('carousel-prev');
+  const nextBtn = document.getElementById('carousel-next');
+  const closeBtn = document.getElementById('modal-close');
+  const modalEyebrow = document.getElementById('modal-eyebrow');
+  const modalTitle = document.getElementById('modal-title');
+  const modalTags = document.getElementById('modal-tags');
+  const modalSummary = document.getElementById('modal-summary');
+  const modalDetail = document.getElementById('modal-detail');
+  const vizMount = document.getElementById('viz-canvas-inner');
+  const vizToggle = document.getElementById('viz-toggle');
+  const vizMute = document.getElementById('viz-mute');
+  const vizAudio = document.getElementById('viz-audio');
+  const vizProgress = document.getElementById('viz-progress');
+  const vizProgressFill = document.getElementById('viz-progress-fill');
+
+  const ICON_VOLUME = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 5V4L8 9H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/><path d="M19 6a9 9 0 0 1 0 12"/></svg>';
+  const ICON_MUTED = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 5V4L8 9H4z"/><line x1="15.5" y1="9" x2="21.5" y2="15"/><line x1="21.5" y1="9" x2="15.5" y2="15"/></svg>';
+
+  let audioAnalyzer = null;
+
+  // Lazily create the analyzer on first use — AudioContext creation
+  // works best right around a user gesture, and there's no point
+  // spinning one up for projects that don't have audio.
+  function ensureAnalyzer() {
+    if (audioAnalyzer || typeof AudioMotionAnalyzer === 'undefined') return;
+    // Mode 10 ("Graph") draws one continuous outlined/filled waveform
+    // instead of discrete bars, matching the connected-wave look.
+    // Sizing stays fluid — the inner mount div's own CSS box (set via
+    // container query units on its parent) is already pre-shaped for
+    // the rotation, so the library can just measure it normally.
+    audioAnalyzer = new AudioMotionAnalyzer(vizMount, {
+      source: vizAudio,
+      mode: 10,
+      lineWidth: 2,
+      fillAlpha: 0.7,
+      showScaleX: false,
+      showScaleY: false,
+      showPeaks: false,
+      gradient: 'prism',
+      overlay: false
+    });
+  }
+
+  // ---- Palette matching: sample the currently-shown cover image and
+  // recolor the analyzer gradient (and the scrub bar) to match, so the
+  // visualizer feels tied to whichever artwork is on screen. ----
+  const paletteCache = {};
+
+  // Push a color's saturation and lightness up a notch so gradients
+  // built from photos/muted artwork still read as bright and vivid
+  // rather than a dull average of the source pixels.
+  function boostColor(r, g, b) {
+    r /= 255; g /= 255; b /= 255;
+    const max = Math.max(r, g, b), min = Math.min(r, g, b);
+    let h = 0, s = 0;
+    const l = (max + min) / 2;
+    if (max !== min) {
+      const d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      switch (max) {
+        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+        case g: h = (b - r) / d + 2; break;
+        default: h = (r - g) / d + 4;
+      }
+      h /= 6;
+    }
+    const s2 = Math.min(1, s * 1.5 + 0.1);
+    const l2 = Math.min(0.7, Math.max(0.34, l * 1.1));
+    const hue2rgb = (p, q, t) => {
+      if (t < 0) t += 1;
+      if (t > 1) t -= 1;
+      if (t < 1 / 6) return p + (q - p) * 6 * t;
+      if (t < 1 / 2) return q;
+      if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+      return p;
+    };
+    let nr, ng, nb;
+    if (s2 === 0) { nr = ng = nb = l2; }
+    else {
+      const q = l2 < 0.5 ? l2 * (1 + s2) : l2 + s2 - l2 * s2;
+      const p = 2 * l2 - q;
+      nr = hue2rgb(p, q, h + 1 / 3);
+      ng = hue2rgb(p, q, h);
+      nb = hue2rgb(p, q, h - 1 / 3);
+    }
+    return [Math.round(nr * 255), Math.round(ng * 255), Math.round(nb * 255)];
+  }
+
+  function quantizePalette(img) {
+    const w = 24, h = 24;
+    const c = document.createElement('canvas');
+    c.width = w; c.height = h;
+    const ctx = c.getContext('2d');
+    ctx.drawImage(img, 0, 0, w, h);
+    let data;
+    try {
+      data = ctx.getImageData(0, 0, w, h).data;
+    } catch (e) {
+      return null; // canvas got tainted (cross-origin) — bail out quietly
+    }
+    const buckets = {};
+    for (let i = 0; i < data.length; i += 4) {
+      const a = data[i + 3];
+      if (a < 128) continue;
+      const r = data[i], g = data[i + 1], b = data[i + 2];
+      const key = `${Math.round(r / 32)},${Math.round(g / 32)},${Math.round(b / 32)}`;
+      if (!buckets[key]) buckets[key] = { r: 0, g: 0, b: 0, n: 0 };
+      buckets[key].r += r; buckets[key].g += g; buckets[key].b += b; buckets[key].n++;
+    }
+    let top = Object.values(buckets).sort((a, b) => b.n - a.n).slice(0, 4).map(bucket => {
+      const [r, g, bl] = boostColor(
+        Math.round(bucket.r / bucket.n),
+        Math.round(bucket.g / bucket.n),
+        Math.round(bucket.b / bucket.n)
+      );
+      return { r, g, b: bl, lum: 0.299 * r + 0.587 * g + 0.114 * bl };
+    });
+    if (!top.length) return null;
+    top.sort((a, b) => a.lum - b.lum);
+    // Make sure there's visible contrast even for very flat/monochrome
+    // covers — pad out a too-short or too-similar palette with a
+    // lightened copy of the brightest color found.
+    if (top.length < 2 || top[top.length - 1].lum - top[0].lum < 40) {
+      const brightest = top[top.length - 1];
+      top.push({
+        r: Math.min(255, brightest.r + 60),
+        g: Math.min(255, brightest.g + 60),
+        b: Math.min(255, brightest.b + 60)
+      });
+    }
+    return {
+      stops: top.map(c => `rgb(${c.r},${c.g},${c.b})`),
+      accent: `rgb(${top[top.length - 1].r},${top[top.length - 1].g},${top[top.length - 1].b})`
+    };
+  }
+
+  function applyPaletteGradient(imgSrc) {
+    ensureAnalyzer();
+    if (!audioAnalyzer || !imgSrc) return;
+    const cached = paletteCache[imgSrc];
+    if (cached) {
+      audioAnalyzer.registerGradient('coverPalette', { colorStops: cached.stops });
+      audioAnalyzer.gradient = 'coverPalette';
+      vizProgressFill.style.background = cached.accent;
+      return;
+    }
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      const palette = quantizePalette(img);
+      if (!palette) return;
+      paletteCache[imgSrc] = palette;
+      audioAnalyzer.registerGradient('coverPalette', { colorStops: palette.stops });
+      audioAnalyzer.gradient = 'coverPalette';
+      vizProgressFill.style.background = palette.accent;
+    };
+    img.src = imgSrc;
+  }
+
+  // Some static hosts return a 200 with an HTML "not found" page instead
+  // of a real 404 for a missing file, which stops the browser from ever
+  // trying the next <source> in the usual markup-based fallback. So
+  // instead we set a single explicit src and, if playback errors out,
+  // manually swap to the other format ourselves.
+  let fallbackSrc = null;
+
+  function loadTrack(i) {
+    const t = currentProject && currentProject.tracks && currentProject.tracks[i];
+    if (!t) return;
+    const wasPlaying = !vizAudio.paused;
+    vizAudio.pause();
+    fallbackSrc = t.wav;
+    vizAudio.src = t.mp3;
+    vizAudio.load();
+    vizProgressFill.style.height = '0%';
+    const slide = currentProject.slides && currentProject.slides[i];
+    if (slide && slide.img) applyPaletteGradient(slide.img);
+    if (wasPlaying) vizAudio.play().catch(() => {});
+  }
+
+  vizAudio.addEventListener('error', () => {
+    if (!fallbackSrc) return;
+    const next = fallbackSrc;
+    fallbackSrc = null;
+    vizAudio.src = next;
+    vizAudio.load();
+  });
+
+  vizAudio.addEventListener('play', () => {
+    vizToggle.classList.add('playing');
+    vizToggle.innerHTML = '&#10074;&#10074;';
+    vizToggle.setAttribute('aria-label', 'Pause track');
+  });
+  vizAudio.addEventListener('pause', () => {
+    vizToggle.classList.remove('playing');
+    vizToggle.innerHTML = '&#9654;';
+    vizToggle.setAttribute('aria-label', 'Play track');
+  });
+  vizToggle.addEventListener('click', () => {
+    buzz(20);
+    ensureAnalyzer();
+    if (vizAudio.paused) vizAudio.play().catch(() => {});
+    else vizAudio.pause();
+  });
+
+  vizMute.addEventListener('click', () => {
+    buzz(20);
+    vizAudio.muted = !vizAudio.muted;
+    vizMute.classList.toggle('muted', vizAudio.muted);
+    vizMute.innerHTML = vizAudio.muted ? ICON_MUTED : ICON_VOLUME;
+    vizMute.setAttribute('aria-label', vizAudio.muted ? 'Unmute' : 'Mute');
+  });
+
+  // ---- Progress bar: fills bottom-up on desktop's vertical layout, or
+  // left-to-right on mobile's horizontal one — orientation is read from
+  // the bar's own current rendered shape, so both layouts just work.
+  function updateProgressUI() {
+    if (!isFinite(vizAudio.duration) || !vizAudio.duration) return;
+    const pct = (vizAudio.currentTime / vizAudio.duration) * 100;
+    const horizontal = vizProgress.clientWidth >= vizProgress.clientHeight;
+    vizProgressFill.style.width = horizontal ? pct + '%' : '100%';
+    vizProgressFill.style.height = horizontal ? '100%' : pct + '%';
+  }
+  vizAudio.addEventListener('timeupdate', updateProgressUI);
+  vizAudio.addEventListener('loadedmetadata', updateProgressUI);
+
+  function seekFromPointer(e) {
+    if (!isFinite(vizAudio.duration) || !vizAudio.duration) return;
+    const rect = vizProgress.getBoundingClientRect();
+    const horizontal = rect.width >= rect.height;
+    let pct;
+    if (horizontal) {
+      pct = Math.min(Math.max((e.clientX - rect.left) / rect.width, 0), 1);
+    } else {
+      pct = 1 - Math.min(Math.max((e.clientY - rect.top) / rect.height, 0), 1);
+    }
+    vizAudio.currentTime = pct * vizAudio.duration;
+    updateProgressUI();
+  }
+
+  let scrubbing = false;
+  vizProgress.addEventListener('pointerdown', (e) => {
+    scrubbing = true;
+    vizProgress.setPointerCapture(e.pointerId);
+    seekFromPointer(e);
+  });
+  vizProgress.addEventListener('pointermove', (e) => {
+    if (scrubbing) seekFromPointer(e);
+  });
+  vizProgress.addEventListener('pointerup', () => { scrubbing = false; });
+  vizProgress.addEventListener('pointercancel', () => { scrubbing = false; });
+
+  let currentSlide = 0;
+  let currentProject = null;
+  let lastFocusedEl = null;
+
+  function slideMediaHtml(s) {
+    if (s.img) {
+      return `<div class="slide-bg" style="background-image:url('${s.img}')"></div><img class="slide-img" src="${s.img}" alt="${s.caption || ''}" decoding="async">`;
+    }
+    if (s.pdf) {
+      const src = `${s.pdf}#toolbar=0&navpanes=0&view=Fit`;
+      return `<div class="slide-doc"><iframe src="${src}" title="${s.caption || 'PDF document'}" loading="lazy"></iframe></div>`;
+    }
+    if (s.pptx) {
+      // Browsers can't render .pptx natively, so this hands off to
+      // Microsoft's own viewer, which needs a real public URL to fetch
+      // the file from (a relative path won't work here).
+      const absoluteUrl = new URL(s.pptx, window.location.href).href;
+      const viewerSrc = `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(absoluteUrl)}`;
+      return `<div class="slide-doc"><iframe src="${viewerSrc}" title="${s.caption || 'Presentation'}" loading="lazy"></iframe></div>`;
+    }
+    return `<div class="slide-fill" style="background:${s.color};"></div>`;
+  }
+
+  function renderCarousel(slides) {
+    track.innerHTML = slides.map(s => `
+      <div class="carousel-slide">
+        ${slideMediaHtml(s)}
+        ${s.caption ? `<div class="slide-caption"><span class="slide-caption-pill">${s.caption}</span></div>` : ''}
+      </div>
+    `).join('');
+    dotsWrap.innerHTML = slides.map((_, i) =>
+      `<button type="button" aria-label="Go to image ${i + 1}"></button>`
+    ).join('');
+    dotsWrap.querySelectorAll('button').forEach((dot, i) => {
+      dot.addEventListener('click', () => { buzz(15); goToSlide(i); });
+    });
+  }
+
+  function goToSlide(index) {
+    const slideCount = track.children.length;
+    currentSlide = (index + slideCount) % slideCount;
+    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    dotsWrap.querySelectorAll('button').forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentSlide);
+    });
+    if (currentProject && currentProject.tracks) loadTrack(currentSlide);
+  }
+
+  // Category dropdown — only used by projects with a `categories` object
+  // (multiple named sets of assets) instead of a single flat `slides`
+  // array. Switching categories just re-renders the same carousel.
+  const categorySelect = document.getElementById('carousel-category-select');
+  categorySelect.addEventListener('change', () => {
+    buzz(15);
+    renderCarousel(currentProject.categories[categorySelect.value]);
+    goToSlide(0);
+  });
+
+  function openModal(index) {
+    currentProject = projects[index];
+    lastFocusedEl = document.activeElement;
+
+    modalEyebrow.textContent = currentProject.eyebrow;
+    modalTitle.textContent = currentProject.title;
+    modalTags.innerHTML = currentProject.tags.map(t => `<span class="tag">${t}</span>`).join('');
+    modalSummary.textContent = currentProject.summary;
+    modalDetail.textContent = currentProject.detail;
+
+    if (currentProject.categories) {
+      const categoryNames = Object.keys(currentProject.categories);
+      const defaultCategory = currentProject.defaultCategory || categoryNames[0];
+      categorySelect.innerHTML = categoryNames.map(name =>
+        `<option value="${name}"${name === defaultCategory ? ' selected' : ''}>${name}</option>`
+      ).join('');
+      categorySelect.hidden = false;
+      renderCarousel(currentProject.categories[defaultCategory]);
+    } else {
+      categorySelect.hidden = true;
+      renderCarousel(currentProject.slides);
+    }
+
+    if (currentProject.tracks) {
+      modalBox.classList.add('has-audio');
+      ensureAnalyzer();
+    } else {
+      modalBox.classList.remove('has-audio');
+      vizAudio.pause();
+    }
+
+    goToSlide(0);
+
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+
+  function closeModal() {
+    overlay.classList.remove('open');
+    overlay.classList.remove('is-fullscreen-active');
+    document.body.style.overflow = '';
+    vizAudio.pause();
+    if (lastFocusedEl) lastFocusedEl.focus();
+  }
+
+  // Full screen carousel viewing — same expand-to-viewport treatment as
+  // the resume viewer, works for any slide type (image, PDF, or the
+  // embedded presentation viewer) since it just resizes the container.
+  const carouselFullscreenToggle = document.getElementById('carousel-fullscreen-toggle');
+  const modalExitFull = document.getElementById('modal-exit-full');
+
+  function enterModalFullscreen() {
+    overlay.classList.add('is-fullscreen-active');
+  }
+  function exitModalFullscreen() {
+    overlay.classList.remove('is-fullscreen-active');
+  }
+  carouselFullscreenToggle.addEventListener('click', () => { buzz(15); enterModalFullscreen(); });
+  modalExitFull.addEventListener('click', () => { buzz(15); exitModalFullscreen(); });
+
+  document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('click', () => {
+      buzz(25);
+      const index = parseInt(card.getAttribute('data-project'), 10);
+      openModal(index);
+    });
+  });
+
+  closeBtn.addEventListener('click', () => { buzz(15); closeModal(); });
+
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (!overlay.classList.contains('open')) return;
+    if (e.key === 'Escape') {
+      if (overlay.classList.contains('is-fullscreen-active')) exitModalFullscreen();
+      else closeModal();
+    }
+    if (e.key === 'ArrowRight') goToSlide(currentSlide + 1);
+    if (e.key === 'ArrowLeft') goToSlide(currentSlide - 1);
+  });
+
+  prevBtn.addEventListener('click', () => { buzz(15); goToSlide(currentSlide - 1); });
+  nextBtn.addEventListener('click', () => { buzz(15); goToSlide(currentSlide + 1); });
+
+  // Swipe support for mobile
+  const carouselEl = document.getElementById('modal-carousel');
+  let touchStartX = 0;
+  let touchDeltaX = 0;
+
+  carouselEl.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+    touchDeltaX = 0;
+  }, { passive: true });
+
+  carouselEl.addEventListener('touchmove', (e) => {
+    touchDeltaX = e.touches[0].clientX - touchStartX;
+  }, { passive: true });
+
+  carouselEl.addEventListener('touchend', () => {
+    const threshold = 40;
+    if (touchDeltaX > threshold) {
+      goToSlide(currentSlide - 1);
+    } else if (touchDeltaX < -threshold) {
+      goToSlide(currentSlide + 1);
+    }
+  });
+
+  // ===================================================================
+  // RESUME MODAL — same overlay language, single PDF viewer
+  // ===================================================================
+  const resumeUrl = 'resume.pdf#toolbar=0&navpanes=0&view=Fit'; // swap this for your real resume file
+  const resumeOverlay = document.getElementById('resume-overlay');
+  const resumeOpenBtn = document.getElementById('resume-open');
+  const resumeCloseBtn = document.getElementById('resume-close');
+  const resumeFrame = document.getElementById('resume-frame');
+  const resumeDownload = document.getElementById('resume-download');
+  let lastFocusedResumeEl = null;
+
+  function openResume() {
+    lastFocusedResumeEl = document.activeElement;
+    resumeFrame.src = resumeUrl;
+    resumeDownload.setAttribute('href', 'resume.pdf');
+    resumeOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    resumeCloseBtn.focus();
+  }
+
+  function closeResume() {
+    resumeOverlay.classList.remove('open');
+    resumeOverlay.classList.remove('resume-overlay-full');
+    document.body.style.overflow = '';
+    if (lastFocusedResumeEl) lastFocusedResumeEl.focus();
+  }
+
+  resumeOpenBtn.addEventListener('click', () => { buzz(20); openResume(); });
+  resumeCloseBtn.addEventListener('click', () => { buzz(15); closeResume(); });
+
+  resumeOverlay.addEventListener('click', (e) => {
+    if (e.target === resumeOverlay) closeResume();
+  });
+
+  // Full screen toggle — strips the dimmed/blurred backdrop and card
+  // chrome so the PDF fills the entire viewport.
+  const resumeFullscreenToggle = document.getElementById('resume-fullscreen-toggle');
+  const resumeExitFull = document.getElementById('resume-exit-full');
+
+  function enterResumeFullscreen() {
+    resumeOverlay.classList.add('resume-overlay-full');
+  }
+
+  // Nothing else needed for the in-card toggle label since the button
+  // itself is hidden while in full screen mode (chrome is stripped away);
+  // the dedicated exit button takes over there.
+
+  function exitResumeFullscreen() {
+    resumeOverlay.classList.remove('resume-overlay-full');
+  }
+
+  resumeFullscreenToggle.addEventListener('click', () => { buzz(15); enterResumeFullscreen(); });
+  resumeExitFull.addEventListener('click', () => { buzz(15); exitResumeFullscreen(); });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape' || !resumeOverlay.classList.contains('open')) return;
+    if (resumeOverlay.classList.contains('resume-overlay-full')) {
+      exitResumeFullscreen();
+    } else {
+      closeResume();
+    }
+  });
+
+  // Link tree contact modal
+  const linktreeOverlay = document.getElementById('linktree-overlay');
+  const linktreeCloseBtn = document.getElementById('linktree-close');
+  const navContactLink = document.getElementById('nav-contact-link');
+  const heroContactLink = document.getElementById('hero-contact-link');
+  let lastFocusedLinktreeEl = null;
+
+  function openLinktree(e) {
+    if (e) e.preventDefault();
+    lastFocusedLinktreeEl = document.activeElement;
+    linktreeOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLinktree() {
+    linktreeOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+    if (lastFocusedLinktreeEl) lastFocusedLinktreeEl.focus();
+  }
+
+  navContactLink.addEventListener('click', () => { buzz(20); openLinktree(); });
+  heroContactLink.addEventListener('click', () => { buzz(20); openLinktree(); });
+  linktreeCloseBtn.addEventListener('click', () => { buzz(15); closeLinktree(); });
+
+  linktreeOverlay.addEventListener('click', (e) => {
+    if (e.target === linktreeOverlay) closeLinktree();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && linktreeOverlay.classList.contains('open')) closeLinktree();
+  });
+</script>
+<script src="js/audioMotion-analyzer.js"></script>
+</body>
+</html>
