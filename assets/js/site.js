@@ -464,5 +464,16 @@
     });
   }
 
+  /* Case hero background drifts slower than the page and settles out of its zoom. */
+  const heroBg = document.querySelector('.case-bg img');
+  if (heroBg && !reduced) {
+    gsap.fromTo(heroBg, { '--bg-zoom': 1.14 }, { '--bg-zoom': 1.06, duration: 1.6, ease: 'expo.out' });
+    gsap.to(heroBg, {
+      '--bg-shift': '120px',
+      ease: 'none',
+      scrollTrigger: { trigger: '.case-hero', start: 'top top', end: 'bottom top', scrub: true }
+    });
+  }
+
   addEventListener('load', () => ScrollTrigger.refresh());
 })();

@@ -354,7 +354,52 @@ ul, ol { margin: 0; padding: 0; }
 /* ------------------------------------------------------------------
    Case study: hero
    ------------------------------------------------------------------ */
-.case-hero { padding-block: clamp(24px, 6vh, 72px) clamp(32px, 5vw, 56px); }
+/* Case pages: the project cover sits behind the header and title as a
+   full-bleed banner, darkened for legibility and fading into the page. */
+body[data-case] .site-header {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+}
+body[data-case] .nav-link { color: rgba(237, 235, 230, 0.8); }
+body[data-case] .nav-link:hover,
+body[data-case] .nav-link[aria-current="page"] { color: var(--text); }
+.case-hero {
+  position: relative;
+  isolation: isolate;
+  padding-block: calc(84px + clamp(40px, 10vh, 120px)) clamp(32px, 5vw, 56px);
+  min-height: min(88vh, 860px);
+  display: flex;
+  align-items: flex-end;
+}
+.case-hero-inner { position: relative; }
+.case-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+.case-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(var(--bg-zoom, 1.06)) translateY(var(--bg-shift, 0px));
+  transform-origin: 50% 30%;
+}
+.case-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(11, 10, 16, 0.55) 0%, rgba(11, 10, 16, 0.35) 30%, rgba(11, 10, 16, 0.82) 72%, var(--bg) 100%),
+    linear-gradient(to right, rgba(11, 10, 16, 0.6), rgba(11, 10, 16, 0) 70%);
+}
+/* FlexiDoc's cover is a light image; push it darker so the title holds. */
+.case-bg.cover-flexidoc img { filter: brightness(0.55) saturate(0.9); }
+.case-bg.cover-sld img { filter: brightness(0.7) saturate(1.1); }
+.case-hero .back-link { color: rgba(237, 235, 230, 0.8); }
+@media (max-width: 560px) {
+  .case-hero { padding-top: calc(68px + 32px); min-height: 0; }
+}
 .back-link {
   display: inline-flex;
   align-items: center;
@@ -384,11 +429,11 @@ ul, ol { margin: 0; padding: 0; }
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 24px;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(237, 235, 230, 0.22);
   padding-top: 20px;
 }
 .case-meta div { font-size: var(--step--1); }
-.case-meta dt { color: var(--muted); margin-bottom: 4px; }
+.case-meta dt { color: rgba(237, 235, 230, 0.68); margin-bottom: 4px; }
 .case-meta dd { margin: 0; }
 @media (max-width: 820px) {
   .case-meta { grid-template-columns: repeat(2, minmax(0, 1fr)); }
