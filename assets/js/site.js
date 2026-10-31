@@ -124,6 +124,8 @@
       img.src = src;
       img.alt = pages.length > 1 ? `${title}, page ${i + 1} of ${pages.length}` : title;
       img.decoding = 'async';
+      // Documents sit on white; transparent artwork (logos) can name its own backdrop.
+      if (fig.dataset.bg) img.style.background = fig.dataset.bg;
       img.addEventListener('click', () => vPages.classList.toggle('is-long'));
       vPages.append(img);
     });

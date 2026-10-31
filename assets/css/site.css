@@ -107,17 +107,8 @@ ul, ol { margin: 0; padding: 0; }
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
   min-height: 44px;
 }
-.wordmark-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--accent);
-  transition: transform 0.5s var(--ease-out);
-}
-.wordmark:hover .wordmark-dot { transform: scale(1.6); }
 
 .site-nav ul {
   display: flex;
@@ -157,7 +148,6 @@ ul, ol { margin: 0; padding: 0; }
   .site-header .wrap { min-height: 68px; }
   .wordmark { font-size: var(--step-0); white-space: nowrap; }
   .site-nav ul { gap: 0; }
-  .wordmark-dot { display: none; }
   .nav-link { font-size: var(--step--1); padding: 0 4px; }
   .nav-link::after { left: 4px; right: 4px; }
 }
@@ -529,7 +519,7 @@ body[data-case] .nav-link[aria-current="page"] { color: var(--text); }
 }
 .chapter-head {
   display: grid;
-  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
   gap: clamp(20px, 5vw, 80px);
   align-items: start;
 }
@@ -541,8 +531,12 @@ body[data-case] .nav-link[aria-current="page"] { color: var(--text); }
   display: block;
   margin-bottom: 14px;
 }
+/* Sized to the heading column, not the window, so the longest single
+   word ("sketchbook", "presenting") always fits inside its mask. */
 .chapter h2 {
-  font-size: var(--step-4);
+  font-size: clamp(1.875rem, 0.6rem + 2.6vw, 3.25rem);
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 .prose {
   max-width: 64ch;
