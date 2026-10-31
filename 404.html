@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found, Stevie McLane</title>
+<meta name="description" content="This page does not exist.">
+<meta property="og:title" content="Page not found, Stevie McLane">
+<meta property="og:description" content="This page does not exist.">
+<meta property="og:image" content="https://steviemclane.com/assets/img/flexidoc/cover.webp">
+<meta name="theme-color" content="#0b0a10">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400..900&display=swap">
+<link rel="stylesheet" href="/assets/css/site.css">
+<script>
+(function (r) {
+  if (!('onpagereveal' in window)) r.classList.add('no-vt');
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    r.classList.add('motion');
+    setTimeout(function () { if (!window.gsap) r.classList.remove('motion'); }, 4000);
+  }
+})(document.documentElement);
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="wordmark" href="/"><span class="wordmark-dot" aria-hidden="true"></span>Stevie McLane</a>
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        <li><a class="nav-link" href="/#work">Work</a></li>
+        <li><a class="nav-link" href="/about/">About</a></li>
+        <li><button type="button" class="nav-link" data-open="resume-dialog">Resume</button></li>
+        <li><button type="button" class="nav-link" data-open="contact-dialog">Contact</button></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <section class="case-hero">
+    <h1 class="case-title" data-reveal="load">Page not found</h1>
+    <p class="case-summary" data-reveal="load">That link doesn't lead anywhere. The case studies are still right where they were.</p>
+    <p style="margin-top: 32px;"><a class="text-link" href="/">Back to the home page</a></p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-cta">
+      <p>Hiring for a UX internship, or want to talk through a project?</p>
+      <a class="footer-mail" href="mailto:steviegmclane@gmail.com">steviegmclane@gmail.com</a>
+    </div>
+    <div class="footer-bottom">
+      <ul>
+        <li><a class="nav-link" href="/">Home</a></li>
+        <li><a class="nav-link" href="/about/">About me</a></li>
+        <li><button type="button" class="nav-link" data-open="resume-dialog">Resume</button></li>
+        <li><button type="button" class="nav-link" data-open="contact-dialog">Contact</button></li>
+      </ul>
+      <small>&copy; 2026 Stevie McLane</small>
+    </div>
+  </div>
+</footer>
+
+<!-- SHARED DIALOGS: keep identical on every page -->
+<dialog class="sheet" id="resume-dialog" aria-labelledby="resume-title">
+  <div class="sheet-inner">
+    <div class="sheet-head">
+      <h2 id="resume-title">Resume</h2>
+      <div class="sheet-tools">
+        <button type="button" class="icon-btn" data-fullscreen="resume-asset" aria-label="View resume full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+        <a class="icon-btn" href="/resume.pdf" download="StevieMcLane_Resume.pdf" aria-label="Download resume as PDF"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+        <button type="button" class="icon-btn" data-close aria-label="Close resume"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+    </div>
+    <figure class="asset resume-preview" id="resume-asset" data-title="Stevie McLane, resume">
+      <button type="button" class="asset-frame" aria-label="View resume full screen"><img src="/assets/img/resume.webp" alt="Resume of Stevie McLane, Creative Director and UX Designer" width="1700" height="2200" loading="lazy"></button>
+      <a hidden href="/resume.pdf" download="StevieMcLane_Resume.pdf" tabindex="-1">Download</a>
+    </figure>
+  </div>
+</dialog>
+
+<dialog class="sheet" id="contact-dialog" aria-labelledby="contact-title">
+  <div class="sheet-inner">
+    <div class="sheet-head">
+      <h2 id="contact-title">Get in touch</h2>
+      <div class="sheet-tools">
+        <button type="button" class="icon-btn" data-close aria-label="Close contact links"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+    </div>
+    <ul class="contact-list">
+      <li><a href="mailto:steviegmclane@gmail.com"><span class="k">Email</span><span class="v">steviegmclane@gmail.com</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></li>
+      <li><a href="https://www.linkedin.com/in/stevie-mclane-bb3a3337b/" target="_blank" rel="noopener"><span class="k">LinkedIn</span><span class="v">stevie-mclane</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></li>    </ul>
+  </div>
+</dialog>
+
+<dialog class="viewer" id="viewer" aria-label="Full screen view">
+  <div class="viewer-bg"></div>
+  <div class="viewer-scroll"><div class="viewer-pages"></div></div>
+  <div class="viewer-bar">
+    <p class="viewer-title"></p>
+    <div class="sheet-tools">
+      <a class="icon-btn" data-viewer-download href="#" download aria-label="Download this file"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+      <button type="button" class="icon-btn" data-viewer-close aria-label="Close full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+  </div>
+</dialog>
+<!-- /SHARED DIALOGS -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FlexiDoc case study, Stevie McLane</title>
+<meta name="description" content="How I designed FlexiDoc, an appointment scheduling app for people with agoraphobia: research, personas, empathy maps, wireframes, IA, journey mapping and final screens.">
+<meta property="og:title" content="FlexiDoc case study, Stevie McLane">
+<meta property="og:description" content="How I designed FlexiDoc, an appointment scheduling app for people with agoraphobia: research, personas, empathy maps, wireframes, IA, journey mapping and final screens.">
+<meta property="og:image" content="https://steviemclane.com/assets/img/flexidoc/cover.webp">
+<meta name="theme-color" content="#0b0a10">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400..900&display=swap">
+<link rel="stylesheet" href="/assets/css/site.css">
+<script>
+(function (r) {
+  if (!('onpagereveal' in window)) r.classList.add('no-vt');
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    r.classList.add('motion');
+    setTimeout(function () { if (!window.gsap) r.classList.remove('motion'); }, 4000);
+  }
+})(document.documentElement);
+</script>
+</head>
+<body data-case="flexidoc">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="wordmark" href="/"><span class="wordmark-dot" aria-hidden="true"></span>Stevie McLane</a>
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        <li><a class="nav-link" href="/#work" aria-current="page">Work</a></li>
+        <li><a class="nav-link" href="/about/">About</a></li>
+        <li><button type="button" class="nav-link" data-open="resume-dialog">Resume</button></li>
+        <li><button type="button" class="nav-link" data-open="contact-dialog">Contact</button></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="case-hero wrap">
+    <a class="back-link" href="/#work"><span aria-hidden="true">&larr;</span> All work</a>
+    <h1 class="case-title" data-reveal="load">FlexiDoc</h1>
+    <p class="case-summary" data-reveal="load">An end-to-end medical appointment scheduling app tailored to the needs of users with agoraphobia.</p>
+    <dl class="case-meta" data-reveal="load">
+      <div><dt>Role</dt><dd>UX designer and researcher</dd></div>
+      <div><dt>Timeline</dt><dd>April 13 to May 6, 2026</dd></div>
+      <div><dt>Context</dt><dd>Final project, UX Design, University of North Texas</dd></div>
+      <div><dt>Tools</dt><dd>Figma, pen and paper</dd></div>
+    </dl>
+  </section>
+
+  <div class="wrap">
+    <div class="case-cover cover-flexidoc">
+      <img src="/assets/img/flexidoc/cover.webp" alt="FlexiDoc logo over a blurred grid of the app's final screens" width="1600" height="1273">
+    </div>
+    <div class="chapter-head" style="margin-top: clamp(48px, 8vw, 96px);">
+      <div></div>
+      <div class="prose">
+        <p class="prose-lead" data-reveal="text">FlexiDoc is a digital appointment planner built specifically for people managing agoraphobia, reframing scheduling around flexibility instead of rigid fixed times. Users pick a booking window set by their provider (four days, five days, a week) and choose how they're seen: in-office, telehealth, or an in-home visit. If plans change, a "bump" feature lets them push their appointment forward a day (usually to a different time slot) for a reduced fee versus a full cancellation. The result is a scheduling experience that puts safety and predictability in the user's hands rather than the clinic's.</p>
+      </div>
+    </div>
+  </div>
+
+  <nav class="timeline" aria-label="Case study steps">
+    <div class="wrap">
+      <ol>
+        <li><a href="#user-group"><span class="node">1</span>User group</a></li>
+        <li><a href="#personas"><span class="node">2</span>Personas</a></li>
+        <li><a href="#empathy"><span class="node">3</span>Empathy maps</a></li>
+        <li><a href="#wireframes"><span class="node">4</span>Wireframes</a></li>
+        <li><a href="#site-map"><span class="node">5</span>Site map</a></li>
+        <li><a href="#journey"><span class="node">6</span>Journey map</a></li>
+        <li><a href="#screens"><span class="node">7</span>Final screens</a></li>
+        <li><a href="#presentation"><span class="node">8</span>Presentation</a></li>
+      </ol>
+      <div class="timeline-track" aria-hidden="true"><div class="timeline-fill"></div></div>
+    </div>
+  </nav>
+
+  <article class="wrap">
+    <!-- 1. User group (from FinalSchedule, group A only) -->
+    <section class="chapter" id="user-group" aria-labelledby="h-user-group">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 1</span>
+          <h2 id="h-user-group" data-reveal="lines">Who this is for</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>An agoraphobe can best be defined as a person with an extreme or irrational fear of entering open or crowded places, of leaving their own home, or of being in places from which escape is difficult. In a recent study by The National Institute of Mental Health, data was found to show that roughly 1% of the adult U.S. population struggles with this fear on a daily basis. In order to get a better understanding of this group, I conducted interviews with real patients of the disease, sourcing for pain points and daily struggles.</p>
+          <p>By far the most prevalent issue that was mentioned was the recurring rescheduling of important events, primarily doctor's appointments. Agoraphobes struggle to step outside the house unless they feel 100% safe in that decision, leading to a lot of last minute or in-the-moment rescheduling.</p>
+          <p>Additionally, doctor's offices and pharmacies were listed multiple times as dedicated "safe spaces" for patients, more than likely due to the presence of medical professionals. In order to make situations like this more desirable for the user group, I need to accommodate for this drawback of setting and spatial awareness. I plan to take both of these problems into consideration and create a neatly designed solution for my final project.</p>
+        </div>
+      </div>
+      <div class="chapter-head" style="margin-top: clamp(40px, 6vw, 72px);">
+        <div><h3 class="chapter-num" style="font-size: var(--step-0); color: var(--text);">How I listened</h3></div>
+        <div class="prose" data-reveal="text">
+          <p>I reached members of an agoraphobia support group through Instagram and asked three open-ended questions:</p>
+          <ul class="question-list">
+            <li>What situations or environments outside your home feel most difficult or stressful for you, and why?</li>
+            <li>Can you walk me through a recent experience where you needed to go out or interact with something, like an app, service or place, and it didn't go well?</li>
+            <li>What would make it easier or more comfortable for you to do those same activities in the future?</li>
+          </ul>
+        </div>
+      </div>
+      <ul class="findings" data-reveal="stack">
+        <li><h3>Safety comes from people</h3><p>Participants only felt safe with a trusted figure nearby, like a parent, partner or medical professional.</p></li>
+        <li><h3>Safety changes day to day</h3><p>Someone who can go to the store one day may not be able to leave the house the next.</p></li>
+        <li><h3>Plans break at the last minute</h3><p>Anxiety often holds steady until right before an appointment, then spikes, which leads to constant rescheduling and cancellations.</p></li>
+      </ul>
+    </section>
+
+    <!-- 2. Personas -->
+    <section class="chapter" id="personas" aria-labelledby="h-personas">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 2</span>
+          <h2 id="h-personas" data-reveal="lines">Two people, opposite ends of the spectrum</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>To keep the solution from fitting only one kind of patient, I wrote two personas from opposite ends of the user group. The wider the net, the more useful the final design would be.</p>
+          <p><strong>John Granger, 65,</strong> is a retired Navy veteran in Flatonia, Texas, whose agoraphobia followed PTSD from his service overseas. He sits at the milder end of the spectrum, but rheumatoid arthritis keeps him on a schedule of in-person check-ups, and he depends on his wife to drive him. One bad morning moves two people's plans and the doctor's.</p>
+          <p><strong>Sarah Harper, 28,</strong> is a freelance graphic designer living alone in downtown Austin, at the more severe end. She manages a secondary condition that needs regular visits, and her anxiety often peaks in the hour before she has to leave. When she reschedules, the next open slot is usually two weeks out, and a telehealth fallback can't check what she needs checked.</p>
+        </div>
+      </div>
+      <div class="gallery two" data-reveal="pair">
+        <figure class="asset" data-title="Persona, John Granger" data-full="/assets/img/flexidoc/persona-john.webp">
+          <button type="button" class="asset-frame" aria-label="View John Granger persona full screen"><img src="/assets/img/flexidoc/persona-john.webp" alt="Persona sheet for John Granger, 65, retired military veteran with agoraphobia: about, goals, motivations, pain points and scenarios of use" width="1800" height="1013" loading="lazy" decoding="async"><span class="asset-badge">PDF</span></button>
+          <figcaption>
+            <p class="asset-caption"><strong>John Granger, 65</strong>Retired Navy veteran managing agoraphobia and rheumatoid arthritis.</p>
+            <div class="asset-actions">
+              <button type="button" class="icon-btn" data-fullscreen aria-label="View John Granger persona full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+              <a class="icon-btn" href="/files/flexidoc/persona-john-granger.pdf" download="StevieMcLane_FlexiDoc_Persona_JohnGranger.pdf" aria-label="Download John Granger persona (PDF)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="asset" data-title="Persona, Sarah Harper" data-full="/assets/img/flexidoc/persona-sarah.webp">
+          <button type="button" class="asset-frame" aria-label="View Sarah Harper persona full screen"><img src="/assets/img/flexidoc/persona-sarah.webp" alt="Persona sheet for Sarah Harper, 28, freelance graphic designer with agoraphobia: about, goals, motivations, pain points and scenarios of use" width="1800" height="1013" loading="lazy" decoding="async"><span class="asset-badge">PDF</span></button>
+          <figcaption>
+            <p class="asset-caption"><strong>Sarah Harper, 28</strong>Freelance graphic designer navigating agoraphobia from her apartment.</p>
+            <div class="asset-actions">
+              <button type="button" class="icon-btn" data-fullscreen aria-label="View Sarah Harper persona full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+              <a class="icon-btn" href="/files/flexidoc/persona-sarah-harper.pdf" download="StevieMcLane_FlexiDoc_Persona_SarahHarper.pdf" aria-label="Download Sarah Harper persona (PDF)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+            </div>
+          </figcaption>
+        </figure>
+      </div>
+      <blockquote class="quote" data-reveal="text">
+        <p>"Battled storms abroad, now just trying to brave the grocery store aisle."</p>
+        <footer>John Granger, persona</footer>
+      </blockquote>
+    </section>
+
+    <!-- 3. Empathy maps -->
+    <section class="chapter" id="empathy" aria-labelledby="h-empathy">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 3</span>
+          <h2 id="h-empathy" data-reveal="lines">What they say, think, do and feel</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>I mapped what each persona says, thinks, does and feels in the hours around an appointment. Side by side, the two maps showed the same pattern: both of them fully intend to go, and both feel the decision slipping away as the appointment gets closer.</p>
+          <p>That shifted the problem. Booking itself wasn't the hard part. The hard part was the moment just before leaving the house, so that moment is where FlexiDoc spends most of its effort.</p>
+        </div>
+      </div>
+      <div class="gallery two" data-reveal="pair">
+        <figure class="asset" data-title="Empathy map, Sarah Harper" data-full="/assets/img/flexidoc/empathy-sarah.webp">
+          <button type="button" class="asset-frame light" aria-label="View Sarah's empathy map full screen"><img src="/assets/img/flexidoc/empathy-sarah.webp" alt="Hand-drawn empathy map for Sarah with says, thinks, does and feels quadrants around appointment anxiety" width="1800" height="1393" loading="lazy" decoding="async"></button>
+          <figcaption>
+            <p class="asset-caption"><strong>Sarah, 28</strong>Says, thinks, does and feels around appointment anxiety.</p>
+            <div class="asset-actions">
+              <button type="button" class="icon-btn" data-fullscreen aria-label="View Sarah's empathy map full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+              <a class="icon-btn" href="/files/flexidoc/empathy-map-sarah.png" download="StevieMcLane_FlexiDoc_EmpathyMap_Sarah.png" aria-label="Download Sarah's empathy map (PNG)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="asset" data-title="Empathy map, John Granger" data-full="/assets/img/flexidoc/empathy-john.webp">
+          <button type="button" class="asset-frame light" aria-label="View John's empathy map full screen"><img src="/assets/img/flexidoc/empathy-john.webp" alt="Hand-drawn empathy map for John with says, thinks, does and feels quadrants around appointment anxiety" width="1800" height="1393" loading="lazy" decoding="async"></button>
+          <figcaption>
+            <p class="asset-caption"><strong>John, 65</strong>Says, thinks, does and feels around appointment anxiety.</p>
+            <div class="asset-actions">
+              <button type="button" class="icon-btn" data-fullscreen aria-label="View John's empathy map full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+              <a class="icon-btn" href="/files/flexidoc/empathy-map-john.png" download="StevieMcLane_FlexiDoc_EmpathyMap_John.png" aria-label="Download John's empathy map (PNG)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+            </div>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 4. Prototype -->
+    <section class="chapter" id="wireframes" aria-labelledby="h-wireframes">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 4</span>
+          <h2 id="h-wireframes" data-reveal="lines">Working it out on paper</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>Before opening Figma, I drew the patient side of the app by hand: role selection, the home calendar, doctor search, an office's about page and the booking screens. Paper kept each round cheap and let me walk the flow screen by screen, in the order a patient would see it.</p>
+          <p>Walking it through exposed three problems that I carried into the next round:</p>
+          <ul class="question-list">
+            <li>None of the screens said anything about time of day.</li>
+            <li>The bottom bar combining search, home and add was inefficient and needed rework.</li>
+            <li>First-time users needed more descriptive language to understand what each step did.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="gallery">
+        <figure class="asset" data-title="Hand-drawn wireframe prototype" data-full="/assets/img/flexidoc/wireframes.webp">
+          <button type="button" class="asset-frame light pad" data-reveal="wipe" aria-label="View wireframe prototype full screen"><img src="/assets/img/flexidoc/wireframes.webp" alt="Six hand-drawn phone wireframes on graph paper: role selection, two calendar views, doctor search, an about page and a booking calendar" width="1600" height="1971" loading="lazy" decoding="async" style="max-width: 720px; margin: 0 auto;"></button>
+          <figcaption>
+            <p class="asset-caption"><strong>Paper prototype</strong>Role selection, home calendar, doctor search and about screens.</p>
+            <div class="asset-actions">
+              <button type="button" class="icon-btn" data-fullscreen aria-label="View wireframe prototype full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+              <a class="icon-btn" href="/files/flexidoc/wireframe-prototype.jpg" download="StevieMcLane_FlexiDoc_WireframePrototype.jpg" aria-label="Download wireframe prototype (JPG)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+            </div>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 5. Site map + IA -->
+    <section class="chapter" id="site-map" aria-labelledby="h-site-map">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 5</span>
+          <h2 id="h-site-map" data-reveal="lines">Two sides of one product</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>The information architecture plans both ends of FlexiDoc. From a single startup page, the app splits into a doctor flow and a patient flow. Doctors reply to messages, watch notifications and review bookings, which they can approve or deny. Patients work from a main calendar, search for providers, read an office's details and reviews, and book a space.</p>
+          <p>Account settings hold the profile along with disability preferences, so a patient's accommodations travel with them instead of being explained again at every visit. The main user flows are highlighted in red and green.</p>
+        </div>
+      </div>
+      <div class="gallery">
+        <figure class="asset" data-title="Site map and information architecture" data-full="/assets/img/flexidoc/site-map.webp">
+          <button type="button" class="asset-frame light" data-reveal="wipe" aria-label="View site map full screen"><img src="/assets/img/flexidoc/site-map.webp" alt="Site map: a startup page branches into doctor and patient flows, with main pages, sub-pages and page content marked in a legend" width="2400" height="1855" loading="lazy" decoding="async"><span class="asset-badge">PDF</span></button>
+          <figcaption>
+            <p class="asset-caption"><strong>Site map and IA</strong>Doctor and patient flows from the startup page.</p>
+            <div class="asset-actions">
+              <button type="button" class="icon-btn" data-fullscreen aria-label="View site map full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+              <a class="icon-btn" href="/files/flexidoc/site-map-ia.pdf" download="StevieMcLane_FlexiDoc_SiteMap_IA.pdf" aria-label="Download site map (PDF)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+            </div>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 6. User journey mapping -->
+    <section class="chapter" id="journey" aria-labelledby="h-journey">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 6</span>
+          <h2 id="h-journey" data-reveal="lines">Following Sarah through the app</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>The journey map follows Sarah as she books a Wednesday 3 PM check-up and then bumps it. It moves through five stages, Calendar, Search, Information, Booking and Bump, and records what she does, what she's thinking and how she feels at each one.</p>
+          <p>Her mood climbs through search and booking, then drops hard at the bump, when the trip outside starts to feel unsafe. Every stage closes with its pain points and the change that answers them: a clearer icon and short explanation in place of the "Bump Time" label, larger date numerals with more contrast, sorting by rating and distance, and a count of open slots shown before the list.</p>
+        </div>
+      </div>
+      <div class="gallery">
+        <figure class="asset" data-title="Customer journey map, Sarah Harper" data-full="/assets/img/flexidoc/journey-map.webp">
+          <button type="button" class="asset-frame light" data-reveal="wipe" aria-label="View journey map full screen"><img src="/assets/img/flexidoc/journey-map.webp" alt="Customer journey map for Sarah across Calendar, Search, Information, Booking and Bump stages, with actions, thoughts, an emotion curve, pain points and solutions" width="2400" height="1855" loading="lazy" decoding="async"><span class="asset-badge">PDF</span></button>
+          <figcaption>
+            <p class="asset-caption"><strong>Customer journey map</strong>Calendar, Search, Information, Booking and Bump.</p>
+            <div class="asset-actions">
+              <button type="button" class="icon-btn" data-fullscreen aria-label="View journey map full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+              <a class="icon-btn" href="/files/flexidoc/user-journey-map.pdf" download="StevieMcLane_FlexiDoc_UserJourneyMap.pdf" aria-label="Download journey map (PDF)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+            </div>
+          </figcaption>
+        </figure>
+      </div>
+      <blockquote class="quote" data-reveal="text">
+        <p>"If I go outside today, everyone will watch me and something bad will happen."</p>
+        <footer>Sarah, at the Bump stage of her journey</footer>
+      </blockquote>
+    </section>
+
+    <!-- 7. Final renders -->
+    <section class="chapter" id="screens" aria-labelledby="h-screens">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 7</span>
+          <h2 id="h-screens" data-reveal="lines">Ten final screens</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>The high-fidelity screens in Figma cover the full patient path, from choosing a role on first launch to a bumped appointment back on the calendar. The palette stays in calm, low-saturation blues, the type runs large, and each screen has one clear next step, which keeps stimulation low for someone who may already be anxious when they open the app.</p>
+          <p><a class="text-link" href="/files/flexidoc/final-renders.pdf" download="StevieMcLane_FlexiDoc_FinalRenders.pdf">Download all ten screens (PDF)</a></p>
+        </div>
+      </div>
+      <div class="screens">
+        <div class="screens-track">
+          <figure class="asset" data-title="FlexiDoc screen 1: Choose a role" data-full="/files/flexidoc/screen-01.png" data-transparent="1">
+            <button type="button" class="asset-frame" aria-label="View screen 1, Choose a role, full screen"><img src="/assets/img/flexidoc/screen-01.webp" alt="FlexiDoc screen 1: Choose a role. Doctor or patient, on first launch." width="600" height="1301" loading="lazy" decoding="async"></button>
+            <figcaption>
+              <p class="asset-caption"><strong>1. Choose a role</strong>Doctor or patient, on first launch.</p>
+              <div class="asset-actions">
+                <a class="icon-btn" href="/files/flexidoc/screen-01.png" download="StevieMcLane_FlexiDoc_Screen01.png" aria-label="Download screen 1 (PNG)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+              </div>
+            </figcaption>
+          </figure>
+          <figure class="asset" data-title="FlexiDoc screen 2: Home calendar" data-full="/files/flexidoc/screen-02.png" data-transparent="1">
+            <button type="button" class="asset-frame" aria-label="View screen 2, Home calendar, full screen"><img src="/assets/img/flexidoc/screen-02.webp" alt="FlexiDoc screen 2: Home calendar. Upcoming appointments and quick notes at a glance." width="600" height="1301" loading="lazy" decoding="async"></button>
+            <figcaption>
+              <p class="asset-caption"><strong>2. Home calendar</strong>Upcoming appointments and quick notes at a glance.</p>
+              <div class="asset-actions">
+                <a class="icon-btn" href="/files/flexidoc/screen-02.png" download="StevieMcLane_FlexiDoc_Screen02.png" aria-label="Download screen 2 (PNG)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+              </div>
+            </figcaption>
+          </figure>
+          <figure class="asset" data-title="FlexiDoc screen 3: Find a doctor" data-full="/files/flexidoc/screen-03.png" data-transparent="1">
+            <button type="button" class="asset-frame" aria-label="View screen 3, Find a doctor, full screen"><img src="/assets/img/flexidoc/screen-03.webp" alt="FlexiDoc screen 3: Find a doctor. Nearby providers by specialty or name, with booking windows." width="600" height="1301" loading="lazy" decoding="async"></button>
+            <figcaption>
+              <p class="asset-caption"><strong>3. Find a doctor</strong>Nearby providers by specialty or name, with booking windows.</p>
+              <div class="asset-actions">
+                <a class="icon-btn" href="/files/flexidoc/screen-03.png" download="StevieMcLane_FlexiDoc_Screen03.png" aria-label="Download screen 3 (PNG)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+              </div>
+            </figcaption>
+          </figure>
+          <figure class="asset" data-title="FlexiDoc screen 4: Office details" data-full="/files/flexidoc/screen-04.png" data-transparent="1">
+            <button type="button" class="asset-frame" aria-label="View screen 4, Office details, full screen"><img src="/assets/img/flexidoc/screen-04.webp" alt="FlexiDoc screen 4: Office details. Location, rating and how the visit happens." width="600" height="1301" loading="lazy" decoding="async"></button>
+            <figcaption>
+              <p class="asset-caption"><strong>4. Office details</strong>Location, rating and how the visit happens.</p>
+              <div class="asset-actions">
+                <a class="icon-btn" href="/files/flexidoc/screen-04.png" download="StevieMcLane_FlexiDoc_Screen04.png" aria-label="Download screen 4 (PNG)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+              </div>
+            </figcaption>
+          </figure>
+          <figure class="asset" data-title="FlexiDoc screen 5: Booking window" data-full="/files/flexidoc/screen-05.png" data-transparent="1">
+            <button type="button" class="asset-frame" aria-label="View screen 5, Booking window, full screen"><img src="/assets/img/flexidoc/screen-05.webp" alt="FlexiDoc screen 5: Booking window. The multi-day window the office offers." width="600" height="1301" loading="lazy" decoding="async"></button>
+            <figcaption>
+              <p class="asset-caption"><strong>5. Booking window</strong>The multi-day window the office offers.</p>
+              <div class="asset-actions">
+                <a class="icon-btn" href="/files/flexidoc/screen-05.png" download="StevieMcLane_FlexiDoc_Screen05.png" aria-label="Download screen 5 (PNG)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+              </div>
+            </figcaption>
+          </figure>
+          <figure class="asset" data-title="FlexiDoc screen 6: Pick a time" data-full="/files/flexidoc/screen-06.png" data-transparent="1">
+            <button type="button" class="asset-frame" aria-label="View screen 6, Pick a time, full screen"><img src="/assets/img/flexidoc/screen-06.webp" alt="FlexiDoc screen 6: Pick a time. A specific slot inside that window." width="600" height="1301" loading="lazy" decoding="async"></button>
+            <figcaption>
+              <p class="asset-caption"><strong>6. Pick a time</strong>A specific slot inside that window.</p>
+              <div class="asset-actions">
+                <a class="icon-btn" href="/files/flexidoc/screen-06.png" download="StevieMcLane_FlexiDoc_Screen06.png" aria-label="Download screen 6 (PNG)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+              </div>
+            </figcaption>
+          </figure>
+          <figure class="asset" data-title="FlexiDoc screen 7: Confirmed" data-full="/files/flexidoc/screen-07.png" data-transparent="1">
+            <button type="button" class="asset-frame" aria-label="View screen 7, Confirmed, full screen"><img src="/assets/img/flexidoc/screen-07.webp" alt="FlexiDoc screen 7: Confirmed. The appointment lands on the home calendar." width="600" height="1301" loading="lazy" decoding="async"></button>
+            <figcaption>
+              <p class="asset-caption"><strong>7. Confirmed</strong>The appointment lands on the home calendar.</p>
+              <div class="asset-actions">
+                <a class="icon-btn" href="/files/flexidoc/screen-07.png" download="StevieMcLane_FlexiDoc_Screen07.png" aria-label="Download screen 7 (PNG)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+              </div>
+            </figcaption>
+          </figure>
+          <figure class="asset" data-title="FlexiDoc screen 8: Start a bump" data-full="/files/flexidoc/screen-08.png" data-transparent="1">
+            <button type="button" class="asset-frame" aria-label="View screen 8, Start a bump, full screen"><img src="/assets/img/flexidoc/screen-08.webp" alt="FlexiDoc screen 8: Start a bump. Shift the appointment forward one day." width="600" height="1301" loading="lazy" decoding="async"></button>
+            <figcaption>
+              <p class="asset-caption"><strong>8. Start a bump</strong>Shift the appointment forward one day.</p>
+              <div class="asset-actions">
+                <a class="icon-btn" href="/files/flexidoc/screen-08.png" download="StevieMcLane_FlexiDoc_Screen08.png" aria-label="Download screen 8 (PNG)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+              </div>
+            </figcaption>
+          </figure>
+          <figure class="asset" data-title="FlexiDoc screen 9: New time, reduced fee" data-full="/files/flexidoc/screen-09.png" data-transparent="1">
+            <button type="button" class="asset-frame" aria-label="View screen 9, New time, reduced fee, full screen"><img src="/assets/img/flexidoc/screen-09.webp" alt="FlexiDoc screen 9: New time, reduced fee. Pick the new slot and pay the bump fee." width="600" height="1301" loading="lazy" decoding="async"></button>
+            <figcaption>
+              <p class="asset-caption"><strong>9. New time, reduced fee</strong>Pick the new slot and pay the bump fee.</p>
+              <div class="asset-actions">
+                <a class="icon-btn" href="/files/flexidoc/screen-09.png" download="StevieMcLane_FlexiDoc_Screen09.png" aria-label="Download screen 9 (PNG)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+              </div>
+            </figcaption>
+          </figure>
+          <figure class="asset" data-title="FlexiDoc screen 10: Bumped" data-full="/files/flexidoc/screen-10.png" data-transparent="1">
+            <button type="button" class="asset-frame" aria-label="View screen 10, Bumped, full screen"><img src="/assets/img/flexidoc/screen-10.webp" alt="FlexiDoc screen 10: Bumped. The calendar shows the new range." width="600" height="1301" loading="lazy" decoding="async"></button>
+            <figcaption>
+              <p class="asset-caption"><strong>10. Bumped</strong>The calendar shows the new range.</p>
+              <div class="asset-actions">
+                <a class="icon-btn" href="/files/flexidoc/screen-10.png" download="StevieMcLane_FlexiDoc_Screen10.png" aria-label="Download screen 10 (PNG)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+              </div>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Final presentation -->
+    <section class="chapter" id="presentation" aria-labelledby="h-presentation">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 8</span>
+          <h2 id="h-presentation" data-reveal="lines">Presenting to the faculty</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>I closed the semester by presenting FlexiDoc to the UX Design faculty. Over eleven slides the deck covers the user group, my research and the pain points it surfaced, both personas and their empathy maps, the solution, the site map, the journey map, the paper prototype and the final renders.</p>
+          <p>The title slide carried the whole idea in one line: <strong>appointments that wait for you, not the other way around.</strong></p>
+        </div>
+      </div>
+      <div class="deck">
+        <figure class="asset" data-deck data-index="0" data-title="FlexiDoc final presentation" data-pages="/assets/img/flexidoc/deck-01.webp,/assets/img/flexidoc/deck-02.webp,/assets/img/flexidoc/deck-03.webp,/assets/img/flexidoc/deck-04.webp,/assets/img/flexidoc/deck-05.webp,/assets/img/flexidoc/deck-06.webp,/assets/img/flexidoc/deck-07.webp,/assets/img/flexidoc/deck-08.webp,/assets/img/flexidoc/deck-09.webp,/assets/img/flexidoc/deck-10.webp,/assets/img/flexidoc/deck-11.webp">
+          <button type="button" class="asset-frame deck-current" data-reveal="wipe" aria-label="View the presentation full screen"><img src="/assets/img/flexidoc/deck-01.webp" alt="Final presentation, slide 1 of 11" width="1600" height="900" loading="lazy" decoding="async"></button>
+          <figcaption>
+            <div class="deck-nav">
+              <button type="button" class="icon-btn" data-deck-prev aria-label="Previous slide"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+              <button type="button" class="icon-btn" data-deck-next aria-label="Next slide"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+              <span class="deck-count" aria-live="polite">1 / 11</span>
+            </div>
+            <div class="asset-actions">
+              <button type="button" class="icon-btn" data-fullscreen aria-label="View the presentation full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+              <a class="icon-btn" href="/files/flexidoc/final-presentation.pptx" download="StevieMcLane_FlexiDoc_FinalPresentation.pptx" aria-label="Download the presentation (PowerPoint)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+            </div>
+          </figcaption>
+        </figure>
+        <div class="deck-strip" aria-label="Jump to slide">
+          <button type="button" aria-label="Slide 1" aria-current="true"><img src="/assets/img/flexidoc/deck-01.webp" alt="" width="1600" height="900" loading="lazy" decoding="async"></button>
+          <button type="button" aria-label="Slide 2" aria-current="false"><img src="/assets/img/flexidoc/deck-02.webp" alt="" width="1600" height="900" loading="lazy" decoding="async"></button>
+          <button type="button" aria-label="Slide 3" aria-current="false"><img src="/assets/img/flexidoc/deck-03.webp" alt="" width="1600" height="900" loading="lazy" decoding="async"></button>
+          <button type="button" aria-label="Slide 4" aria-current="false"><img src="/assets/img/flexidoc/deck-04.webp" alt="" width="1600" height="900" loading="lazy" decoding="async"></button>
+          <button type="button" aria-label="Slide 5" aria-current="false"><img src="/assets/img/flexidoc/deck-05.webp" alt="" width="1600" height="900" loading="lazy" decoding="async"></button>
+          <button type="button" aria-label="Slide 6" aria-current="false"><img src="/assets/img/flexidoc/deck-06.webp" alt="" width="1600" height="900" loading="lazy" decoding="async"></button>
+          <button type="button" aria-label="Slide 7" aria-current="false"><img src="/assets/img/flexidoc/deck-07.webp" alt="" width="1600" height="900" loading="lazy" decoding="async"></button>
+          <button type="button" aria-label="Slide 8" aria-current="false"><img src="/assets/img/flexidoc/deck-08.webp" alt="" width="1600" height="900" loading="lazy" decoding="async"></button>
+          <button type="button" aria-label="Slide 9" aria-current="false"><img src="/assets/img/flexidoc/deck-09.webp" alt="" width="1600" height="900" loading="lazy" decoding="async"></button>
+          <button type="button" aria-label="Slide 10" aria-current="false"><img src="/assets/img/flexidoc/deck-10.webp" alt="" width="1600" height="900" loading="lazy" decoding="async"></button>
+          <button type="button" aria-label="Slide 11" aria-current="false"><img src="/assets/img/flexidoc/deck-11.webp" alt="" width="1600" height="900" loading="lazy" decoding="async"></button>
+        </div>
+        <p class="asset-caption" style="margin-top: 16px;">Also available as a <a class="text-link" href="/files/flexidoc/final-presentation.pdf" download="StevieMcLane_FlexiDoc_FinalPresentation.pdf">PDF</a>.</p>
+      </div>
+    </section>
+  </article>
+
+  <section class="more wrap" aria-labelledby="more-title">
+    <h2 id="more-title" data-reveal="lines">Read more of my case studies</h2>
+    <ul class="more-grid" data-reveal="stack">
+      <li>
+        <a class="more-link" href="/work/sld/">
+          <div class="work-media cover-sld"><img src="/assets/img/sld/cover.webp" alt="" width="900" height="716" loading="lazy" decoding="async"></div>
+          <h3>SLD <span aria-hidden="true">&rarr;</span></h3>
+          <p>Brand identity and cover art for a musical artist</p>
+        </a>
+      </li>
+    </ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-cta">
+      <p>Hiring for a UX internship, or want to talk through a project?</p>
+      <a class="footer-mail" href="mailto:steviegmclane@gmail.com">steviegmclane@gmail.com</a>
+    </div>
+    <div class="footer-bottom">
+      <ul>
+        <li><a class="nav-link" href="/">Home</a></li>
+        <li><a class="nav-link" href="/about/">About me</a></li>
+        <li><button type="button" class="nav-link" data-open="resume-dialog">Resume</button></li>
+        <li><button type="button" class="nav-link" data-open="contact-dialog">Contact</button></li>
+      </ul>
+      <small>&copy; 2026 Stevie McLane</small>
+    </div>
+  </div>
+</footer>
+
+<!-- SHARED DIALOGS: keep identical on every page -->
+<dialog class="sheet" id="resume-dialog" aria-labelledby="resume-title">
+  <div class="sheet-inner">
+    <div class="sheet-head">
+      <h2 id="resume-title">Resume</h2>
+      <div class="sheet-tools">
+        <button type="button" class="icon-btn" data-fullscreen="resume-asset" aria-label="View resume full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+        <a class="icon-btn" href="/resume.pdf" download="StevieMcLane_Resume.pdf" aria-label="Download resume as PDF"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+        <button type="button" class="icon-btn" data-close aria-label="Close resume"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+    </div>
+    <figure class="asset resume-preview" id="resume-asset" data-title="Stevie McLane, resume">
+      <button type="button" class="asset-frame" aria-label="View resume full screen"><img src="/assets/img/resume.webp" alt="Resume of Stevie McLane, Creative Director and UX Designer" width="1700" height="2200" loading="lazy"></button>
+      <a hidden href="/resume.pdf" download="StevieMcLane_Resume.pdf" tabindex="-1">Download</a>
+    </figure>
+  </div>
+</dialog>
+
+<dialog class="sheet" id="contact-dialog" aria-labelledby="contact-title">
+  <div class="sheet-inner">
+    <div class="sheet-head">
+      <h2 id="contact-title">Get in touch</h2>
+      <div class="sheet-tools">
+        <button type="button" class="icon-btn" data-close aria-label="Close contact links"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+    </div>
+    <ul class="contact-list">
+      <li><a href="mailto:steviegmclane@gmail.com"><span class="k">Email</span><span class="v">steviegmclane@gmail.com</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></li>
+      <li><a href="https://www.linkedin.com/in/stevie-mclane-bb3a3337b/" target="_blank" rel="noopener"><span class="k">LinkedIn</span><span class="v">stevie-mclane</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></li>    </ul>
+  </div>
+</dialog>
+
+<dialog class="viewer" id="viewer" aria-label="Full screen view">
+  <div class="viewer-bg"></div>
+  <div class="viewer-scroll"><div class="viewer-pages"></div></div>
+  <div class="viewer-bar">
+    <p class="viewer-title"></p>
+    <div class="sheet-tools">
+      <a class="icon-btn" data-viewer-download href="#" download aria-label="Download this file"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+      <button type="button" class="icon-btn" data-viewer-close aria-label="Close full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+  </div>
+</dialog>
+<!-- /SHARED DIALOGS -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>
