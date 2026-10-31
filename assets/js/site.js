@@ -265,6 +265,40 @@
     });
   }
 
+  /* Light / dark screenshot switch: swaps every phone shot, with a quick cross-fade. */
+  document.querySelectorAll('[data-shot-theme]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const theme = btn.dataset.shotTheme;
+      btn.parentElement.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+      document.querySelectorAll('[data-shot]').forEach((fig, i) => {
+        const img = fig.querySelector('.asset-frame img');
+        const pages = fig.dataset.pages.split(',');
+        const next = theme === 'dark' ? pages[1] : pages[0];
+        const dl = fig.querySelector('[download]');
+        dl.href = dl.href.replace(/-(light|dark)\.png$/, `-${theme}.png`);
+        dl.download = dl.download.replace(/_(light|dark)\.png$/, `_${theme}.png`);
+        // Open full screen on the chosen theme first.
+        fig.dataset.index = theme === 'dark' ? 1 : 0;
+        if (window.gsap && !reduced) {
+          gsap.to(img, { opacity: 0, y: 8, duration: 0.18, delay: i * 0.05, ease: 'power2.in', onComplete: () => {
+            img.src = next;
+            gsap.to(img, { opacity: 1, y: 0, duration: 0.35, ease: 'power3.out' });
+          } });
+        } else {
+          img.src = next;
+        }
+      });
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-video-fullscreen]');
+    if (!btn) return;
+    const video = btn.closest('.asset').querySelector('video');
+    video.play().catch(() => {});
+    (video.requestFullscreen || video.webkitEnterFullscreen || (() => {})).call(video);
+  });
+
   if (!hasGsap) return;
 
   /* ---------------------------------------------------------------

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Any Day Now case study, Stevie McLane</title>
+<meta name="description" content="How I designed, built, audited and launched Any Day Now, a package tracker for web, iOS and Android: audits, concepts, native features and launch videos.">
+<meta property="og:title" content="Any Day Now case study, Stevie McLane">
+<meta property="og:description" content="How I designed, built, audited and launched Any Day Now, a package tracker for web, iOS and Android: audits, concepts, native features and launch videos.">
+<meta property="og:image" content="https://steviemclane.com/assets/img/anydaynow/cover.webp">
+<meta name="theme-color" content="#0b0a10">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png?v=2">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16.png?v=2">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400..900&display=swap">
+<link rel="stylesheet" href="/assets/css/site.css">
+<script>
+(function (r) {
+  if (!('onpagereveal' in window)) r.classList.add('no-vt');
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    r.classList.add('motion');
+    setTimeout(function () { if (!window.gsap) r.classList.remove('motion'); }, 4000);
+  }
+})(document.documentElement);
+</script>
+</head>
+<body data-case="anydaynow">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="wordmark" href="/">Stevie McLane</a>
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        <li><a class="nav-link" href="/#work" aria-current="page">Work</a></li>
+        <li><a class="nav-link" href="/about/">About</a></li>
+        <li><button type="button" class="nav-link" data-open="resume-dialog">Resume</button></li>
+        <li><button type="button" class="nav-link" data-open="contact-dialog">Contact</button></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="case-hero">
+    <div class="case-bg cover-anydaynow" aria-hidden="true"><img src="/assets/img/anydaynow/hero-bg.webp" alt="" width="2400" height="1350" fetchpriority="high"></div>
+    <div class="wrap case-hero-inner">
+      <a class="back-link" href="/#work"><span aria-hidden="true">&larr;</span> All work</a>
+      <h1 class="case-title" data-reveal="load">Any Day Now</h1>
+      <p class="case-summary" data-reveal="load">A free package tracker for web, iOS and Android that turns carrier jargon into plain language and gives an honest delivery estimate, in 45 languages.</p>
+      <dl class="case-meta" data-reveal="load">
+        <div><dt>Role</dt><dd>Founder and product designer</dd></div>
+        <div><dt>Timeline</dt><dd>October 2026 to present</dd></div>
+        <div><dt>Platforms</dt><dd>Website, web app, iOS, Android</dd></div>
+        <div><dt>Live</dt><dd><a class="text-link" href="https://anydaynow.net" target="_blank" rel="noopener">anydaynow.net</a></dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="chapter-head" style="margin-top: clamp(32px, 5vw, 64px);">
+      <div></div>
+      <div class="prose">
+        <p class="prose-lead" data-reveal="text">Any Day Now is my own product. I designed it, built it, audited it and launched it, and it's live on the web, on Android and as an iOS app with widgets and Live Activities. This case study follows it from the first commit to the launch videos, including the three rounds of accessibility, heuristic and usability audits that reshaped it along the way.</p>
+      </div>
+    </div>
+  </div>
+
+  <nav class="timeline" aria-label="Case study steps">
+    <div class="wrap">
+      <ol>
+        <li><a href="#problem"><span class="node">1</span>The problem</a></li>
+        <li><a href="#first-build"><span class="node">2</span>First build</a></li>
+        <li><a href="#heuristic"><span class="node">3</span>Heuristic audit</a></li>
+        <li><a href="#rounds"><span class="node">4</span>Audit rounds</a></li>
+        <li><a href="#home-concepts"><span class="node">5</span>Home concepts</a></li>
+        <li><a href="#icons"><span class="node">6</span>App icon</a></li>
+        <li><a href="#native"><span class="node">7</span>Native apps</a></li>
+        <li><a href="#launch"><span class="node">8</span>Launch</a></li>
+        <li><a href="#growth"><span class="node">9</span>Growth plan</a></li>
+      </ol>
+      <div class="timeline-track" aria-hidden="true"><div class="timeline-fill"></div></div>
+    </div>
+  </nav>
+
+  <article class="wrap">
+    <section class="chapter" id="problem" aria-labelledby="h-problem">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 1</span>
+          <h2 id="h-problem" data-reveal="lines">Tracking pages speak carrier</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>A typical tracking page lists scans like "Handed over to import customs" and "Destination customs allow Import", then leaves the expected delivery date blank. The person waiting is left to decode it, and the moments that worry people most, a package sitting in customs or a scan that hasn't changed in days, are exactly where the page says the least.</p>
+          <p>Customs is also where scam texts land, asking people to pay a fake import fee. And a lot of people ordering from overseas don't read English first, so even the clear scans aren't clear to them.</p>
+        </div>
+      </div>
+      <ul class="findings" data-reveal="stack">
+        <li><h3>Where is it?</h3><p>Every scan, rewritten in plain words, with a line on what it means.</p></li>
+        <li><h3>When will it arrive?</h3><p>One honest delivery estimate, explained, instead of a blank field or a date that keeps slipping.</p></li>
+        <li><h3>Is this normal?</h3><p>Context at the anxious moments, including how real customs fees are requested.</p></li>
+      </ul>
+    </section>
+
+    <section class="chapter" id="first-build" aria-labelledby="h-first-build">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 2</span>
+          <h2 id="h-first-build" data-reveal="lines">Live in a day</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>The first version went live on October 19, the same day as the first commit. It identifies the carrier from the tracking number's format and asks the official USPS, UPS, FedEx and DHL services first, falling back to an aggregator for everyone else. Each scan is then rewritten in the visitor's language.</p>
+          <p>The delivery estimate is the part I care most about getting right. It uses the carrier's own date when there is one. When there isn't, it uses real transit times for that route once ten or more packages have been delivered on it, and published carrier standards before that. Delivered packages feed the model with stage durations only; the tracking number itself is stored as a hash.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter" id="heuristic" aria-labelledby="h-heuristic">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 3</span>
+          <h2 id="h-heuristic" data-reveal="lines">Auditing my own work</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>The day after launch I audited the site against Nielsen's ten heuristics and Krug's trunk test. It worked, but it buried its two answers, where the package is and when it will arrive, under a five-line summary set as a headline. Its dark serif and monospace styling read like a template rather than a utility people could trust.</p>
+          <p>The redesign led with a short status headline and the estimate, moved to a light-first system with dark mode following the device, and gave color a fixed meaning: blue for action, amber for attention, green for delivered, red for a problem, always paired with text.</p>
+        </div>
+      </div>
+      <ul class="stats" data-reveal="stack">
+        <li><span class="stat-num">6 <i>to</i> 9</span><span class="stat-label">Heuristic score out of 10, before and after the redesign</span></li>
+        <li><span class="stat-num">2 <i>to</i> 0</span><span class="stat-label">Major (severity 3) issues</span></li>
+        <li><span class="stat-num">13 <i>to</i> 0</span><span class="stat-label">Minor (severity 2) issues</span></li>
+      </ul>
+      <div class="gallery">
+        <figure class="asset" data-title="UX heuristic audit" data-pages="/assets/img/anydaynow/ux-audit-01.webp,/assets/img/anydaynow/ux-audit-02.webp,/assets/img/anydaynow/ux-audit-03.webp">
+          <button type="button" class="asset-frame light pad" aria-label="View Heuristic audit full screen"><img style="max-width: 720px; margin: 0 auto; max-height: 720px; object-fit: cover; object-position: top;" src="/assets/img/anydaynow/ux-audit-01.webp" alt="UX heuristic audit report for Any Day Now, first page" width="1400" height="1982" loading="lazy" decoding="async"><span class="asset-badge">PDF · 3 pages</span></button>
+          <figcaption><p class="asset-caption"><strong>Heuristic audit</strong>Findings, fixes and the before and after score.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Heuristic audit full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button><a class="icon-btn" href="/files/anydaynow/ux-heuristic-audit.pdf" download="StevieMcLane_AnyDayNow_HeuristicAudit.pdf" aria-label="Download Heuristic audit (PDF)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="chapter" id="rounds" aria-labelledby="h-rounds">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 4</span>
+          <h2 id="h-rounds" data-reveal="lines">Three rounds, ten user groups</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>From there I ran each change through three audits: accessibility against WCAG 2.2 AA, a heuristic review, and a task-based usability review. Every finding is rated on Nielsen's 0 to 4 severity scale and tagged with the user groups it affects, from first-time trackers and older adults to screen-reader users, people with color vision deficiency, non-English and right-to-left readers, and resellers tracking dozens of parcels.</p>
+          <p>The first round, on the live site, surfaced things like translated updates being read aloud with an English voice, near-invisible empty steps in the progress bar, and a language picker that listed "Spanish" instead of "Español". Round two covered the home screen redesign and round three the details that make the web app feel native. Across all three audits, major findings went from twelve to two to none.</p>
+        </div>
+      </div>
+      <figure class="round-chart" data-reveal="stack" aria-label="Major findings per audit round">
+        <div class="round"><span class="round-name">Round 1 <small>Live site, Oct 21</small></span><span class="round-bar" style="--v: 12"><b>12</b></span></div>
+        <div class="round"><span class="round-name">Round 2 <small>Home redesign</small></span><span class="round-bar" style="--v: 2"><b>2</b></span></div>
+        <div class="round"><span class="round-name">Round 3 <small>App-feel details</small></span><span class="round-bar" style="--v: 0"><b>0</b></span></div>
+        <figcaption class="asset-caption">Severity 3 and 4 findings across the accessibility, heuristic and usability audits in each round.</figcaption>
+      </figure>
+      <div class="round-group"><h3 class="round-title">Round 1 <span>Live site, October 21</span></h3><div class="gallery three" data-reveal="stack"><figure class="asset" data-title="Round 1 accessibility audit" data-pages="/assets/img/anydaynow/audit-r1-accessibility-01.webp,/assets/img/anydaynow/audit-r1-accessibility-02.webp,/assets/img/anydaynow/audit-r1-accessibility-03.webp,/assets/img/anydaynow/audit-r1-accessibility-04.webp">
+          <button type="button" class="asset-frame light" aria-label="View Accessibility audit full screen"><img src="/assets/img/anydaynow/audit-r1-accessibility-01.webp" alt="Round 1 accessibility audit spreadsheet, first page" width="1600" height="1131" loading="lazy" decoding="async"><span class="asset-badge">Sheet · 4 pages</span></button>
+          <figcaption><p class="asset-caption"><strong>Accessibility audit</strong>WCAG 2.2 AA checklist.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Accessibility audit full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button><a class="icon-btn" href="/files/anydaynow/audits/r1-accessibility.xlsx" download="StevieMcLane_AnyDayNow_Round1_AccessibilityAudit.xlsx" aria-label="Download Accessibility audit (Excel)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+        </figure><figure class="asset" data-title="Round 1 heuristic audit" data-pages="/assets/img/anydaynow/audit-r1-heuristic-01.webp,/assets/img/anydaynow/audit-r1-heuristic-02.webp,/assets/img/anydaynow/audit-r1-heuristic-03.webp">
+          <button type="button" class="asset-frame light" aria-label="View Heuristic audit full screen"><img src="/assets/img/anydaynow/audit-r1-heuristic-01.webp" alt="Round 1 heuristic audit spreadsheet, first page" width="1600" height="1131" loading="lazy" decoding="async"><span class="asset-badge">Sheet · 3 pages</span></button>
+          <figcaption><p class="asset-caption"><strong>Heuristic audit</strong>Nielsen heuristics with severity ratings.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Heuristic audit full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button><a class="icon-btn" href="/files/anydaynow/audits/r1-heuristic.xlsx" download="StevieMcLane_AnyDayNow_Round1_HeuristicAudit.xlsx" aria-label="Download Heuristic audit (Excel)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+        </figure><figure class="asset" data-title="Round 1 usability audit" data-pages="/assets/img/anydaynow/audit-r1-usability-01.webp,/assets/img/anydaynow/audit-r1-usability-02.webp,/assets/img/anydaynow/audit-r1-usability-03.webp,/assets/img/anydaynow/audit-r1-usability-04.webp">
+          <button type="button" class="asset-frame light" aria-label="View Usability audit full screen"><img src="/assets/img/anydaynow/audit-r1-usability-01.webp" alt="Round 1 usability audit spreadsheet, first page" width="1600" height="1131" loading="lazy" decoding="async"><span class="asset-badge">Sheet · 4 pages</span></button>
+          <figcaption><p class="asset-caption"><strong>Usability audit</strong>Task-based findings by user group.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Usability audit full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button><a class="icon-btn" href="/files/anydaynow/audits/r1-usability.xlsx" download="StevieMcLane_AnyDayNow_Round1_UsabilityAudit.xlsx" aria-label="Download Usability audit (Excel)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+        </figure></div></div>
+      <div class="round-group"><h3 class="round-title">Round 2 <span>Home screen redesign</span></h3><div class="gallery three" data-reveal="stack"><figure class="asset" data-title="Round 2 accessibility audit" data-pages="/assets/img/anydaynow/audit-r2-accessibility-01.webp,/assets/img/anydaynow/audit-r2-accessibility-02.webp">
+          <button type="button" class="asset-frame light" aria-label="View Accessibility audit full screen"><img src="/assets/img/anydaynow/audit-r2-accessibility-01.webp" alt="Round 2 accessibility audit spreadsheet, first page" width="1600" height="1131" loading="lazy" decoding="async"><span class="asset-badge">Sheet · 2 pages</span></button>
+          <figcaption><p class="asset-caption"><strong>Accessibility audit</strong>WCAG 2.2 AA checklist.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Accessibility audit full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button><a class="icon-btn" href="/files/anydaynow/audits/r2-accessibility.xlsx" download="StevieMcLane_AnyDayNow_Round2_AccessibilityAudit.xlsx" aria-label="Download Accessibility audit (Excel)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+        </figure><figure class="asset" data-title="Round 2 heuristic audit" data-pages="/assets/img/anydaynow/audit-r2-heuristic-01.webp,/assets/img/anydaynow/audit-r2-heuristic-02.webp">
+          <button type="button" class="asset-frame light" aria-label="View Heuristic audit full screen"><img src="/assets/img/anydaynow/audit-r2-heuristic-01.webp" alt="Round 2 heuristic audit spreadsheet, first page" width="1600" height="1131" loading="lazy" decoding="async"><span class="asset-badge">Sheet · 2 pages</span></button>
+          <figcaption><p class="asset-caption"><strong>Heuristic audit</strong>Nielsen heuristics with severity ratings.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Heuristic audit full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button><a class="icon-btn" href="/files/anydaynow/audits/r2-heuristic.xlsx" download="StevieMcLane_AnyDayNow_Round2_HeuristicAudit.xlsx" aria-label="Download Heuristic audit (Excel)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+        </figure><figure class="asset" data-title="Round 2 usability audit" data-pages="/assets/img/anydaynow/audit-r2-usability-01.webp,/assets/img/anydaynow/audit-r2-usability-02.webp">
+          <button type="button" class="asset-frame light" aria-label="View Usability audit full screen"><img src="/assets/img/anydaynow/audit-r2-usability-01.webp" alt="Round 2 usability audit spreadsheet, first page" width="1600" height="1131" loading="lazy" decoding="async"><span class="asset-badge">Sheet · 2 pages</span></button>
+          <figcaption><p class="asset-caption"><strong>Usability audit</strong>Task-based findings by user group.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Usability audit full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button><a class="icon-btn" href="/files/anydaynow/audits/r2-usability.xlsx" download="StevieMcLane_AnyDayNow_Round2_UsabilityAudit.xlsx" aria-label="Download Usability audit (Excel)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+        </figure></div></div>
+      <div class="round-group"><h3 class="round-title">Round 3 <span>App-feel details</span></h3><div class="gallery three" data-reveal="stack"><figure class="asset" data-title="Round 3 accessibility audit" data-pages="/assets/img/anydaynow/audit-r3-accessibility-01.webp,/assets/img/anydaynow/audit-r3-accessibility-02.webp">
+          <button type="button" class="asset-frame light" aria-label="View Accessibility audit full screen"><img src="/assets/img/anydaynow/audit-r3-accessibility-01.webp" alt="Round 3 accessibility audit spreadsheet, first page" width="1600" height="1131" loading="lazy" decoding="async"><span class="asset-badge">Sheet · 2 pages</span></button>
+          <figcaption><p class="asset-caption"><strong>Accessibility audit</strong>WCAG 2.2 AA checklist.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Accessibility audit full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button><a class="icon-btn" href="/files/anydaynow/audits/r3-accessibility.xlsx" download="StevieMcLane_AnyDayNow_Round3_AccessibilityAudit.xlsx" aria-label="Download Accessibility audit (Excel)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+        </figure><figure class="asset" data-title="Round 3 heuristic audit" data-pages="/assets/img/anydaynow/audit-r3-heuristic-01.webp,/assets/img/anydaynow/audit-r3-heuristic-02.webp">
+          <button type="button" class="asset-frame light" aria-label="View Heuristic audit full screen"><img src="/assets/img/anydaynow/audit-r3-heuristic-01.webp" alt="Round 3 heuristic audit spreadsheet, first page" width="1600" height="1131" loading="lazy" decoding="async"><span class="asset-badge">Sheet · 2 pages</span></button>
+          <figcaption><p class="asset-caption"><strong>Heuristic audit</strong>Nielsen heuristics with severity ratings.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Heuristic audit full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button><a class="icon-btn" href="/files/anydaynow/audits/r3-heuristic.xlsx" download="StevieMcLane_AnyDayNow_Round3_HeuristicAudit.xlsx" aria-label="Download Heuristic audit (Excel)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+        </figure><figure class="asset" data-title="Round 3 usability audit" data-pages="/assets/img/anydaynow/audit-r3-usability-01.webp,/assets/img/anydaynow/audit-r3-usability-02.webp">
+          <button type="button" class="asset-frame light" aria-label="View Usability audit full screen"><img src="/assets/img/anydaynow/audit-r3-usability-01.webp" alt="Round 3 usability audit spreadsheet, first page" width="1600" height="1131" loading="lazy" decoding="async"><span class="asset-badge">Sheet · 2 pages</span></button>
+          <figcaption><p class="asset-caption"><strong>Usability audit</strong>Task-based findings by user group.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Usability audit full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button><a class="icon-btn" href="/files/anydaynow/audits/r3-usability.xlsx" download="StevieMcLane_AnyDayNow_Round3_UsabilityAudit.xlsx" aria-label="Download Usability audit (Excel)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+        </figure></div></div>
+    </section>
+
+    <section class="chapter" id="home-concepts" aria-labelledby="h-home-concepts">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 5</span>
+          <h2 id="h-home-concepts" data-reveal="lines">Eight ways to say "today"</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>The home screen has one job: show what's arriving and when, at a glance. I explored eight directions with the same five packages so they could be compared fairly: a hero card for whatever arrives today, a two-column grid, a timeline grouped by arrival day, segmented tabs, a stacked card deck, a filterable list, a week strip and a dashboard with counts.</p>
+          <p>The shipped home combines the strongest parts: tabs for on the way and delivered, rows grouped by arrival day, and the tracking field always in reach.</p>
+          <p><a class="text-link" href="/files/anydaynow/home-concepts.pdf" download="StevieMcLane_AnyDayNow_HomeConcepts.pdf">Download all eight concepts (PDF)</a></p>
+        </div>
+      </div>
+      <div class="screens">
+        <div class="screens-track">
+          <figure class="asset" data-title="Home concept 1: Hero card for today" data-full="/assets/img/anydaynow/home-concept-01.webp">
+            <button type="button" class="asset-frame" aria-label="View home concept 1 full screen"><img src="/assets/img/anydaynow/home-concept-01.webp" alt="Home screen concept 1: Hero card for today" width="700" height="1515" loading="lazy" decoding="async"></button>
+            <figcaption><p class="asset-caption"><strong>1. Hero card for today</strong></p><div class="asset-actions"><a class="icon-btn" href="/files/anydaynow/home-concepts.pdf" download="StevieMcLane_AnyDayNow_HomeConcepts.pdf" aria-label="Download home concept 1 (PDF)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+          </figure>
+          <figure class="asset" data-title="Home concept 2: Two-column grid" data-full="/assets/img/anydaynow/home-concept-02.webp">
+            <button type="button" class="asset-frame" aria-label="View home concept 2 full screen"><img src="/assets/img/anydaynow/home-concept-02.webp" alt="Home screen concept 2: Two-column grid" width="700" height="1515" loading="lazy" decoding="async"></button>
+            <figcaption><p class="asset-caption"><strong>2. Two-column grid</strong></p><div class="asset-actions"><a class="icon-btn" href="/files/anydaynow/home-concepts.pdf" download="StevieMcLane_AnyDayNow_HomeConcepts.pdf" aria-label="Download home concept 2 (PDF)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+          </figure>
+          <figure class="asset" data-title="Home concept 3: Timeline by arrival day" data-full="/assets/img/anydaynow/home-concept-03.webp">
+            <button type="button" class="asset-frame" aria-label="View home concept 3 full screen"><img src="/assets/img/anydaynow/home-concept-03.webp" alt="Home screen concept 3: Timeline by arrival day" width="700" height="1515" loading="lazy" decoding="async"></button>
+            <figcaption><p class="asset-caption"><strong>3. Timeline by arrival day</strong></p><div class="asset-actions"><a class="icon-btn" href="/files/anydaynow/home-concepts.pdf" download="StevieMcLane_AnyDayNow_HomeConcepts.pdf" aria-label="Download home concept 3 (PDF)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+          </figure>
+          <figure class="asset" data-title="Home concept 4: Segmented tabs" data-full="/assets/img/anydaynow/home-concept-04.webp">
+            <button type="button" class="asset-frame" aria-label="View home concept 4 full screen"><img src="/assets/img/anydaynow/home-concept-04.webp" alt="Home screen concept 4: Segmented tabs" width="700" height="1515" loading="lazy" decoding="async"></button>
+            <figcaption><p class="asset-caption"><strong>4. Segmented tabs</strong></p><div class="asset-actions"><a class="icon-btn" href="/files/anydaynow/home-concepts.pdf" download="StevieMcLane_AnyDayNow_HomeConcepts.pdf" aria-label="Download home concept 4 (PDF)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+          </figure>
+          <figure class="asset" data-title="Home concept 5: Stacked card deck" data-full="/assets/img/anydaynow/home-concept-05.webp">
+            <button type="button" class="asset-frame" aria-label="View home concept 5 full screen"><img src="/assets/img/anydaynow/home-concept-05.webp" alt="Home screen concept 5: Stacked card deck" width="700" height="1515" loading="lazy" decoding="async"></button>
+            <figcaption><p class="asset-caption"><strong>5. Stacked card deck</strong></p><div class="asset-actions"><a class="icon-btn" href="/files/anydaynow/home-concepts.pdf" download="StevieMcLane_AnyDayNow_HomeConcepts.pdf" aria-label="Download home concept 5 (PDF)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+          </figure>
+          <figure class="asset" data-title="Home concept 6: Filterable list" data-full="/assets/img/anydaynow/home-concept-06.webp">
+            <button type="button" class="asset-frame" aria-label="View home concept 6 full screen"><img src="/assets/img/anydaynow/home-concept-06.webp" alt="Home screen concept 6: Filterable list" width="700" height="1515" loading="lazy" decoding="async"></button>
+            <figcaption><p class="asset-caption"><strong>6. Filterable list</strong></p><div class="asset-actions"><a class="icon-btn" href="/files/anydaynow/home-concepts.pdf" download="StevieMcLane_AnyDayNow_HomeConcepts.pdf" aria-label="Download home concept 6 (PDF)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+          </figure>
+          <figure class="asset" data-title="Home concept 7: Week strip" data-full="/assets/img/anydaynow/home-concept-07.webp">
+            <button type="button" class="asset-frame" aria-label="View home concept 7 full screen"><img src="/assets/img/anydaynow/home-concept-07.webp" alt="Home screen concept 7: Week strip" width="700" height="1515" loading="lazy" decoding="async"></button>
+            <figcaption><p class="asset-caption"><strong>7. Week strip</strong></p><div class="asset-actions"><a class="icon-btn" href="/files/anydaynow/home-concepts.pdf" download="StevieMcLane_AnyDayNow_HomeConcepts.pdf" aria-label="Download home concept 7 (PDF)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+          </figure>
+          <figure class="asset" data-title="Home concept 8: Dashboard with counts" data-full="/assets/img/anydaynow/home-concept-08.webp">
+            <button type="button" class="asset-frame" aria-label="View home concept 8 full screen"><img src="/assets/img/anydaynow/home-concept-08.webp" alt="Home screen concept 8: Dashboard with counts" width="700" height="1515" loading="lazy" decoding="async"></button>
+            <figcaption><p class="asset-caption"><strong>8. Dashboard with counts</strong></p><div class="asset-actions"><a class="icon-btn" href="/files/anydaynow/home-concepts.pdf" download="StevieMcLane_AnyDayNow_HomeConcepts.pdf" aria-label="Download home concept 8 (PDF)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter" id="icons" aria-labelledby="h-icons">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 6</span>
+          <h2 id="h-icons" data-reveal="lines">An icon that survives 16 pixels</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>I drew ten app icon concepts, each built on one idea: a porch light left on, a parcel as the crown of a clock, a calendar check, a route ending at a door, a sunrise, a monogram, an hourglass, a front door, a pin holding a box, and the tracker's own step dots.</p>
+          <p>Every concept is shown at 64, 32 and 16 pixels next to the full-size version, because an icon that only works large fails on a home screen, in a browser tab and in a notification.</p>
+        </div>
+      </div>
+      <div class="gallery five" data-reveal="stack">
+        <figure class="asset" data-title="Icon concept 1: Porch Light" data-full="/assets/img/anydaynow/icon-concept-01.webp">
+          <button type="button" class="asset-frame light" aria-label="View icon concept Porch Light full screen"><img src="/assets/img/anydaynow/icon-concept-01.webp" alt="App icon concept 1, Porch Light, shown large and at 64, 32 and 16 pixels" width="700" height="856" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>Porch Light</strong></p><div class="asset-actions"><a class="icon-btn" href="/files/anydaynow/icon-concepts.pdf" download="StevieMcLane_AnyDayNow_IconConcepts.pdf" aria-label="Download icon concept Porch Light (PDF)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="Icon concept 2: Parcel Clock" data-full="/assets/img/anydaynow/icon-concept-02.webp">
+          <button type="button" class="asset-frame light" aria-label="View icon concept Parcel Clock full screen"><img src="/assets/img/anydaynow/icon-concept-02.webp" alt="App icon concept 2, Parcel Clock, shown large and at 64, 32 and 16 pixels" width="700" height="856" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>Parcel Clock</strong></p><div class="asset-actions"><a class="icon-btn" href="/files/anydaynow/icon-concepts.pdf" download="StevieMcLane_AnyDayNow_IconConcepts.pdf" aria-label="Download icon concept Parcel Clock (PDF)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="Icon concept 3: Any Day" data-full="/assets/img/anydaynow/icon-concept-03.webp">
+          <button type="button" class="asset-frame light" aria-label="View icon concept Any Day full screen"><img src="/assets/img/anydaynow/icon-concept-03.webp" alt="App icon concept 3, Any Day, shown large and at 64, 32 and 16 pixels" width="700" height="856" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>Any Day</strong></p><div class="asset-actions"><a class="icon-btn" href="/files/anydaynow/icon-concepts.pdf" download="StevieMcLane_AnyDayNow_IconConcepts.pdf" aria-label="Download icon concept Any Day (PDF)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="Icon concept 4: Route Pin" data-full="/assets/img/anydaynow/icon-concept-04.webp">
+          <button type="button" class="asset-frame light" aria-label="View icon concept Route Pin full screen"><img src="/assets/img/anydaynow/icon-concept-04.webp" alt="App icon concept 4, Route Pin, shown large and at 64, 32 and 16 pixels" width="700" height="856" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>Route Pin</strong></p><div class="asset-actions"><a class="icon-btn" href="/files/anydaynow/icon-concepts.pdf" download="StevieMcLane_AnyDayNow_IconConcepts.pdf" aria-label="Download icon concept Route Pin (PDF)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="Icon concept 5: Sunrise" data-full="/assets/img/anydaynow/icon-concept-05.webp">
+          <button type="button" class="asset-frame light" aria-label="View icon concept Sunrise full screen"><img src="/assets/img/anydaynow/icon-concept-05.webp" alt="App icon concept 5, Sunrise, shown large and at 64, 32 and 16 pixels" width="700" height="856" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>Sunrise</strong></p><div class="asset-actions"><a class="icon-btn" href="/files/anydaynow/icon-concepts.pdf" download="StevieMcLane_AnyDayNow_IconConcepts.pdf" aria-label="Download icon concept Sunrise (PDF)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="Icon concept 6: Monogram" data-full="/assets/img/anydaynow/icon-concept-06.webp">
+          <button type="button" class="asset-frame light" aria-label="View icon concept Monogram full screen"><img src="/assets/img/anydaynow/icon-concept-06.webp" alt="App icon concept 6, Monogram, shown large and at 64, 32 and 16 pixels" width="700" height="856" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>Monogram</strong></p><div class="asset-actions"><a class="icon-btn" href="/files/anydaynow/icon-concepts.pdf" download="StevieMcLane_AnyDayNow_IconConcepts.pdf" aria-label="Download icon concept Monogram (PDF)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="Icon concept 7: Hourglass Parcel" data-full="/assets/img/anydaynow/icon-concept-07.webp">
+          <button type="button" class="asset-frame light" aria-label="View icon concept Hourglass Parcel full screen"><img src="/assets/img/anydaynow/icon-concept-07.webp" alt="App icon concept 7, Hourglass Parcel, shown large and at 64, 32 and 16 pixels" width="700" height="856" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>Hourglass Parcel</strong></p><div class="asset-actions"><a class="icon-btn" href="/files/anydaynow/icon-concepts.pdf" download="StevieMcLane_AnyDayNow_IconConcepts.pdf" aria-label="Download icon concept Hourglass Parcel (PDF)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="Icon concept 8: Front Door" data-full="/assets/img/anydaynow/icon-concept-08.webp">
+          <button type="button" class="asset-frame light" aria-label="View icon concept Front Door full screen"><img src="/assets/img/anydaynow/icon-concept-08.webp" alt="App icon concept 8, Front Door, shown large and at 64, 32 and 16 pixels" width="700" height="856" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>Front Door</strong></p><div class="asset-actions"><a class="icon-btn" href="/files/anydaynow/icon-concepts.pdf" download="StevieMcLane_AnyDayNow_IconConcepts.pdf" aria-label="Download icon concept Front Door (PDF)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="Icon concept 9: Pin Box" data-full="/assets/img/anydaynow/icon-concept-09.webp">
+          <button type="button" class="asset-frame light" aria-label="View icon concept Pin Box full screen"><img src="/assets/img/anydaynow/icon-concept-09.webp" alt="App icon concept 9, Pin Box, shown large and at 64, 32 and 16 pixels" width="700" height="856" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>Pin Box</strong></p><div class="asset-actions"><a class="icon-btn" href="/files/anydaynow/icon-concepts.pdf" download="StevieMcLane_AnyDayNow_IconConcepts.pdf" aria-label="Download icon concept Pin Box (PDF)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="Icon concept 10: Step Dots" data-full="/assets/img/anydaynow/icon-concept-10.webp">
+          <button type="button" class="asset-frame light" aria-label="View icon concept Step Dots full screen"><img src="/assets/img/anydaynow/icon-concept-10.webp" alt="App icon concept 10, Step Dots, shown large and at 64, 32 and 16 pixels" width="700" height="856" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>Step Dots</strong></p><div class="asset-actions"><a class="icon-btn" href="/files/anydaynow/icon-concepts.pdf" download="StevieMcLane_AnyDayNow_IconConcepts.pdf" aria-label="Download icon concept Step Dots (PDF)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="chapter" id="native" aria-labelledby="h-native">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 7</span>
+          <h2 id="h-native" data-reveal="lines">Beyond the browser</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>People check on a package in short glances, so the iOS app puts the answer where those glances happen: home and lock screen widgets, a Live Activity and the Dynamic Island, plus a share extension that tracks a number straight from another app. Android gets the same app as an installable build.</p>
+          <p>Every screen follows the device's light or dark setting. Switch between them below.</p>
+        </div>
+      </div>
+      <div class="theme-switch" role="group" aria-label="Screenshot theme">
+        <button type="button" data-shot-theme="light" aria-pressed="true">Light</button>
+        <button type="button" data-shot-theme="dark" aria-pressed="false">Dark</button>
+      </div>
+      <div class="gallery four" data-reveal="stack">
+        <figure class="asset" data-title="iOS: Track any package" data-pages="/assets/img/anydaynow/ios-1-app-light.webp,/assets/img/anydaynow/ios-1-app-dark.webp" data-shot="1-app" data-transparent="1">
+          <button type="button" class="asset-frame" aria-label="View Track any package full screen"><img src="/assets/img/anydaynow/ios-1-app-light.webp" alt="Any Day Now on iPhone: Track any package" width="600" height="1305" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>Track any package</strong>The first screen: paste a number, see what the app does.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Track any package full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button><a class="icon-btn" href="/files/anydaynow/ios-1-app-light.png" download="StevieMcLane_AnyDayNow_iOS_1-app_light.png" aria-label="Download Track any package (PNG)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="iOS: A package" data-pages="/assets/img/anydaynow/ios-2-package-light.webp,/assets/img/anydaynow/ios-2-package-dark.webp" data-shot="2-package" data-transparent="1">
+          <button type="button" class="asset-frame" aria-label="View A package full screen"><img src="/assets/img/anydaynow/ios-2-package-light.webp" alt="Any Day Now on iPhone: A package" width="600" height="1305" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>A package</strong>Status, estimate and the journey so far.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View A package full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button><a class="icon-btn" href="/files/anydaynow/ios-2-package-light.png" download="StevieMcLane_AnyDayNow_iOS_2-package_light.png" aria-label="Download A package (PNG)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="iOS: Dynamic Island" data-pages="/assets/img/anydaynow/ios-3-dynamic-island-light.webp,/assets/img/anydaynow/ios-3-dynamic-island-dark.webp" data-shot="3-dynamic-island" data-transparent="1">
+          <button type="button" class="asset-frame" aria-label="View Dynamic Island full screen"><img src="/assets/img/anydaynow/ios-3-dynamic-island-light.webp" alt="Any Day Now on iPhone: Dynamic Island" width="600" height="1305" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>Dynamic Island</strong>The arriving package, from any screen.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Dynamic Island full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button><a class="icon-btn" href="/files/anydaynow/ios-3-dynamic-island-light.png" download="StevieMcLane_AnyDayNow_iOS_3-dynamic-island_light.png" aria-label="Download Dynamic Island (PNG)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="iOS: Widgets and Live Activity" data-pages="/assets/img/anydaynow/ios-4-widgets-light.webp,/assets/img/anydaynow/ios-4-widgets-dark.webp" data-shot="4-widgets" data-transparent="1">
+          <button type="button" class="asset-frame" aria-label="View Widgets and Live Activity full screen"><img src="/assets/img/anydaynow/ios-4-widgets-light.webp" alt="Any Day Now on iPhone: Widgets and Live Activity" width="600" height="1305" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>Widgets and Live Activity</strong>Home screen, lock screen and Live Activity.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Widgets and Live Activity full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button><a class="icon-btn" href="/files/anydaynow/ios-4-widgets-light.png" download="StevieMcLane_AnyDayNow_iOS_4-widgets_light.png" aria-label="Download Widgets and Live Activity (PNG)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="chapter" id="launch" aria-labelledby="h-launch">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 8</span>
+          <h2 id="h-launch" data-reveal="lines">Showing it in two minutes</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>I scripted and produced a two-minute product demo that follows one real package from a confusing carrier page to a plain-language answer, then through customs, 45 languages, the route map, alerts and email forwarding.</p>
+          <p>The same footage feeds short vertical videos, each built around one worry and one audience: carrier jargon, customs-fee scams, families who read another language, and people who just want to watch their parcel cross the Pacific.</p>
+        </div>
+      </div>
+      <div class="gallery"><figure class="asset video">
+          <div class="video-frame" style="aspect-ratio: 1280 / 720;"><video controls playsinline preload="none" poster="/assets/img/anydaynow/demo-poster.webp" width="1280" height="720"><source src="/assets/video/anydaynow/product-demo.mp4" type="video/mp4"><a href="/assets/video/anydaynow/product-demo.mp4">Download the video</a></video></div>
+          <figcaption><p class="asset-caption"><strong>Product demo</strong>Two minutes, one real package, every feature.</p><div class="asset-actions"><button type="button" class="icon-btn" data-video-fullscreen aria-label="Play Product demo full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button><a class="icon-btn" href="/assets/video/anydaynow/product-demo.mp4" download="StevieMcLane_AnyDayNow_ProductDemo.mp4" aria-label="Download Product demo (MP4)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+        </figure></div>
+      <div class="gallery four" data-reveal="stack" style="margin-top: clamp(28px, 4vw, 48px);">
+        <figure class="asset video">
+          <div class="video-frame" style="aspect-ratio: 720 / 1280;"><video controls playsinline preload="none" poster="/assets/img/anydaynow/v01-jargon-poster.webp" width="720" height="1280"><source src="/assets/video/anydaynow/v01-jargon.mp4" type="video/mp4"><a href="/assets/video/anydaynow/v01-jargon.mp4">Download the video</a></video></div>
+          <figcaption><p class="asset-caption"><strong>What does 'customs allow Import' mean?</strong>For overseas shoppers.</p><div class="asset-actions"><button type="button" class="icon-btn" data-video-fullscreen aria-label="Play What does &#x27;customs allow Import&#x27; mean? full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button><a class="icon-btn" href="/assets/video/anydaynow/v01-jargon.mp4" download="StevieMcLane_AnyDayNow_v01-jargon.mp4" aria-label="Download What does &#x27;customs allow Import&#x27; mean? (MP4)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+        </figure>
+        <figure class="asset video">
+          <div class="video-frame" style="aspect-ratio: 720 / 1280;"><video controls playsinline preload="none" poster="/assets/img/anydaynow/v02-scam-poster.webp" width="720" height="1280"><source src="/assets/video/anydaynow/v02-scam.mp4" type="video/mp4"><a href="/assets/video/anydaynow/v02-scam.mp4">Download the video</a></video></div>
+          <figcaption><p class="asset-caption"><strong>Got a text saying you owe a customs fee?</strong>A scam warning for everyone.</p><div class="asset-actions"><button type="button" class="icon-btn" data-video-fullscreen aria-label="Play Got a text saying you owe a customs fee? full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button><a class="icon-btn" href="/assets/video/anydaynow/v02-scam.mp4" download="StevieMcLane_AnyDayNow_v02-scam.mp4" aria-label="Download Got a text saying you owe a customs fee? (MP4)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+        </figure>
+        <figure class="asset video">
+          <div class="video-frame" style="aspect-ratio: 720 / 1280;"><video controls playsinline preload="none" poster="/assets/img/anydaynow/v11-languages-poster.webp" width="720" height="1280"><source src="/assets/video/anydaynow/v11-languages.mp4" type="video/mp4"><a href="/assets/video/anydaynow/v11-languages.mp4">Download the video</a></video></div>
+          <figcaption><p class="asset-caption"><strong>Family reads Spanish? Chinese? Hindi?</strong>For multilingual families.</p><div class="asset-actions"><button type="button" class="icon-btn" data-video-fullscreen aria-label="Play Family reads Spanish? Chinese? Hindi? full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button><a class="icon-btn" href="/assets/video/anydaynow/v11-languages.mp4" download="StevieMcLane_AnyDayNow_v11-languages.mp4" aria-label="Download Family reads Spanish? Chinese? Hindi? (MP4)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+        </figure>
+        <figure class="asset video">
+          <div class="video-frame" style="aspect-ratio: 720 / 1280;"><video controls playsinline preload="none" poster="/assets/img/anydaynow/v08-route-poster.webp" width="720" height="1280"><source src="/assets/video/anydaynow/v08-route.mp4" type="video/mp4"><a href="/assets/video/anydaynow/v08-route.mp4">Download the video</a></video></div>
+          <figcaption><p class="asset-caption"><strong>Watch your package cross the Pacific</strong>The route map.</p><div class="asset-actions"><button type="button" class="icon-btn" data-video-fullscreen aria-label="Play Watch your package cross the Pacific full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button><a class="icon-btn" href="/assets/video/anydaynow/v08-route.mp4" download="StevieMcLane_AnyDayNow_v08-route.mp4" aria-label="Download Watch your package cross the Pacific (MP4)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="chapter" id="growth" aria-labelledby="h-growth">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 9</span>
+          <h2 id="h-growth" data-reveal="lines">A plan for the first 90 days</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>A product people can't find doesn't help anyone, so I wrote a growth and funding plan for a solo student founder on a small budget. It starts with measurement, because every channel and every application depends on knowing whether people come back, and then covers positioning, a fair look at competitors, launch channels, funding paths and a 30, 60 and 90-day checklist built around the holiday shipping peak.</p>
+          <p>Measurement is now in place: cookieless page analytics plus server-side events for lookups, saved packages, sign-ins and alerts, with nothing personal stored.</p>
+        </div>
+      </div>
+      <div class="gallery">
+        <figure class="asset" data-title="Growth and funding plan" data-pages="/assets/img/anydaynow/growth-plan-01.webp,/assets/img/anydaynow/growth-plan-02.webp,/assets/img/anydaynow/growth-plan-03.webp,/assets/img/anydaynow/growth-plan-04.webp,/assets/img/anydaynow/growth-plan-05.webp,/assets/img/anydaynow/growth-plan-06.webp,/assets/img/anydaynow/growth-plan-07.webp,/assets/img/anydaynow/growth-plan-08.webp,/assets/img/anydaynow/growth-plan-09.webp,/assets/img/anydaynow/growth-plan-10.webp,/assets/img/anydaynow/growth-plan-11.webp,/assets/img/anydaynow/growth-plan-12.webp,/assets/img/anydaynow/growth-plan-13.webp,/assets/img/anydaynow/growth-plan-14.webp,/assets/img/anydaynow/growth-plan-15.webp">
+          <button type="button" class="asset-frame light pad" aria-label="View Growth and funding plan full screen"><img style="max-width: 640px; margin: 0 auto; max-height: 760px; object-fit: cover; object-position: top;" src="/assets/img/anydaynow/growth-plan-01.webp" alt="Growth and funding plan, first page" width="1400" height="1812" loading="lazy" decoding="async"><span class="asset-badge">PDF · 15 pages</span></button>
+          <figcaption><p class="asset-caption"><strong>Growth and funding plan</strong>Measurement, positioning, channels, funding and a 90-day checklist.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Growth and funding plan full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button><a class="icon-btn" href="/files/anydaynow/growth-funding-plan.pdf" download="StevieMcLane_AnyDayNow_GrowthFundingPlan.pdf" aria-label="Download Growth and funding plan (PDF)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a></div></figcaption>
+        </figure>
+      </div>
+    </section>
+  </article>
+
+  <section class="more wrap" aria-labelledby="more-title">
+    <h2 id="more-title" data-reveal="lines">Read more of my case studies</h2>
+    <ul class="more-grid" data-reveal="stack">
+      <li><a class="more-link" href="/work/flexidoc/"><div class="work-media cover-flexidoc"><img src="/assets/img/flexidoc/cover.webp" alt="" width="1600" height="1273" loading="lazy" decoding="async"></div><h3>FlexiDoc <span aria-hidden="true">&rarr;</span></h3><p>Appointment scheduling for people with agoraphobia</p></a></li>
+      <li><a class="more-link" href="/work/sld/"><div class="work-media cover-sld"><img src="/assets/img/sld/cover.webp" alt="" width="900" height="716" loading="lazy" decoding="async"></div><h3>SLD <span aria-hidden="true">&rarr;</span></h3><p>Brand identity and cover art for a musical artist</p></a></li>
+    </ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-cta">
+      <p>Hiring for a UX internship, or want to talk through a project?</p>
+      <a class="footer-mail" href="mailto:steviegmclane@gmail.com">steviegmclane@gmail.com</a>
+    </div>
+    <div class="footer-bottom">
+      <ul>
+        <li><a class="nav-link" href="/">Home</a></li>
+        <li><a class="nav-link" href="/about/">About me</a></li>
+        <li><button type="button" class="nav-link" data-open="resume-dialog">Resume</button></li>
+        <li><button type="button" class="nav-link" data-open="contact-dialog">Contact</button></li>
+      </ul>
+      <small>&copy; 2026 Stevie McLane</small>
+    </div>
+  </div>
+</footer>
+
+<!-- SHARED DIALOGS: keep identical on every page -->
+<dialog class="sheet" id="resume-dialog" aria-labelledby="resume-title">
+  <div class="sheet-inner">
+    <div class="sheet-head">
+      <h2 id="resume-title">Resume</h2>
+      <div class="sheet-tools">
+        <button type="button" class="icon-btn" data-fullscreen="resume-asset" aria-label="View resume full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+        <a class="icon-btn" href="/resume.pdf" download="StevieMcLane_Resume.pdf" aria-label="Download resume as PDF"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+        <button type="button" class="icon-btn" data-close aria-label="Close resume"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+    </div>
+    <figure class="asset resume-preview" id="resume-asset" data-title="Stevie McLane, resume">
+      <button type="button" class="asset-frame" aria-label="View resume full screen"><img src="/assets/img/resume.webp" alt="Resume of Stevie McLane, Creative Director and UX Designer" width="1700" height="2200" loading="lazy"></button>
+      <a hidden href="/resume.pdf" download="StevieMcLane_Resume.pdf" tabindex="-1">Download</a>
+    </figure>
+  </div>
+</dialog>
+
+<dialog class="sheet" id="contact-dialog" aria-labelledby="contact-title">
+  <div class="sheet-inner">
+    <div class="sheet-head">
+      <h2 id="contact-title">Get in touch</h2>
+      <div class="sheet-tools">
+        <button type="button" class="icon-btn" data-close aria-label="Close contact links"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+    </div>
+    <ul class="contact-list">
+      <li><a href="mailto:steviegmclane@gmail.com"><span class="k">Email</span><span class="v">steviegmclane@gmail.com</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></li>
+      <li><a href="https://www.linkedin.com/in/stevie-mclane-bb3a3337b/" target="_blank" rel="noopener"><span class="k">LinkedIn</span><span class="v">stevie-mclane</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></li>    </ul>
+  </div>
+</dialog>
+
+<dialog class="viewer" id="viewer" aria-label="Full screen view">
+  <div class="viewer-bg"></div>
+  <div class="viewer-scroll"><div class="viewer-pages"></div></div>
+  <div class="viewer-bar">
+    <p class="viewer-title"></p>
+    <div class="sheet-tools">
+      <a class="icon-btn" data-viewer-download href="#" download aria-label="Download this file"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+      <button type="button" class="icon-btn" data-viewer-close aria-label="Close full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+  </div>
+</dialog>
+<!-- /SHARED DIALOGS -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>
