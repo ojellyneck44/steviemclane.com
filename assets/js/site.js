@@ -512,4 +512,6 @@
   }
 
   addEventListener('load', () => ScrollTrigger.refresh());
+  // Web fonts can land after load and reflow the text, which moves every trigger below.
+  document.fonts.ready.then(() => ScrollTrigger.refresh());
 })();
