@@ -1307,6 +1307,23 @@ dialog::backdrop { background: rgba(5, 4, 8, 0.72); }
 .cover-anydaynow { view-transition-name: cover-anydaynow; }
 .cover-blendwright { view-transition-name: cover-blendwright; }
 
+/* FlexiDoc: Figma Make demo. Figma blocks framing, so this is a link card. */
+.demo-card {
+  margin-top: clamp(40px, 6vw, 72px);
+  display: grid;
+  justify-items: center;
+  gap: 20px;
+  padding: clamp(32px, 6vw, 72px) 16px;
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--text);
+}
+.demo-card img { width: min(300px, 70vw); height: auto; transition: transform 0.6s var(--ease-out); }
+.demo-card:hover img { transform: translateY(-6px); }
+.demo-cta { font-weight: 600; padding: 10px 20px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); }
+
 /* ------------------------------------------------------------------
    Blendwright: comparison tables, decisions, type specimen, label demo.
    The demo uses Blendwright's own tokens, so it stays light on this dark site.
