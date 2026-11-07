@@ -389,7 +389,7 @@ body[data-case] .nav-link[aria-current="page"] { color: var(--text); }
 }
 /* FlexiDoc's cover is a light image; push it darker so the title holds. */
 .case-bg.cover-flexidoc img { filter: brightness(0.55) saturate(0.9); }
-.case-bg.cover-sld img { filter: brightness(0.7) saturate(1.1); }
+.case-bg.cover-sld img { filter: brightness(0.45) saturate(1.1); }
 .case-bg.cover-anydaynow img { filter: brightness(0.5) saturate(1.1); }
 .case-bg.cover-blendwright img { filter: brightness(0.4); }
 .case-hero .back-link { color: rgba(237, 235, 230, 0.8); }
