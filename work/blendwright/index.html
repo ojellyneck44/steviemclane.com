@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blendwright case study, Stevie McLane</title>
+<meta name="description" content="How I designed Blendwright, a custom protein powder site built around a formula label: research, design direction, a token-based design system and accessibility results.">
+<meta property="og:title" content="Blendwright case study, Stevie McLane">
+<meta property="og:description" content="How I designed Blendwright, a custom protein powder site built around a formula label: research, design direction, a token-based design system and accessibility results.">
+<meta property="og:image" content="https://steviemclane.com/assets/img/blendwright/cover.webp">
+<meta name="theme-color" content="#0b0a10">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png?v=2">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16.png?v=2">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400..900&family=Bricolage+Grotesque:opsz,wght@12..96,700&family=Public+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/assets/css/site.css">
+<script>
+(function (r) {
+  if (!('onpagereveal' in window)) r.classList.add('no-vt');
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    r.classList.add('motion');
+    setTimeout(function () { if (!window.gsap) r.classList.remove('motion'); }, 4000);
+  }
+})(document.documentElement);
+</script>
+</head>
+<body data-case="blendwright">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="wordmark" href="/">Stevie McLane</a>
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        <li><a class="nav-link" href="/#work" aria-current="page">Work</a></li>
+        <li><a class="nav-link" href="/about/">About</a></li>
+        <li><button type="button" class="nav-link" data-open="resume-dialog">Resume</button></li>
+        <li><button type="button" class="nav-link" data-open="contact-dialog">Contact</button></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="case-hero">
+    <div class="case-bg cover-blendwright" aria-hidden="true"><img src="/assets/img/blendwright/hero-bg.webp" alt="" width="2400" height="1350" fetchpriority="high"></div>
+    <div class="wrap case-hero-inner">
+      <a class="back-link" href="/#work"><span aria-hidden="true">&larr;</span> All work</a>
+      <h1 class="case-title" data-reveal="load">Blendwright</h1>
+      <p class="case-summary" data-reveal="load">A custom protein powder site that builds each formula from what the customer already takes, and shows the reason, the evidence and the limit for every ingredient.</p>
+      <dl class="case-meta" data-reveal="load">
+        <div><dt>Role</dt><dd>UX and visual designer</dd></div>
+        <div><dt>Timeline</dt><dd>November 2026</dd></div>
+        <div><dt>Deliverable</dt><dd>73-page website with a live formula builder</dd></div>
+        <div><dt>Status</dt><dd>Pre-launch, in legal and content review</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="chapter-head" style="margin-top: clamp(32px, 5vw, 64px);">
+      <div></div>
+      <div class="prose">
+        <p class="prose-lead" data-reveal="text">I owned the research, information architecture, design direction, design system and front-end build. This case study follows the project from a competitor review to a site that passes every accessibility check I ran, and it's honest about the one thing audits can't tell me: whether real customers trust it.</p>
+      </div>
+    </div>
+  </div>
+
+  <nav class="timeline" aria-label="Case study steps">
+    <div class="wrap">
+      <ol>
+        <li><a href="#brief"><span class="node">1</span>The brief</a></li>
+        <li><a href="#research"><span class="node">2</span>Research</a></li>
+        <li><a href="#naming"><span class="node">3</span>Naming</a></li>
+        <li><a href="#label"><span class="node">4</span>Formula label</a></li>
+        <li><a href="#direction"><span class="node">5</span>Direction</a></li>
+        <li><a href="#process"><span class="node">6</span>Process</a></li>
+        <li><a href="#set-aside"><span class="node">7</span>Set aside</a></li>
+        <li><a href="#results"><span class="node">8</span>Results</a></li>
+        <li><a href="#next"><span class="node">9</span>What's next</a></li>
+      </ol>
+      <div class="timeline-track" aria-hidden="true"><div class="timeline-fill"></div></div>
+    </div>
+  </nav>
+
+  <article class="wrap">
+    <section class="chapter" id="brief" aria-labelledby="h-brief">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 1</span>
+          <h2 id="h-brief" data-reveal="lines">A product nobody has seen before</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>Blendwright sells custom protein powder. Each customer picks what they take, and the site builds a formula for them: a protein base, a flavor and a set of add-ins, each at a dose the customer can see and change.</p>
+          <p>The hard part is trust. A custom formula is a product nobody has seen before, sold to someone who is about to put it in their body, so every choice the builder makes has to be explainable. The design question became: <strong>how do you make a personalized product feel precise and checkable, not like a quiz or a candy aisle?</strong></p>
+          <p>I set four success criteria before designing anything:</p>
+          <ol class="question-list">
+            <li>A first-time visitor understands the product within 10 seconds of landing on the home page.</li>
+            <li>Every number on screen, from dose and price to protein per serving, updates visibly when the customer changes something.</li>
+            <li>Every ingredient shows its reason and its evidence without leaving the builder.</li>
+            <li>The site meets its accessibility and performance targets without trading one for the other.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter" id="research" aria-labelledby="h-research">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 2</span>
+          <h2 id="h-research" data-reveal="lines">Where the references leave a gap</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>I reviewed three direct competitors in custom protein. Their sites weren't reachable from my build environment, so I worked from their help pages and independent reviews and recorded every source.</p>
+          <p>All three cover the basics customers already expect, and I kept those: base choice, protein per serving, flavor with intensity, adjustable doses, bag size, a subscription option, a name on the label and a price that updates as you build. None of them explained why anything was in the bag.</p>
+        </div>
+      </div>
+      <div class="table-scroll" data-reveal="stack">
+        <table class="compare">
+          <thead><tr><th scope="col">Approach</th><th scope="col">Entry point</th><th scope="col">Strength</th><th scope="col">Gap</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Quiz-led</th><td>Questions about goals, diet and training</td><td>Easy to start</td><td>Personalizes by goal, not by what the customer actually takes</td></tr>
+            <tr><th scope="row">Pick everything</th><td>Choose every base, flavor and booster</td><td>Lots of control</td><td>Overwhelming, with no guidance on why to add anything</td></tr>
+            <tr><th scope="row">Calorie-first</th><td>Calorie or carb level, then protein</td><td>A clear entry point</td><td>Narrow framing around endurance</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul class="findings" data-reveal="stack">
+        <li><h3>Build from what they take</h3><p>The formula assembles from the customer's own list instead of a goals quiz, so it answers a real question.</p></li>
+        <li><h3>Evidence inside the builder</h3><p>None of the references showed sources while you build. Every add-in gets a letter grade and a citation.</p></li>
+        <li><h3>Visible safety rules</h3><p>Doses stop at safe limits, and conflicting ingredients are blocked with a stated reason instead of disappearing.</p></li>
+      </ul>
+    </section>
+
+    <section class="chapter" id="naming" aria-labelledby="h-naming">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 3</span>
+          <h2 id="h-naming" data-reveal="lines">Ten names, one maker</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>I screened ten candidate names against existing companies and products with exact-match searches. Two were cut: one because a supplement company already holds the trademark, and one because it was too generic to own.</p>
+          <p>Blendwright won because "wright" means maker, the name is distinctive, and screening turned up no company using it. Domain and trademark checks couldn't be finished from the build environment, so they stay on the open list, and the full shortlist is kept in the project so the choice can be revisited.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter" id="label" aria-labelledby="h-label">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 4</span>
+          <h2 id="h-label" data-reveal="lines">A label, not a product card</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>The most important decision was the metaphor. Supplement sites lean on product cards, bold color and athletes. Blendwright's live preview is a <strong>formula label</strong>: a printed record with the customer's name, each ingredient and its dose, and a nutrition summary. It reads like a dispensing record from a careful pharmacy, which is the promise: measured, not guessed.</p>
+          <p>The label is the center of gravity of the builder. It updates on every change, and the changes animate: rows slide in, amounts count to their new value, and the blend jar fills in proportion to each ingredient group.</p>
+        </div>
+      </div>
+      <figure class="bw-demo" data-reveal="stack">
+        <div class="bw-stage">
+          <div class="bw-label">
+            <div class="bw-top"><span class="bw-word">Blendwright</span><span class="bw-mono">Formula label</span></div>
+            <p class="bw-mono">Built for</p>
+            <p class="bw-name">Your <em>formula</em></p>
+            <ul class="bw-rows">
+              <li data-group="base"><span class="bw-dot" style="background:#e3d7bf"></span>Protein base<span class="bw-g a">A</span></li>
+              <li data-group="muscle"><span class="bw-dot" style="background:#3e5c7a"></span>Muscle and recovery<span class="bw-g a">A</span></li>
+              <li data-group="repair"><span class="bw-dot" style="background:#c46a50"></span>Skin and joints<span class="bw-g b">B</span></li>
+              <li data-group="gut" hidden><span class="bw-dot" style="background:#6f9474"></span>Gut and hydration<span class="bw-g b">B</span></li>
+              <li data-group="rest" hidden><span class="bw-dot" style="background:#6e5f98"></span>Sleep and calm<span class="bw-g c">C</span></li>
+            </ul>
+          </div>
+          <div class="bw-jar" aria-hidden="true">
+            <span data-group="rest" style="--h:0;background:#6e5f98"></span>
+            <span data-group="gut" style="--h:0;background:#6f9474"></span>
+            <span data-group="repair" style="--h:16;background:#c46a50"></span>
+            <span data-group="muscle" style="--h:22;background:#3e5c7a"></span>
+            <span data-group="base" style="--h:50;background:#e3d7bf"></span>
+          </div>
+        </div>
+        <div class="bw-toggles" role="group" aria-label="Add-ins">
+          <button type="button" aria-pressed="true" data-toggle="repair" data-h="16">Skin and joints</button>
+          <button type="button" aria-pressed="false" data-toggle="gut" data-h="12">Gut and hydration</button>
+          <button type="button" aria-pressed="false" data-toggle="rest" data-h="9">Sleep and calm</button>
+        </div>
+        <figcaption class="asset-caption">A simplified recreation of the label, built from Blendwright's own design tokens. Turn add-ins on and off to watch the label and the jar change.</figcaption>
+      </figure>
+    </section>
+
+    <section class="chapter" id="direction" aria-labelledby="h-direction">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 5</span>
+          <h2 id="h-direction" data-reveal="lines">Paper, ink and one vermilion</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>I wrote the direction down before building, so every later decision had something to be checked against. The anchor was a clinical-grade product label crossed with a kitchen scale, and explicitly not a sports supplement shop: no gradients, no hero athletes, no neon.</p>
+          <p>The page is paper and ink. The vermilion accent is reserved for actions and one emphasized word per page. Ingredient groups get their own six muted hues, used only in the blend jar and the ingredient list, so they never compete with the brand. During the audit one group's hue sat too close to the accent, so I moved it to the plum you see below. Evidence grades pair a letter with color, so color is never the only signal.</p>
+        </div>
+      </div>
+      <ul class="findings four" data-reveal="stack">
+        <li><h3>Mood</h3><p>Precise. Calm, exact and legible, with every number traceable to a source.</p></li>
+        <li><h3>Anchor</h3><p>A clinical product label crossed with a kitchen scale.</p></li>
+        <li><h3>Audience</h3><p>Informed buyers who want to see the study before they buy.</p></li>
+        <li><h3>Voice</h3><p>Plain, specific and honest. The number first, then the reason.</p></li>
+      </ul>
+      <div class="palette" data-reveal="swatches">
+        <div class="swatch on-dark" style="background:#17242f">Ink<span>#17242F</span></div>
+        <div class="swatch" style="background:#f4f6f5">Paper<span>#F4F6F5</span></div>
+        <div class="swatch" style="background:#d3d9db">Rule<span>#D3D9DB</span></div>
+        <div class="swatch on-dark" style="background:#c8431a">Vermilion<span>#C8431A</span></div>
+        <div class="swatch" style="background:#fbe7df">Accent wash<span>#FBE7DF</span></div>
+      </div>
+      <div class="palette six" data-reveal="swatches">
+        <div class="swatch" style="background:#e3d7bf">Base<span>#E3D7BF</span></div>
+        <div class="swatch on-dark" style="background:#3e5c7a">Muscle<span>#3E5C7A</span></div>
+        <div class="swatch on-dark" style="background:#c46a50">Repair<span>#C46A50</span></div>
+        <div class="swatch on-dark" style="background:#6f9474">Gut<span>#6F9474</span></div>
+        <div class="swatch on-dark" style="background:#6e5f98">Rest<span>#6E5F98</span></div>
+        <div class="swatch on-dark" style="background:#2c8794">Energy<span>#2C8794</span></div>
+      </div>
+      <div class="type-specimen" data-reveal="stack">
+        <div><span class="k">Display</span><p class="bw-display">Bricolage Grotesque</p><span class="v">Headings, the wordmark and the formula name</span></div>
+        <div><span class="k">Body</span><p class="bw-body">Public Sans for reading, buttons and forms</p><span class="v">Body copy, controls and navigation</span></div>
+        <div><span class="k">Mono</span><p class="bw-mono-lg">IBM Plex Mono · Evidence grade A</p><span class="v">Only data and labels, cut from five styles to three roles</span></div>
+      </div>
+      <div class="prose" data-reveal="text" style="margin-top: clamp(32px, 4vw, 48px); margin-left: auto;">
+        <p>Every color, size and space lives in one stylesheet as a named token, with no hard-coded colors in components. That made later fixes, like the plum hue and a type scale where two steps overlapped at some screen widths, one-line edits that carried through every page from 320 to 1440 pixels wide.</p>
+      </div>
+    </section>
+
+    <section class="chapter" id="process" aria-labelledby="h-process">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 6</span>
+          <h2 id="h-process" data-reveal="lines">Decide, build, measure, look, change</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>I ran the work as a loop. Each round scored the built site against Nielsen's ten heuristics, scanned the copy for buzzwords, ran an automated accessibility engine on every page type in light and dark at desktop and mobile sizes, tabbed through the main pages to check focus, ran browser tests on the builder and the cart, and ended with a screenshot review of each page that set the next round of changes.</p>
+          <p>These are the calls that came out of it.</p>
+        </div>
+      </div>
+      <ul class="decisions" data-reveal="stack">
+        <li><h3>Replacing native dropdowns</h3><p>The house rules forbid native selects, which draw their own chevron and handle the keyboard inconsistently. I built one shared listbox with arrow keys, Home and End, Enter or Space to choose, Escape to close and type-ahead. It keeps the old values and change events, so the builder logic didn't change.</p></li>
+        <li><h3>Keeping out-of-stock items visible</h3><p>Some ingredients couldn't be bought yet. Instead of removing them, I kept them in the library and marked them out of stock, so the range stays honest. Blends that depended on them fall back to their other ingredients, so every formula can still be completed.</p></li>
+        <li><h3>Fewer choices</h3><p>The builder had a base picker, a sweetener menu and eight flavors. I cut the base to one option, removed the sweetener choice and kept two flavors. Each remaining decision means more, and the label still reads as personal.</p></li>
+        <li><h3>Hiding the batch reference</h3><p>Every formula gets a deterministic batch code, so the same blend always matches its mixing record. It's useful on the printed bag but noise on screen, so it lives in the order details.</p></li>
+        <li><h3>The example box that jumped</h3><p>The home page rotates through example formulas of different heights, so the page kept changing length. Reserving the height of the tallest example keeps the page still.</p></li>
+        <li><h3>Motion with a purpose</h3><p>Motion is feedback, not decoration: controls respond to a press, nav underlines draw in, new rows slide in and adding to the cart gives a small bounce. All of it switches off for visitors who ask for reduced motion.</p></li>
+      </ul>
+    </section>
+
+    <section class="chapter" id="set-aside" aria-labelledby="h-set-aside">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 7</span>
+          <h2 id="h-set-aside" data-reveal="lines">Ideas I set aside</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>Some of the most useful thinking happened in options I didn't ship.</p>
+          <ul class="question-list">
+            <li><strong>A goals quiz as the way in.</strong> Familiar and easy, but it personalizes by aspiration rather than by what someone actually takes.</li>
+            <li><strong>Flavors sold as separate packets.</strong> Simple to produce, but it breaks the idea of one formula per bag.</li>
+            <li><strong>A dark theme.</strong> The palette is defined, but the site ships light only. Keeping it defined leaves the option open without making visitors choose.</li>
+            <li><strong>A dropdown for every choice.</strong> Compact, but it hides the options. One accessible listbox replaced them.</li>
+            <li><strong>Autoplaying examples.</strong> I kept the rotation, but it stops the moment a visitor hovers or focuses on it, so it never fights someone who is reading.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter" id="results" aria-labelledby="h-results">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 8</span>
+          <h2 id="h-results" data-reveal="lines">Measured, not projected</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>Every number here was measured on the built site. The site hasn't launched to customers, so I haven't measured conversion or sales and I don't claim any.</p>
+        </div>
+      </div>
+      <ul class="stats" data-reveal="stack">
+        <li><span class="stat-num">0</span><span class="stat-label">Accessibility violations across 44 automated runs</span></li>
+        <li><span class="stat-num">100</span><span class="stat-label">Lighthouse accessibility, SEO and best practice on every page tested</span></li>
+        <li><span class="stat-num">0.34 <i>to</i> 0</span><span class="stat-label">Layout shift in the builder</span></li>
+      </ul>
+      <div class="table-scroll" data-reveal="stack">
+        <table class="compare">
+          <thead><tr><th scope="col">Area</th><th scope="col">How it was measured</th><th scope="col">Result</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Accessibility</th><td>axe on 11 page types, light and dark, desktop and mobile</td><td>0 violations in 44 runs</td></tr>
+            <tr><th scope="row">SEO</th><td>Lighthouse and a crawl of every sitemap URL</td><td>100; every URL returns 200 with a unique title, description and one H1</td></tr>
+            <tr><th scope="row">Performance</th><td>Lighthouse, mobile and desktop</td><td>97 to 100</td></tr>
+            <tr><th scope="row">Interaction</th><td>Browser test suite for the builder and the cart</td><td>16 of 16 pass</td></tr>
+            <tr><th scope="row">Contrast</th><td>Every text pair in light and dark</td><td>4.5:1 or higher</td></tr>
+            <tr><th scope="row">Copy</th><td>Scan for dashes, buzzwords and title-case reflexes</td><td>None found</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="chapter" id="next" aria-labelledby="h-next">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 9</span>
+          <h2 id="h-next" data-reveal="lines">What only people can tell me</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>The audits are good at finding inconsistency and broken rules. They can't tell me whether the builder feels trustworthy, so that comes next.</p>
+          <ol class="question-list">
+            <li>Usability testing with five to eight people who take supplements, building a formula from a realistic list.</li>
+            <li>Photography of the printed bag label, to make the formula metaphor physical.</li>
+            <li>A full legal and content review before launch, with the design following that review rather than getting ahead of it.</li>
+            <li>A screen reader pass on the listbox, beyond the automated and browser checks.</li>
+            <li>A modular type scale and a documented component library, so the next designer can extend the system.</li>
+          </ol>
+          <p>The strongest move was writing the direction down before building. Cutting options, the out-of-stock fallback, the label and the motion rules could all be checked against it, so the choices hung together. The weakest moment was the early builder, with too many choices and no clear hierarchy. If I did it again, I'd put the builder in front of real customers much earlier.</p>
+        </div>
+      </div>
+    </section>
+  </article>
+
+  <section class="more wrap" aria-labelledby="more-title">
+    <h2 id="more-title" data-reveal="lines">Read more of my case studies</h2>
+    <ul class="more-grid" data-reveal="stack">
+      <li><a class="more-link" href="/work/any-day-now/"><div class="work-media cover-anydaynow"><img src="/assets/img/anydaynow/cover.webp" alt="" width="1600" height="1100" loading="lazy" decoding="async"></div><h3>Any Day Now <span aria-hidden="true">&rarr;</span></h3><p>A package tracker in plain language, for web, iOS and Android</p></a></li>
+      <li><a class="more-link" href="/work/flexidoc/"><div class="work-media cover-flexidoc"><img src="/assets/img/flexidoc/cover.webp" alt="" width="1600" height="1273" loading="lazy" decoding="async"></div><h3>FlexiDoc <span aria-hidden="true">&rarr;</span></h3><p>Appointment scheduling for people with agoraphobia</p></a></li>
+    </ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-cta">
+      <p>Hiring for a UX internship, or want to talk through a project?</p>
+      <a class="footer-mail" href="mailto:steviegmclane@gmail.com">steviegmclane@gmail.com</a>
+    </div>
+    <div class="footer-bottom">
+      <ul>
+        <li><a class="nav-link" href="/">Home</a></li>
+        <li><a class="nav-link" href="/about/">About me</a></li>
+        <li><button type="button" class="nav-link" data-open="resume-dialog">Resume</button></li>
+        <li><button type="button" class="nav-link" data-open="contact-dialog">Contact</button></li>
+      </ul>
+      <small>&copy; 2026 Stevie McLane</small>
+    </div>
+  </div>
+</footer>
+
+<!-- SHARED DIALOGS: keep identical on every page -->
+<dialog class="sheet" id="resume-dialog" aria-labelledby="resume-title">
+  <div class="sheet-inner">
+    <div class="sheet-head">
+      <h2 id="resume-title">Resume</h2>
+      <div class="sheet-tools">
+        <button type="button" class="icon-btn" data-fullscreen="resume-asset" aria-label="View resume full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+        <a class="icon-btn" href="/resume.pdf" download="StevieMcLane_Resume.pdf" aria-label="Download resume as PDF"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+        <button type="button" class="icon-btn" data-close aria-label="Close resume"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+    </div>
+    <figure class="asset resume-preview" id="resume-asset" data-title="Stevie McLane, resume">
+      <button type="button" class="asset-frame" aria-label="View resume full screen"><img src="/assets/img/resume.webp" alt="Resume of Stevie McLane, Creative Director and UX Designer" width="1700" height="2200" loading="lazy"></button>
+      <a hidden href="/resume.pdf" download="StevieMcLane_Resume.pdf" tabindex="-1">Download</a>
+    </figure>
+  </div>
+</dialog>
+
+<dialog class="sheet" id="contact-dialog" aria-labelledby="contact-title">
+  <div class="sheet-inner">
+    <div class="sheet-head">
+      <h2 id="contact-title">Get in touch</h2>
+      <div class="sheet-tools">
+        <button type="button" class="icon-btn" data-close aria-label="Close contact links"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+    </div>
+    <ul class="contact-list">
+      <li><a href="mailto:steviegmclane@gmail.com"><span class="k">Email</span><span class="v">steviegmclane@gmail.com</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></li>
+      <li><a href="https://www.linkedin.com/in/stevie-mclane-bb3a3337b/" target="_blank" rel="noopener"><span class="k">LinkedIn</span><span class="v">stevie-mclane</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></li>    </ul>
+  </div>
+</dialog>
+
+<dialog class="viewer" id="viewer" aria-label="Full screen view">
+  <div class="viewer-bg"></div>
+  <div class="viewer-scroll"><div class="viewer-pages"></div></div>
+  <div class="viewer-bar">
+    <p class="viewer-title"></p>
+    <div class="sheet-tools">
+      <a class="icon-btn" data-viewer-download href="#" download aria-label="Download this file"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+      <button type="button" class="icon-btn" data-viewer-close aria-label="Close full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+  </div>
+</dialog>
+<!-- /SHARED DIALOGS -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
+<script src="/assets/js/site.js"></script>
+<script src="/assets/js/blendwright.js"></script>
+</body>
+</html>
