@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Taglet case study, Stevie McLane</title>
+<meta name="description" content="How I designed and built Taglet, a browser app that converts, tags and groups your own music into albums for Spotify Local Files: research, brand, key decisions and audit results.">
+<meta property="og:title" content="Taglet case study, Stevie McLane">
+<meta property="og:description" content="How I designed and built Taglet, a browser app that converts, tags and groups your own music into albums for Spotify Local Files: research, brand, key decisions and audit results.">
+<meta property="og:image" content="https://steviemclane.com/assets/img/taglet/cover.webp?v=1">
+<meta name="theme-color" content="#0b0a10">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png?v=2">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16.png?v=2">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400..900&family=Bricolage+Grotesque:opsz,wght@12..96,700&family=Hanken+Grotesk:wght@400;600&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261115">
+<script>
+(function (r) {
+  if (!('onpagereveal' in window)) r.classList.add('no-vt');
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    r.classList.add('motion');
+    setTimeout(function () { if (!window.gsap) r.classList.remove('motion'); }, 4000);
+  }
+})(document.documentElement);
+</script>
+</head>
+<body data-case="taglet">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="wordmark" href="/">Stevie McLane</a>
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        <li><a class="nav-link" href="/#work" aria-current="page">Work</a></li>
+        <li><a class="nav-link" href="/about/">About</a></li>
+        <li><button type="button" class="nav-link" data-open="resume-dialog">Resume</button></li>
+        <li><button type="button" class="nav-link" data-open="contact-dialog">Contact</button></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="case-hero">
+    <div class="case-bg cover-taglet" aria-hidden="true"><img src="/assets/img/taglet/hero-bg.webp?v=1" alt="" width="2400" height="1350" fetchpriority="high"></div>
+    <div class="wrap case-hero-inner">
+      <a class="back-link" href="/#work"><span aria-hidden="true">&larr;</span> All work</a>
+      <h1 class="case-title" data-reveal="load">Taglet</h1>
+      <p class="case-summary" data-reveal="load">A browser app that converts, tags and groups your own music into albums that hold together in Spotify Local Files, without a single file leaving your device.</p>
+      <dl class="case-meta" data-reveal="load">
+        <div><dt>Role</dt><dd>Designer and developer</dd></div>
+        <div><dt>Timeline</dt><dd>November 2026</dd></div>
+        <div><dt>Deliverable</dt><dd>Installable web app, guides, privacy page and live brand sheet</dd></div>
+        <div><dt>Status</dt><dd>Live at <a class="text-link" href="https://taglet.net" target="_blank" rel="noopener">taglet.net</a></dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="chapter-head" style="margin-top: clamp(32px, 5vw, 64px);">
+      <div></div>
+      <div class="prose">
+        <p class="prose-lead" data-reveal="text">I owned the research, the brand, the interface and the code. This case study follows Taglet from a competitor review to a live app, and it's straight about what I could and couldn't test: I haven't yet checked it on a physical phone, or seen how Spotify itself lays out the files it exports.</p>
+        <p data-reveal="text"><a class="text-link" href="https://taglet.net" target="_blank" rel="noopener">Open Taglet</a> to try it. It can't be embedded here, because its security headers forbid framing, on purpose. The screens below are captures of the app with sample songs.</p>
+      </div>
+    </div>
+  </div>
+
+  <nav class="timeline" aria-label="Case study steps">
+    <div class="wrap">
+      <ol>
+        <li><a href="#brief"><span class="node">1</span>The brief</a></li>
+        <li><a href="#research"><span class="node">2</span>Research</a></li>
+        <li><a href="#album"><span class="node">3</span>The album</a></li>
+        <li><a href="#direction"><span class="node">4</span>Direction</a></li>
+        <li><a href="#decisions"><span class="node">5</span>Decisions</a></li>
+        <li><a href="#build"><span class="node">6</span>How it's built</a></li>
+        <li><a href="#results"><span class="node">7</span>Audit</a></li>
+        <li><a href="#next"><span class="node">8</span>What's next</a></li>
+      </ol>
+      <div class="timeline-track" aria-hidden="true"><div class="timeline-fill"></div></div>
+    </div>
+  </nav>
+
+  <article class="wrap">
+    <section class="chapter" id="brief" aria-labelledby="h-brief">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 1</span>
+          <h2 id="h-brief" data-reveal="lines">Music Spotify doesn't have</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>Spotify can play files from your own device, but only if they're tagged well enough for it to group them. People who have music Spotify doesn't, like demos, DJ edits, rips and their own bounces, end up with albums split into pieces, missing covers and artists shown as raw strings.</p>
+          <p>The design question became: <strong>how do you make tagging audio for Spotify feel like one calm task instead of three tools and a forum thread?</strong></p>
+          <p>The product brief set the shape of the work:</p>
+          <ol class="question-list">
+            <li>The core task is short: drop files, fix titles, artists and cover, see "Ready for Spotify", export.</li>
+            <li>The promise comes first: files never leave the device. The one exception, Link a device, is end-to-end encrypted.</li>
+            <li>It works on a phone and a laptop, because the audio is usually on one and the Spotify app is on the other.</li>
+            <li>It's trustworthy before it's clever. Dark, a little playful and plain-spoken about what it does with your files.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter" id="research" aria-labelledby="h-research">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 2</span>
+          <h2 id="h-research" data-reveal="lines">Everyone edits tags, nobody checks the album</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>I compared the tools people already use for this job. They're good at what they're built for, but none was built for getting a pile of unreleased audio into Spotify.</p>
+        </div>
+      </div>
+      <div class="table-scroll" data-reveal="stack">
+        <table class="compare">
+          <thead><tr><th scope="col">Tool type</th><th scope="col">Strength</th><th scope="col">Gap for this job</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Desktop tag editors (Mp3tag, Picard, Kid3)</th><td>Every field, batch actions, lookups</td><td>Desktop only, no conversion, and no idea why a Spotify album splits</td></tr>
+            <tr><th scope="row">Mobile tag editor (Evertag)</th><td>Clean, readable, batch mode</td><td>iOS only, no conversion, no album-consistency check</td></tr>
+            <tr><th scope="row">Drag-and-drop bridges (WALTR PRO)</th><td>Converts and fills metadata on the way in</td><td>Paid, built for Apple's apps, needs a cable or bridge</td></tr>
+            <tr><th scope="row">Online converters</th><td>Nothing to install</td><td>Your unreleased music is uploaded to a stranger's server, with ads, size caps and tags as an afterthought</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul class="findings" data-reveal="stack">
+        <li><h3>Check the whole album</h3><p>Every tool edits tags. None tells you the album will split, because a guest artist with no album artist, or one cover that differs, breaks the group.</p></li>
+        <li><h3>One trip, not three</h3><p>People convert in one tool, then find the converter stripped the tags. Converting and tagging belong in one place.</p></li>
+        <li><h3>Privacy as a fact</h3><p>Running everything in the browser means the claim can be checked in the network panel instead of taken on faith.</p></li>
+      </ul>
+    </section>
+
+    <section class="chapter" id="album" aria-labelledby="h-album">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 3</span>
+          <h2 id="h-album" data-reveal="lines">The album is the unit, not the file</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>The central decision was where each field lives. Album fields (title, album artist, year, genre, compilation, cover) are stored once on the album and written identically to every track, so they can't drift apart. Track fields (title, artists, track and disc number) sit on the track.</p>
+          <p>Beside the album sits a live check. It reads "Ready for Spotify", or it lists what's wrong, each problem with a one-tap fix: fill in the album artist, number tracks in order, add a cover. The tag hanging off the cover is the same one in the logo, so the status feels like part of the object instead of a warning banner.</p>
+        </div>
+      </div>
+      <div class="gallery" data-reveal="stack">
+        <figure class="asset" data-title="Before: 3 to fix" data-pages="/assets/img/taglet/editor-before.webp">
+          <button type="button" class="asset-frame" aria-label="View Before: 3 to fix full screen"><img src="/assets/img/taglet/editor-before.webp" alt="Taglet editor with three songs loaded and an empty album: a tag reads 3 to fix for Spotify, with a list of fixes" width="1600" height="1000" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>Before: 3 to fix</strong>Three songs dropped in. The album check lists each problem with a one-tap fix.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Before: 3 to fix full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="After: ready" data-pages="/assets/img/taglet/editor-ready.webp">
+          <button type="button" class="asset-frame" aria-label="View After: ready full screen"><img src="/assets/img/taglet/editor-ready.webp" alt="Taglet editor after the album title, artist, year and cover are filled in, with the album list showing a green dot" width="1600" height="1000" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>After: ready</strong>Album fields filled in once, applied to every track. Artists are previewed the way Spotify will show them.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View After: ready full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="chapter" id="direction" aria-labelledby="h-direction">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 4</span>
+          <h2 id="h-direction" data-reveal="lines">A tag on a string in a dark room</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>A taglet is a small tag. The brand is a patina-green tag hanging on a string: warm, handled, a little playful and plain-spoken. Dark suits the use scene, sorting music late on a laptop or in bed on a phone, and it lets album art be the brightest thing on screen.</p>
+          <p>The accent is Patina, the blue-green copper turns with age. I picked it over a first-draft manila gold, and it stays clear of Spotify's green on purpose. A second colour, Signal, appears only when something needs fixing. The usual "AI app" accents (indigo-violet gradients, neon on black) were ruled out.</p>
+          <p>Glass is only on the floating control layer, and the current album's art is blurred into the room behind it, so the bars take on that album's colours. Content is never glass, and lists are lists, not card grids.</p>
+        </div>
+      </div>
+      <ul class="findings four" data-reveal="stack">
+        <li><h3>Mood</h3><p>Warm, calm and handled, with a little play.</p></li>
+        <li><h3>Anchor</h3><p>A tag on a string. It leans toward the pointer, swings when files arrive and knocks once when an album is ready.</p></li>
+        <li><h3>Audience</h3><p>People with music Spotify doesn't have, on a phone and a laptop.</p></li>
+        <li><h3>Voice</h3><p>Plain words, sentence case, second person. Buttons say what will happen.</p></li>
+      </ul>
+      <div class="palette" data-reveal="swatches">
+        <div class="swatch on-dark" style="background:#0b0a09">Ink 0<span>#0B0A09</span></div>
+        <div class="swatch on-dark" style="background:#27231f">Ink 3<span>#27231F</span></div>
+        <div class="swatch" style="background:#f3ece2">Paper<span>#F3ECE2</span></div>
+        <div class="swatch" style="background:#46c2b0">Patina<span>#46C2B0</span></div>
+        <div class="swatch" style="background:#ff7558">Signal<span>#FF7558</span></div>
+      </div>
+      <div class="type-specimen" data-reveal="stack">
+        <div><span class="k">Display</span><p class="tg-display">Bricolage Grotesque</p><span class="v">Headings, album titles and the wordmark</span></div>
+        <div><span class="k">Interface</span><p class="tg-body">Hanken Grotesk for every control</p><span class="v">Body text, labels and buttons</span></div>
+        <div><span class="k">Data</span><p class="tg-mono">JetBrains Mono · 01/12</p><span class="v">Only data: track numbers, durations, file names, pairing codes</span></div>
+      </div>
+      <div class="gallery" data-reveal="stack">
+        <figure class="asset" data-title="Live brand sheet" data-pages="/assets/img/taglet/brand.webp">
+          <button type="button" class="asset-frame" aria-label="View Live brand sheet full screen"><img src="/assets/img/taglet/brand.webp" alt="Taglet brand style sheet page showing the tag icon and the colour tokens" width="1600" height="1000" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>Live brand sheet</strong>The style sheet ships with the app, so the tokens are checked against the real thing.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Live brand sheet full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="The first screen" data-pages="/assets/img/taglet/welcome.webp">
+          <button type="button" class="asset-frame" aria-label="View The first screen full screen"><img src="/assets/img/taglet/welcome.webp" alt="Taglet welcome screen: a patina tag on a string above Add songs and a drop area" width="1600" height="1000" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>The first screen</strong>It opens straight onto the upload screen. No sign-up, no tour.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View The first screen full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="chapter" id="decisions" aria-labelledby="h-decisions">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 5</span>
+          <h2 id="h-decisions" data-reveal="lines">Calls that shaped it</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>These are the decisions I'd defend in a review, and why I made them.</p>
+        </div>
+      </div>
+      <ul class="decisions" data-reveal="stack">
+        <li><h3>One field per artist</h3><p>Tools write "A feat. B", "A/B" or "A; B" inconsistently, and Spotify shows the raw string. Each artist gets their own field, written as "A, B, C" the way Spotify shows its own catalogue. A preview line shows the exact string, and one button applies the same artists to every track.</p></li>
+        <li><h3>MP3, and say why</h3><p>"Which format does Spotify want?" is a forum question. Taglet converts to MP3 at 320 kbps (or V0) and explains why in one sentence. MP3s you add are only re-tagged, never re-encoded, so they keep their quality.</p></li>
+        <li><h3>Gapless by default</h3><p>Encoders add silence at the start and end of a track. Sources are decoded with that removed and every MP3 carries a gapless header, so an album meant to flow doesn't click between songs. An optional switch trims silent edges.</p></li>
+        <li><h3>Untagged files form one album</h3><p>The first audit showed that untagged files dropped together each became their own album, which worked against the main promise. They now form one album, and a lone untagged song becomes a single named after itself.</p></li>
+        <li><h3>New builds replace, not duplicate</h3><p>Drop an updated render of a song you've already tagged and Taglet matches it by file name or title. You confirm before anything is replaced, and the new audio keeps the title, artists, number, album and cover, so Spotify replaces the old file. Every replacement can be undone.</p></li>
+        <li><h3>Link a device instead of a cloud</h3><p>The audio is on the laptop, the cover is in the camera roll and the files need to reach the phone. A QR code or a 10-character code pairs two browsers and sends songs or images either way, end-to-end encrypted. The relay only sees ciphertext.</p></li>
+        <li><h3>Behave like an app on a phone</h3><p>It installs to the home screen, works offline and, once installed, drops zoom and pull-to-refresh and uses bottom sheets you drag to dismiss. On a phone the album cover morphs between the list and the album.</p></li>
+      </ul>
+      <div class="gallery" data-reveal="stack">
+        <figure class="asset" data-title="On a phone" data-pages="/assets/img/taglet/phone-ready.webp">
+          <button type="button" class="asset-frame" aria-label="View On a phone full screen"><img src="/assets/img/taglet/phone-ready.webp" alt="Taglet on a phone, showing the finished album with cover art, title, artist, year and genre" width="600" height="1298" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>On a phone</strong>The same album on a phone, with a dock for Add, Link and Export.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View On a phone full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="The Spotify guide" data-pages="/assets/img/taglet/guide.webp">
+          <button type="button" class="asset-frame" aria-label="View The Spotify guide full screen"><img src="/assets/img/taglet/guide.webp" alt="Taglet guide page, Getting your files into Spotify, with Mac or PC steps" width="1600" height="1000" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>The Spotify guide</strong>A short guide linked from the welcome screen and the end of every export.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View The Spotify guide full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="chapter" id="build" aria-labelledby="h-build">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 6</span>
+          <h2 id="h-build" data-reveal="lines">No framework, no build step</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>Taglet is static files and one small Cloudflare Worker. Decoding and encoding run in ffmpeg.wasm on the visitor's device, and a tag writer, a metadata parser and a store-only zip writer are plain JavaScript with their own tests. The Worker relays encrypted device links, stores encrypted share links for 30 days and handles optional sign-in.</p>
+          <p>Privacy is built into the architecture, not only the copy. Share links are encrypted on the device with AES-GCM before upload, and the key lives in the link's fragment, which a server never sees. Usage is counted anonymously with no cookies, and no file names, titles or emails are ever stored.</p>
+        </div>
+      </div>
+      <ul class="stats" data-reveal="stack">
+        <li><span class="stat-num">0</span><span class="stat-label">Files uploaded to convert or tag a song</span></li>
+        <li><span class="stat-num">30 <i>days</i></span><span class="stat-label">Share links kept, as ciphertext only</span></li>
+        <li><span class="stat-num">9+</span><span class="stat-label">Input formats converted to MP3</span></li>
+      </ul>
+    </section>
+
+    <section class="chapter" id="results" aria-labelledby="h-results">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 7</span>
+          <h2 id="h-results" data-reveal="lines">Audited, fixed, measured again</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>I audited the live site on 10 November 2026 at 390 by 844 (touch) and 1440 by 900, against WCAG 2.2 AA, Nielsen's ten heuristics and my own brand sheet, using automated probes plus keyboard and reading passes. The first pass found six issues. All six are fixed and re-measured.</p>
+        </div>
+      </div>
+      <div class="table-scroll" data-reveal="stack">
+        <table class="compare">
+          <thead><tr><th scope="col">Issue</th><th scope="col">What I measured</th><th scope="col">Fix</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Footer links too small</th><td>21px tall, against a 44px house rule</td><td>Links are now 44px tall</td></tr>
+            <tr><th scope="row">Select named by its options</th><td>Accessible name swallowed every option</td><td>An explicit label</td></tr>
+            <tr><th scope="row">Low-contrast duration</th><td>4.24:1 on the selected row, needs 4.5:1</td><td>Selected rows use a lighter paper tone (8.5:1 or better)</td></tr>
+            <tr><th scope="row">No h1 in the editor</th><td>Heading outline began at h2</td><td>A visually hidden h1</td></tr>
+            <tr><th scope="row">Analytics beacon injected</th><td>Contradicted the privacy page's "no analytics" and tripped the CSP</td><td>Pages are served with no-transform so nothing is injected</td></tr>
+            <tr><th scope="row">Every untagged file its own album</th><td>Worked against the main promise</td><td>One album per drop, a single for a lone song</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul class="stats" data-reveal="stack">
+        <li><span class="stat-num">6<i>/6</i></span><span class="stat-label">First-pass issues fixed and re-measured</span></li>
+        <li><span class="stat-num">4.5<i>:1+</i></span><span class="stat-label">Text contrast on every measured node, 16 to 66 per page</span></li>
+        <li><span class="stat-num">0</span><span class="stat-label">Contrast, tap-target, heading or overflow failures in the final pass</span></li>
+      </ul>
+    </section>
+
+    <section class="chapter" id="next" aria-labelledby="h-next">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 8</span>
+          <h2 id="h-next" data-reveal="lines">What I haven't verified</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>An audit finds inconsistency and broken rules. It can't say whether the album check actually calms someone down, and some things I haven't been able to test yet.</p>
+          <ol class="question-list">
+            <li>A real iPhone and a real Android phone. Phone checks used Chrome's touch emulation at 390px.</li>
+            <li>Link a device across two networks. I tested it between two tabs on one machine. It relays through Cloudflare, so network address translation shouldn't matter, but I haven't measured cellular to Wi-Fi.</li>
+            <li>How Spotify itself displays the exported files. I checked the tags by reading them back with ffmpeg.</li>
+            <li>Usability testing with people who actually have unreleased music to get into Spotify.</li>
+          </ol>
+          <p>The decision I'd repeat is making the album the unit. Fields stored once, a check on the whole album and a status that's part of the cover made the rest of the interface simpler. The weak spot is that I audited my own work. If I did it again, I'd put it in front of real musicians before writing the audit.</p>
+        </div>
+      </div>
+    </section>
+  </article>
+
+  <section class="more wrap" aria-labelledby="more-title">
+    <h2 id="more-title" data-reveal="lines">Read more of my case studies</h2>
+    <ul class="more-grid" data-reveal="stack">
+      <li><a class="more-link" href="/work/any-day-now/"><div class="work-media cover-anydaynow"><img src="/assets/img/anydaynow/cover.webp?v=3" alt="" width="1600" height="1100" loading="lazy" decoding="async"></div><h3>Any Day Now <span aria-hidden="true">&rarr;</span></h3><p>A package tracker in plain language, for web, iOS and Android</p></a></li>
+      <li><a class="more-link" href="/work/blendwright/"><div class="work-media cover-blendwright"><img src="/assets/img/blendwright/cover.webp?v=4" alt="" width="1600" height="1100" loading="lazy" decoding="async"></div><h3>Blendwright <span aria-hidden="true">&rarr;</span></h3><p>A custom protein powder site built around a formula label</p></a></li>
+    </ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-cta">
+      <p>Hiring for a UX internship, or want to talk through a project?</p>
+      <a class="footer-mail" href="mailto:steviegmclane@gmail.com">steviegmclane@gmail.com</a>
+    </div>
+    <div class="footer-bottom">
+      <ul>
+        <li><a class="nav-link" href="/">Home</a></li>
+        <li><a class="nav-link" href="/about/">About me</a></li>
+        <li><button type="button" class="nav-link" data-open="resume-dialog">Resume</button></li>
+        <li><button type="button" class="nav-link" data-open="contact-dialog">Contact</button></li>
+      </ul>
+      <small>&copy; 2026 Stevie McLane</small>
+    </div>
+  </div>
+</footer>
+
+<!-- SHARED DIALOGS: keep identical on every page -->
+<dialog class="sheet" id="resume-dialog" aria-labelledby="resume-title">
+  <div class="sheet-inner">
+    <div class="sheet-head">
+      <h2 id="resume-title">Resume</h2>
+      <div class="sheet-tools">
+        <button type="button" class="icon-btn" data-fullscreen="resume-asset" aria-label="View resume full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+        <a class="icon-btn" href="/resume.pdf" download="StevieMcLane_Resume.pdf" aria-label="Download resume as PDF"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+        <button type="button" class="icon-btn" data-close aria-label="Close resume"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+    </div>
+    <figure class="asset resume-preview" id="resume-asset" data-title="Stevie McLane, resume">
+      <button type="button" class="asset-frame" aria-label="View resume full screen"><img src="/assets/img/resume.webp" alt="Resume of Stevie McLane, Creative Director and UX Designer" width="1700" height="2200" loading="lazy"></button>
+      <a hidden href="/resume.pdf" download="StevieMcLane_Resume.pdf" tabindex="-1">Download</a>
+    </figure>
+  </div>
+</dialog>
+
+<dialog class="sheet" id="contact-dialog" aria-labelledby="contact-title">
+  <div class="sheet-inner">
+    <div class="sheet-head">
+      <h2 id="contact-title">Get in touch</h2>
+      <div class="sheet-tools">
+        <button type="button" class="icon-btn" data-close aria-label="Close contact links"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+    </div>
+    <ul class="contact-list">
+      <li><a href="mailto:steviegmclane@gmail.com"><span class="k">Email</span><span class="v">steviegmclane@gmail.com</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></li>
+      <li><a href="https://www.linkedin.com/in/stevie-mclane-bb3a3337b/" target="_blank" rel="noopener"><span class="k">LinkedIn</span><span class="v">stevie-mclane</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></li>    </ul>
+  </div>
+</dialog>
+
+<dialog class="viewer" id="viewer" aria-label="Full screen view">
+  <div class="viewer-bg"></div>
+  <div class="viewer-scroll"><div class="viewer-pages"></div></div>
+  <div class="viewer-bar">
+    <p class="viewer-title"></p>
+    <div class="sheet-tools">
+      <a class="icon-btn" data-viewer-download href="#" download aria-label="Download this file"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+      <button type="button" class="icon-btn" data-viewer-close aria-label="Close full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+  </div>
+</dialog>
+<!-- /SHARED DIALOGS -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
+<script src="/assets/js/site.js?v=20261115"></script>
+</body>
+</html>
