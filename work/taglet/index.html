@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400..900&family=Bricolage+Grotesque:opsz,wght@12..96,700&family=Hanken+Grotesk:wght@400;600&family=JetBrains+Mono:wght@500&display=swap">
-<link rel="stylesheet" href="/assets/css/site.css?v=20261115">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261117">
 <script>
 (function (r) {
   if (!('onpagereveal' in window)) r.classList.add('no-vt');
@@ -145,7 +145,7 @@
           <p>Beside the album sits a live check. It reads "Ready for Spotify", or it lists what's wrong, each problem with a one-tap fix: fill in the album artist, number tracks in order, add a cover. The tag hanging off the cover is the same one in the logo, so the status feels like part of the object instead of a warning banner.</p>
         </div>
       </div>
-      <div class="gallery" data-reveal="stack">
+      <div class="gallery two" data-reveal="stack">
         <figure class="asset" data-title="Before: 3 to fix" data-pages="/assets/img/taglet/editor-before.webp">
           <button type="button" class="asset-frame" aria-label="View Before: 3 to fix full screen"><img src="/assets/img/taglet/editor-before.webp" alt="Taglet editor with three songs loaded and an empty album: a tag reads 3 to fix for Spotify, with a list of fixes" width="1600" height="1000" loading="lazy" decoding="async"></button>
           <figcaption><p class="asset-caption"><strong>Before: 3 to fix</strong>Three songs dropped in. The album check lists each problem with a one-tap fix.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Before: 3 to fix full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
@@ -187,7 +187,7 @@
         <div><span class="k">Interface</span><p class="tg-body">Hanken Grotesk for every control</p><span class="v">Body text, labels and buttons</span></div>
         <div><span class="k">Data</span><p class="tg-mono">JetBrains Mono · 01/12</p><span class="v">Only data: track numbers, durations, file names, pairing codes</span></div>
       </div>
-      <div class="gallery" data-reveal="stack">
+      <div class="gallery two" data-reveal="stack">
         <figure class="asset" data-title="Live brand sheet" data-pages="/assets/img/taglet/brand.webp">
           <button type="button" class="asset-frame" aria-label="View Live brand sheet full screen"><img src="/assets/img/taglet/brand.webp" alt="Taglet brand style sheet page showing the tag icon and the colour tokens" width="1600" height="1000" loading="lazy" decoding="async"></button>
           <figcaption><p class="asset-caption"><strong>Live brand sheet</strong>The style sheet ships with the app, so the tokens are checked against the real thing.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Live brand sheet full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
@@ -218,14 +218,18 @@
         <li><h3>Link a device instead of a cloud</h3><p>The audio is on the laptop, the cover is in the camera roll and the files need to reach the phone. A QR code or a 10-character code pairs two browsers and sends songs or images either way, end-to-end encrypted. The relay only sees ciphertext.</p></li>
         <li><h3>Behave like an app on a phone</h3><p>It installs to the home screen, works offline and, once installed, drops zoom and pull-to-refresh and uses bottom sheets you drag to dismiss. On a phone the album cover morphs between the list and the album.</p></li>
       </ul>
-      <div class="gallery" data-reveal="stack">
-        <figure class="asset" data-title="On a phone" data-pages="/assets/img/taglet/phone-ready.webp">
-          <button type="button" class="asset-frame" aria-label="View On a phone full screen"><img src="/assets/img/taglet/phone-ready.webp" alt="Taglet on a phone, showing the finished album with cover art, title, artist, year and genre" width="600" height="1298" loading="lazy" decoding="async"></button>
-          <figcaption><p class="asset-caption"><strong>On a phone</strong>The same album on a phone, with a dock for Add, Link and Export.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View On a phone full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+      <div class="gallery phones" data-reveal="stack">
+        <figure class="asset" data-title="1. Add songs" data-pages="/assets/img/taglet/phone-welcome.webp">
+          <button type="button" class="asset-frame" aria-label="View 1. Add songs full screen"><img src="/assets/img/taglet/phone-welcome.webp" alt="Taglet on a phone: the welcome screen with a patina tag on a string and an Add songs button" width="600" height="1298" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>1. Add songs</strong>Open it and drop songs in. Nothing to sign up for.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View 1. Add songs full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
         </figure>
-        <figure class="asset" data-title="The Spotify guide" data-pages="/assets/img/taglet/guide.webp">
-          <button type="button" class="asset-frame" aria-label="View The Spotify guide full screen"><img src="/assets/img/taglet/guide.webp" alt="Taglet guide page, Getting your files into Spotify, with Mac or PC steps" width="1600" height="1000" loading="lazy" decoding="async"></button>
-          <figcaption><p class="asset-caption"><strong>The Spotify guide</strong>A short guide linked from the welcome screen and the end of every export.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View The Spotify guide full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        <figure class="asset" data-title="2. See what to fix" data-pages="/assets/img/taglet/phone-before.webp">
+          <button type="button" class="asset-frame" aria-label="View 2. See what to fix full screen"><img src="/assets/img/taglet/phone-before.webp" alt="Taglet on a phone with a new album: an empty cover, a tag reading 3 to fix for Spotify, and the album title field" width="600" height="1298" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>2. See what to fix</strong>The album check appears as soon as songs are in.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View 2. See what to fix full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="3. Ready" data-pages="/assets/img/taglet/phone-ready.webp">
+          <button type="button" class="asset-frame" aria-label="View 3. Ready full screen"><img src="/assets/img/taglet/phone-ready.webp" alt="Taglet on a phone, showing the finished album with cover art, title, artist, year and genre" width="600" height="1298" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>3. Ready</strong>The same album on a phone, with a dock for Add, Link and Export.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View 3. Ready full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
         </figure>
       </div>
     </section>
