@@ -34,6 +34,7 @@ body[data-case="sld"] { --accent: #ff3d9a; --accent-2: #00a0e9; }
 body[data-case="anydaynow"] { --accent: #7aa5ff; }
 body[data-case="blendwright"] { --accent: #ec6a3f; }
 body[data-case="taglet"] { --accent: #46c2b0; }
+body[data-case="freshroute"] { --accent: #b4ec6a; }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
@@ -247,6 +248,7 @@ ul, ol { margin: 0; padding: 0; }
 .work-link[data-case="anydaynow"] { --item-accent: #7aa5ff; }
 .work-link[data-case="blendwright"] { --item-accent: #ec6a3f; }
 .work-link[data-case="taglet"] { --item-accent: #46c2b0; }
+.work-link[data-case="freshroute"] { --item-accent: #b4ec6a; }
 .work-meta {
   display: flex;
   flex-wrap: wrap;
@@ -395,6 +397,7 @@ body[data-case] .nav-link[aria-current="page"] { color: var(--text); }
 .case-bg.cover-anydaynow img { filter: brightness(0.5) saturate(1.1); }
 .case-bg.cover-blendwright img { filter: brightness(0.4); }
 .case-bg.cover-taglet img { filter: brightness(0.5) saturate(1.05); }
+.case-bg.cover-freshroute img { filter: brightness(0.45); }
 .case-hero .back-link { color: rgba(237, 235, 230, 0.8); }
 @media (max-width: 560px) {
   .case-hero { padding-top: calc(68px + 32px); min-height: 0; }
@@ -1314,6 +1317,7 @@ dialog::backdrop { background: rgba(5, 4, 8, 0.72); }
 .cover-anydaynow { view-transition-name: cover-anydaynow; }
 .cover-blendwright { view-transition-name: cover-blendwright; }
 .cover-taglet { view-transition-name: cover-taglet; }
+.cover-freshroute { view-transition-name: cover-freshroute; }
 
 /* FlexiDoc: the published Figma Make prototype, framed as a phone. */
 .demo-card {

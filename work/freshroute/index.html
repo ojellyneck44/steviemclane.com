@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FreshRoute case study, Stevie McLane</title>
+<meta name="description" content="How a UNT team designed and built FreshRoute, an iPad app that shows a food pantry when its food is arriving, checks it in at the door and keeps proof that cold food stayed cold: research, ideation, wireframes, brand, prototype and heuristic evaluation.">
+<meta property="og:title" content="FreshRoute case study, Stevie McLane">
+<meta property="og:description" content="How a UNT team designed and built FreshRoute, an iPad app that shows a food pantry when its food is arriving, checks it in at the door and keeps proof that cold food stayed cold: research, ideation, wireframes, brand, prototype and heuristic evaluation.">
+<meta property="og:image" content="https://steviemclane.com/assets/img/freshroute/cover.webp?v=1">
+<meta name="theme-color" content="#1a1c20">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png?v=2">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16.png?v=2">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400..900&family=Bricolage+Grotesque:opsz,wght@12..96,700&family=Hanken+Grotesk:wght@400;600&family=JetBrains+Mono:wght@500&family=Overpass:wght@800&display=swap">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261126">
+<script>
+(function (r) {
+  if (!('onpagereveal' in window)) r.classList.add('no-vt');
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    r.classList.add('motion');
+    setTimeout(function () { if (!window.gsap) r.classList.remove('motion'); }, 4000);
+  }
+})(document.documentElement);
+</script>
+</head>
+<body data-case="freshroute">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="wordmark" href="/">Stevie McLane</a>
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        <li><a class="nav-link" href="/#work" aria-current="page">Work</a></li>
+        <li><a class="nav-link" href="/about/">About</a></li>
+        <li><button type="button" class="nav-link" data-open="resume-dialog">Resume</button></li>
+        <li><button type="button" class="nav-link" data-open="contact-dialog">Contact</button></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="case-hero">
+    <div class="case-bg cover-freshroute" aria-hidden="true"><img src="/assets/img/freshroute/hero-bg.webp?v=1" alt="" width="2400" height="1350" fetchpriority="high"></div>
+    <div class="wrap case-hero-inner">
+      <a class="back-link" href="/#work"><span aria-hidden="true">&larr;</span> All work</a>
+      <h1 class="case-title" data-reveal="load">FreshRoute</h1>
+      <p class="case-summary" data-reveal="load">An iPad app for food pantries that shows when food is on its way, checks each delivery in at the door, and keeps proof that cold food stayed cold.</p>
+      <dl class="case-meta" data-reveal="load">
+        <div><dt>Role</dt><dd>UX designer and developer, on a team of four</dd></div>
+        <div><dt>Timeline</dt><dd>September to November 2026</dd></div>
+        <div><dt>Deliverable</dt><dd>Research, wireframes, style sheet, working iPad web app and a heuristic evaluation</dd></div>
+        <div><dt>Status</dt><dd>Working prototype at <a class="text-link" href="https://freshroute.pages.dev" target="_blank" rel="noopener">freshroute.pages.dev</a></dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="chapter-head" style="margin-top: clamp(32px, 5vw, 64px);">
+      <div></div>
+      <div class="prose">
+        <p class="prose-lead" data-reveal="text">FreshRoute was a semester project for a UX class at the University of North Texas, with Rosly Tavarez, Anaya Smith and Alyssa Cuarenta. We researched together, from interviews to the design studio. I turned that research into the wireframes, the brand and the working prototype, then ran the heuristic evaluation.</p>
+        <p data-reveal="text">This is the work so far. We haven't tested it with pantry staff yet, and the case study says where that leaves gaps.</p>
+      </div>
+    </div>
+  </div>
+
+  <nav class="timeline" aria-label="Case study steps">
+    <div class="wrap">
+      <ol>
+        <li><a href="#brief"><span class="node">1</span>The brief</a></li>
+        <li><a href="#research"><span class="node">2</span>Research</a></li>
+        <li><a href="#people"><span class="node">3</span>Who it&#x27;s for</a></li>
+        <li><a href="#ideas"><span class="node">4</span>Ideas</a></li>
+        <li><a href="#wireframes"><span class="node">5</span>Wireframes</a></li>
+        <li><a href="#product"><span class="node">6</span>The product</a></li>
+        <li><a href="#brand"><span class="node">7</span>Brand</a></li>
+        <li><a href="#evaluation"><span class="node">8</span>Evaluation</a></li>
+        <li><a href="#next"><span class="node">9</span>What&#x27;s next</a></li>
+      </ol>
+      <div class="timeline-track" aria-hidden="true"><div class="timeline-fill"></div></div>
+    </div>
+  </nav>
+
+  <article class="wrap">
+    <section class="chapter" id="brief" aria-labelledby="h-brief">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 1</span>
+          <h2 id="h-brief" data-reveal="lines">Food arrives, and nobody saw it coming</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>Texas has the highest food insecurity rate in the country: 6.06 million people, about 1 in 5. Food pantries are the last step between donated food and the families who need it, and they run on very little staff time.</p>
+          <p>We started from food waste and narrowed to one handoff: food moving from a parent food bank and local grocery stores into a pantry. That's where time, food and trust get lost.</p>
+          <ol class="question-list">
+            <li>Find the pain points in how a pantry receives food today.</li>
+            <li>Design something that fits the workflow pantries already have. The ordering portal, the delivery windows and the receiving steps stay. FreshRoute makes them visible.</li>
+          </ol>
+        </div>
+      </div>
+
+    </section>
+    <section class="chapter" id="research" aria-labelledby="h-research">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 2</span>
+          <h2 id="h-research" data-reveal="lines">We went to the pantry</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>We used five methods: a contextual inquiry and interview with the coordinator of the Diamond Eagle Basic Needs Hub at UNT, an interview with a manager and driver at Tarrant Area Food Bank, a competitive feature analysis of four apps, a heuristic audit of Careit (the donation platform pantries use, 40 findings), and desk research on how parent food banks supply their pantries.</p>
+          <p>The coordinator showed us the shelves, the six fridge and freezer units and the food bank's ordering portal. The Hub sees about 600 visits a week, and a truck from Tarrant Area Food Bank arrives every Thursday, "usually around 10 or 11, depends on their traffic."</p>
+        </div>
+      </div>
+      <div class="gallery two" data-reveal="stack">
+        <figure class="asset" data-title="The pantry" data-pages="/assets/img/freshroute/pantry-shelves.webp">
+          <button type="button" class="asset-frame" aria-label="View The pantry full screen"><img src="/assets/img/freshroute/pantry-shelves.webp" alt="Shelves of canned food at a campus food pantry" width="1400" height="1050" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>The pantry</strong>Canned goods on the Hub's shelves, restocked from the Thursday truck.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View The pantry full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="The ordering portal" data-pages="/assets/img/freshroute/portal.webp">
+          <button type="button" class="asset-frame" aria-label="View The ordering portal full screen"><img src="/assets/img/freshroute/portal.webp" alt="A computer screen showing a food bank ordering portal shopping cart summary with gross weight 3350 lbs" width="1200" height="900" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>The ordering portal</strong>Orders are placed days ahead in the food bank's portal. After that, the pantry has no view of the delivery.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View The ordering portal full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+      </div>
+      <ul class="findings" data-reveal="stack">
+        <li><h3>Deliveries arrive blind</h3><p>"You could be sending an important email and then it's like, oh, the truck's here." The pantry waits out a whole delivery window with no live arrival time.</p></li>
+        <li><h3>Cold food needs proof</h3><p>"Unless they're actively timing when they took it out of the fridge, we don't know how long it's been out, so we can't accept it."</p></li>
+        <li><h3>Drivers can't see ahead either</h3><p>The food bank driver can't see a pickup before he gets there, and blankets are his only cold storage, which limits how far he can go.</p></li>
+      </ul>
+      <div class="table-scroll" data-reveal="stack">
+        <table class="compare">
+          <thead><tr><th scope="col">What we compared</th><th scope="col">What we found</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Too Good To Go, HelloFresh, Plentiful, Misfits Market</th><td>Delivery tracking exists, but only for consumers waiting on a meal kit. Nothing tracks food going into a pantry.</td></tr>
+            <tr><th scope="row">Check-in at pickup</th><td>It works when it's one scan or one tap (Plentiful, Too Good To Go).</td></tr>
+            <tr><th scope="row">Careit, the tool pantries use</th><td>No quantities or storage needs, two status labels that contradict each other, and a process that stops at delivery.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section class="chapter" id="people" aria-labelledby="h-people">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 3</span>
+          <h2 id="h-people" data-reveal="lines">Design for the coordinator, design against shrinkage</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>Our persona, Maya, is built from the interview and the contextual inquiry. She runs a pantry with about 600 visits a week, one other staff member and rotating volunteers, and orders 3,000 to 6,000 lb a week. Her pain points became our design drivers: warn before the truck arrives, time cold food from the moment it's loaded, and show quantities and storage needs up front.</p>
+          <p>Our anti-persona, Max, is a trusted volunteer who quietly resells food that isn't tracked. We didn't design to catch people. We designed to close the gaps: counts at pickup must match drop-off, every receipt records who signed, and the drive record shows when things happened. The same record protects honest drivers.</p>
+        </div>
+      </div>
+      <div class="gallery two" style="grid-template-columns: minmax(0, 720px);" data-reveal="stack">
+        <figure class="asset" data-title="Persona: Maya" data-pages="/assets/img/freshroute/persona.webp">
+          <button type="button" class="asset-frame light pad" aria-label="View Persona: Maya full screen"><img src="/assets/img/freshroute/persona.webp" alt="Persona sheet for Maya, food pantry coordinator, with key metrics, design drivers, pain points and goals" width="1400" height="1811" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>Persona: Maya</strong>Pantry coordinator. Goals, pain points, key metrics and the design drivers they produced.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Persona: Maya full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+      </div>
+      <ul class="findings four" data-reveal="stack">
+        <li><h3>Pantry coordinator</h3><p>The primary user. Decides whether a tool gets adopted.</p></li>
+        <li><h3>Volunteer drivers</h3><p>Pick up from stores. They're recorded, so the app has to help them too.</p></li>
+        <li><h3>Parent food bank</h3><p>Delivers the weekly order, and takes receipts and credit requests.</p></li>
+        <li><h3>Grocery stores</h3><p>Only need an arrival time and a "ready at the dock" button, with no account.</p></li>
+      </ul>
+    </section>
+    <section class="chapter" id="ideas" aria-labelledby="h-ideas">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 4</span>
+          <h2 id="h-ideas" data-reveal="lines">Sketch, vote, combine</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>From the journey map we wrote two need statements. The one we pursued: <strong>pantry managers need a way to monitor deliveries so they can predict arrival, prepare, and make sure donations arrive reliably.</strong></p>
+          <p>Each of us sketched alone, then we dot-voted and combined the strongest ideas. The top votes were colour that creates urgency, driver input that feeds store descriptions, multiple destinations and useful metrics. Gamification was voted out, because it distracts and stresses drivers.</p>
+          <p>On the impact and feasibility matrix, live arrival notifications landed in the no-brainer corner. "Handy Footage", a camera that explains damage, was cheap to build but only explains problems after they happen, so it became a supporting drive record.</p>
+        </div>
+      </div>
+      <div class="gallery two" data-reveal="stack">
+        <figure class="asset" data-title="Storyboards" data-pages="/assets/img/freshroute/need-storyboards.webp">
+          <button type="button" class="asset-frame light pad" aria-label="View Storyboards full screen"><img src="/assets/img/freshroute/need-storyboards.webp" alt="Two storyboard sketches: Notifications from FreshRoute and Handy Footage" width="1600" height="900" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>Storyboards</strong>Our two ideas for the first need: live notifications and Handy Footage.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Storyboards full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="Prioritization matrix" data-pages="/assets/img/freshroute/priority-matrix.webp">
+          <button type="button" class="asset-frame light pad" aria-label="View Prioritization matrix full screen"><img src="/assets/img/freshroute/priority-matrix.webp" alt="Impact versus feasibility matrix placing Notifications from FreshRoute as a no-brainer" width="1600" height="900" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>Prioritization matrix</strong>Notifications won on impact and feasibility.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Prioritization matrix full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+      </div>
+      <div class="gallery three" data-reveal="stack">
+        <figure class="asset" data-title="Sketches and dot votes" data-pages="/assets/img/freshroute/studio-p21.webp">
+          <button type="button" class="asset-frame" aria-label="View Sketches and dot votes full screen"><img src="/assets/img/freshroute/studio-p21.webp" alt="Hands placing sticky notes and dot votes on paper sketches" width="1400" height="788" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>Sketches and dot votes</strong>Individual sketches, then votes.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Sketches and dot votes full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="Three main ideas" data-pages="/assets/img/freshroute/studio-p02.webp">
+          <button type="button" class="asset-frame" aria-label="View Three main ideas full screen"><img src="/assets/img/freshroute/studio-p02.webp" alt="A whiteboard of sketches and sticky notes grouped with green marker" width="1200" height="1600" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>Three main ideas</strong>Votes grouped into three concepts.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Three main ideas full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="Who, what, wow" data-pages="/assets/img/freshroute/studio-p04.webp">
+          <button type="button" class="asset-frame" aria-label="View Who, what, wow full screen"><img src="/assets/img/freshroute/studio-p04.webp" alt="Whiteboard titled Big Idea: Safe Transport with who, what and wow columns" width="1600" height="900" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>Who, what, wow</strong>The big idea, "Safe Transport", on the whiteboard.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Who, what, wow full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+      </div>
+    </section>
+    <section class="chapter" id="wireframes" aria-labelledby="h-wireframes">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 5</span>
+          <h2 id="h-wireframes" data-reveal="lines">Grayscale first, then the real thing</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>Before any visual design, I laid out both flows as annotated mid-fidelity wireframes, 26 pages in all: a driver from finding food to the drive report, and a manager seeing what's coming and checking what happened. They're grayscale on purpose, so feedback stayed on structure and content.</p>
+          <p>Research moved us during the build. The wireframes said "food bank manager", but the pantry coordinator turned out to be the real user, so the pantry's Incoming screen now leads with the food bank truck, and I added a receiving flow.</p>
+        </div>
+      </div>
+      <div class="gallery two" data-reveal="stack">
+        <figure class="asset" data-title="Both flows" data-pages="/assets/img/freshroute/wf-3.webp">
+          <button type="button" class="asset-frame light pad" aria-label="View Both flows full screen"><img src="/assets/img/freshroute/wf-3.webp" alt="Wireframe page showing the two user flows as rows of boxes" width="1600" height="1000" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>Both flows</strong>Flow 1, the driver, 14 screens. Flow 2, the manager, 7 screens.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Both flows full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="Wireframe: drive report" data-pages="/assets/img/freshroute/wf-17.webp">
+          <button type="button" class="asset-frame light pad" aria-label="View Wireframe: drive report full screen"><img src="/assets/img/freshroute/wf-17.webp" alt="Annotated grayscale wireframe of a drive report" width="1600" height="1000" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>Wireframe: drive report</strong>Promise against forecast, with footage.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Wireframe: drive report full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="Wireframe: pickups" data-pages="/assets/img/freshroute/wf-6.webp">
+          <button type="button" class="asset-frame light pad" aria-label="View Wireframe: pickups full screen"><img src="/assets/img/freshroute/wf-6.webp" alt="Annotated grayscale wireframe of the pickups list and map" width="1600" height="1000" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>Wireframe: pickups</strong>List on the left, map on the right.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Wireframe: pickups full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="App: pickups" data-pages="/assets/img/freshroute/pickups.webp">
+          <button type="button" class="asset-frame" aria-label="View App: pickups full screen"><img src="/assets/img/freshroute/pickups.webp" alt="FreshRoute pickups screen with a list of Denton grocery stores and a dark map" width="1600" height="1118" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>App: pickups</strong>The layout held. It gained a map key, filters for open now and cold items, and real Denton stores.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View App: pickups full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="Wireframe: store detail" data-pages="/assets/img/freshroute/wf-8.webp">
+          <button type="button" class="asset-frame light pad" aria-label="View Wireframe: store detail full screen"><img src="/assets/img/freshroute/wf-8.webp" alt="Annotated grayscale wireframe of a store detail page" width="1600" height="1000" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>Wireframe: store detail</strong>What the store usually donates.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Wireframe: store detail full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="App: store detail" data-pages="/assets/img/freshroute/store-detail.webp">
+          <button type="button" class="asset-frame" aria-label="View App: store detail full screen"><img src="/assets/img/freshroute/store-detail.webp" alt="FreshRoute store detail for Walmart Supercenter listing items, amounts, weights and storage" width="1600" height="1118" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>App: store detail</strong>Pack sizes, weights and storage type, after a story about a surprise 19 lb tub of sour cream.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View App: store detail full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+      </div>
+    </section>
+    <section class="chapter" id="product" aria-labelledby="h-product">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 6</span>
+          <h2 id="h-product" data-reveal="lines">A Thursday delivery, end to end</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>The prototype is a working iPad web app with three roles: the pantry, a volunteer driver and the food bank driver. The main scenario follows a real Thursday.</p>
+          <ol class="question-list">
+            <li>The coordinator adds this week's order from the portal confirmation.</li>
+            <li>The truck leaves the warehouse in Fort Worth, and the pantry watches it come in against its delivery window.</li>
+            <li>About 15 minutes out, the iPad gives a heads-up: bring the pallet blanket for the cold lines.</li>
+            <li>At the door, a volunteer checks each line. One case of apples arrived crushed.</li>
+            <li>FreshRoute turns that into a credit request, due within 3 business days.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="gallery three" data-reveal="stack">
+        <figure class="asset" data-title="1. Add a delivery" data-pages="/assets/img/freshroute/add-delivery.webp">
+          <button type="button" class="asset-frame" aria-label="View 1. Add a delivery full screen"><img src="/assets/img/freshroute/add-delivery.webp" alt="FreshRoute Add a delivery form with order number, delivery window and invoice lines" width="1600" height="1118" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>1. Add a delivery</strong>Order number, window, truck and invoice lines.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View 1. Add a delivery full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="2. The truck, live" data-pages="/assets/img/freshroute/incoming-live.webp">
+          <button type="button" class="asset-frame" aria-label="View 2. The truck, live full screen"><img src="/assets/img/freshroute/incoming-live.webp" alt="FreshRoute Incoming screen showing the food bank truck live on a map with an arrival ring reading 9:02" width="1600" height="1118" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>2. The truck, live</strong>A ring shows the arrival time against the delivery window.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View 2. The truck, live full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="3. Heads-up" data-pages="/assets/img/freshroute/heads-up.webp">
+          <button type="button" class="asset-frame" aria-label="View 3. Heads-up full screen"><img src="/assets/img/freshroute/heads-up.webp" alt="FreshRoute Incoming screen with a heads-up banner that the truck is close" width="1600" height="1118" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>3. Heads-up</strong>About 15 minutes out, with what to prepare.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View 3. Heads-up full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="4. Receive" data-pages="/assets/img/freshroute/receive.webp">
+          <button type="button" class="asset-frame" aria-label="View 4. Receive full screen"><img src="/assets/img/freshroute/receive.webp" alt="FreshRoute receive order form with invoice lines marked received or damaged and a temperature field" width="1600" height="1118" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>4. Receive</strong>Line by line: received, short or damaged, plus the temperature and a signature.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View 4. Receive full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="5. Credit to claim" data-pages="/assets/img/freshroute/credit.webp">
+          <button type="button" class="asset-frame" aria-label="View 5. Credit to claim full screen"><img src="/assets/img/freshroute/credit.webp" alt="FreshRoute Receiving screen showing a credit to claim for one damaged case of apples" width="1600" height="1118" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>5. Credit to claim</strong>Problems become a credit request with its deadline.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View 5. Credit to claim full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="Driver notes" data-pages="/assets/img/freshroute/store-notes.webp">
+          <button type="button" class="asset-frame" aria-label="View Driver notes full screen"><img src="/assets/img/freshroute/store-notes.webp" alt="FreshRoute Stores screen with notes from drivers under each store" width="1600" height="1118" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>Driver notes</strong>A volunteer's note on a store page helps the next driver.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Driver notes full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+      </div>
+      <div class="prose" style="margin-top: clamp(32px, 5vw, 56px);" data-reveal="text">
+        <p>Volunteer pickup runs work the same way. The driver plans a route, the store gets a link with the arrival time and a "ready at the dock" button, and the run ends in a report that explains itself in a sentence.</p>
+      </div>
+      <div class="gallery two" data-reveal="stack">
+        <figure class="asset" data-title="Drive report" data-pages="/assets/img/freshroute/drive-report.webp">
+          <button type="button" class="asset-frame" aria-label="View Drive report full screen"><img src="/assets/img/freshroute/drive-report.webp" alt="FreshRoute drive report: arrived 9:07 PM, 5 min after the 9:03 promise, with cold food time and item counts" width="1600" height="1118" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>Drive report</strong>Five minutes late, and why: cold food out of the fridge 22 min, 141 of 141 items delivered.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Drive report full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="Did the truck stay on schedule?" data-pages="/assets/img/freshroute/schedule-chart.webp">
+          <button type="button" class="asset-frame" aria-label="View Did the truck stay on schedule? full screen"><img src="/assets/img/freshroute/schedule-chart.webp" alt="Chart of the promised return time against the forecast, rising 12 minutes after a long stop" width="1600" height="782" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>Did the truck stay on schedule?</strong>The chart names the cause: the stop at Walmart took 24 min, against the 12 planned.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Did the truck stay on schedule? full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+      </div>
+    </section>
+    <section class="chapter" id="brand" aria-labelledby="h-brand">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 7</span>
+          <h2 id="h-brand" data-reveal="lines">Keep the promise, show the proof</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>The brand is a calm, friendly dispatcher. The icon is a ring that's nearly closed, with a leaf: the arrival ring from the app. One green, Sprout, is the only brand colour, and it also means on time. Amber means slipping, coral means late, and cold food gets its own blue. Every status colour comes with a glyph and a word.</p>
+          <p>The first dark mode felt "like a computer terminal", so the green-black neutrals became soft charcoal and monospace left the interface. Gamification, streaks and confetti are ruled out, and so is decorative motion while the vehicle is moving.</p>
+        </div>
+      </div>
+      <div class="palette" data-reveal="swatches">
+        <div class="swatch on-dark" style="background:#1a1c20">Charcoal<span>#1A1C20</span></div>
+        <div class="swatch" style="background:#b4ec6a">Sprout<span>#B4EC6A</span></div>
+        <div class="swatch" style="background:#ffbe5c">Apricot<span>#FFBE5C</span></div>
+        <div class="swatch" style="background:#ff8a76">Tomato<span>#FF8A76</span></div>
+        <div class="swatch" style="background:#86d9f2">Frost<span>#86D9F2</span></div>
+      </div>
+      <div class="type-specimen" data-reveal="stack">
+        <div><span class="k">Display</span><p class="tg-display" style="font-family: Overpass, sans-serif; font-weight: 800;">Overpass</p><span class="v">Headlines, store names and the wordmark</span></div>
+        <div><span class="k">Interface</span><p class="tg-body" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">SF Pro for every control</p><span class="v">The system font, with tabular figures for live numbers</span></div>
+        <div><span class="k">Numbers</span><p class="tg-body" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-variant-numeric: tabular-nums; font-weight: 700;">9:02 · 22:32 · 141 of 141</p><span class="v">Times, counts and the cold timer</span></div>
+      </div>
+      <div class="gallery three" data-reveal="stack">
+        <figure class="asset" data-title="Style sheet" data-pages="/assets/img/freshroute/brand-1.webp">
+          <button type="button" class="asset-frame" aria-label="View Style sheet full screen"><img src="/assets/img/freshroute/brand-1.webp" alt="FreshRoute style sheet cover: Keep the promise. Show the proof, beside the ring and leaf icon" width="1600" height="1000" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>Style sheet</strong>The cover of the brand style sheet.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Style sheet full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="The icon" data-pages="/assets/img/freshroute/brand-13.webp">
+          <button type="button" class="asset-frame" aria-label="View The icon full screen"><img src="/assets/img/freshroute/brand-13.webp" alt="Style sheet page showing the FreshRoute app icon at several sizes" width="1600" height="1000" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>The icon</strong>A ring nearly closed, and a leaf, waiting.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View The icon full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+        <figure class="asset" data-title="Twelve steps of charcoal" data-pages="/assets/img/freshroute/brand-6.webp">
+          <button type="button" class="asset-frame" aria-label="View Twelve steps of charcoal full screen"><img src="/assets/img/freshroute/brand-6.webp" alt="Style sheet page with a twelve-step charcoal neutral scale and contrast table" width="1600" height="1000" loading="lazy" decoding="async"></button>
+          <figcaption><p class="asset-caption"><strong>Twelve steps of charcoal</strong>The neutral scale, with contrast measured for each use.</p><div class="asset-actions"><button type="button" class="icon-btn" data-fullscreen aria-label="View Twelve steps of charcoal full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></figcaption>
+        </figure>
+      </div>
+    </section>
+    <section class="chapter" id="evaluation" aria-labelledby="h-evaluation">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 8</span>
+          <h2 id="h-evaluation" data-reveal="lines">Evaluated, then fixed</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>We couldn't run sessions with pantry staff before the deadline, so we used our fallback: an expert review of the live prototype on an iPad against Nielsen's ten heuristics, across all three flows. It found no catastrophes, one major issue, six minor and four cosmetic.</p>
+          <p>After the review, I fixed the major issue and four of the minor ones in the live app.</p>
+        </div>
+      </div>
+      <div class="table-scroll" data-reveal="stack">
+        <table class="compare">
+          <thead><tr><th scope="col">Finding</th><th scope="col">Severity</th><th scope="col">Fix</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">A signed receipt was final</th><td>3, major (user control)</td><td>Correctable until the credit request is sent, and marked as corrected</td></tr>
+            <tr><th scope="row">The driver could finish before the pantry signed</th><td>2, minor (error prevention)</td><td>The driver's screen waits for the signature, or the pantry signs on the driver's iPad</td></tr>
+            <tr><th scope="row">"I'm at the pantry" showed 39 miles away</th><td>2, minor (system status)</td><td>Arrival buttons turn secondary and show the distance until you're close</td></tr>
+            <tr><th scope="row">Invoice entry depended on typed syntax</th><td>2, minor (recognition)</td><td>Defaults to sample lines for testing; a storage picker or portal import is next</td></tr>
+            <tr><th scope="row">No retry when routing failed</th><td>1, cosmetic (recovery)</td><td>A Try again button</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul class="stats" data-reveal="stack">
+        <li><span class="stat-num">0</span><span class="stat-label">Catastrophes across the ten heuristics</span></li>
+        <li><span class="stat-num">0</span><span class="stat-label">Contrast failures and tap targets under 44 px, across 9 screens</span></li>
+        <li><span class="stat-num">40</span><span class="stat-label">Findings from our earlier audit of Careit, which shaped the design</span></li>
+      </ul>
+    </section>
+    <section class="chapter" id="next" aria-labelledby="h-next">
+      <div class="chapter-head">
+        <div>
+          <span class="chapter-num">Step 9</span>
+          <h2 id="h-next" data-reveal="lines">What we haven't verified</h2>
+        </div>
+        <div class="prose" data-reveal="text">
+          <p>An expert review shows where a design breaks the rules. It can't show how a volunteer behaves at the door on a busy Thursday.</p>
+          <ol class="question-list">
+            <li>Usability testing with pantry staff and volunteers. The facilitator guide is written and ready.</li>
+            <li>A real delivery. The truck's location comes from a stand-in "I drive for the food bank" role. In practice it would likely come from the food bank's own fleet tracking.</li>
+            <li>Importing orders straight from the food bank's portal, instead of typing the invoice lines.</li>
+            <li>A short first-run walkthrough for each role. So far there's only a hint on a driver's first run.</li>
+          </ol>
+          <p>The decision I'd repeat is going to the pantry. One afternoon there moved the whole design, from a dashboard for a food bank manager to an arrival time for the people waiting at the door.</p>
+        </div>
+      </div>
+
+    </section>
+  </article>
+
+  <section class="more wrap" aria-labelledby="more-title">
+    <h2 id="more-title" data-reveal="lines">Read more of my case studies</h2>
+    <ul class="more-grid" data-reveal="stack">
+      <li><a class="more-link" href="/work/any-day-now/"><div class="work-media cover-anydaynow"><img src="/assets/img/anydaynow/cover.webp?v=20261126" alt="" width="1600" height="1100" loading="lazy" decoding="async"></div><h3>Any Day Now <span aria-hidden="true">&rarr;</span></h3><p>A package tracker in plain language, for web, iOS and Android</p></a></li>
+      <li><a class="more-link" href="/work/taglet/"><div class="work-media cover-taglet"><img src="/assets/img/taglet/cover.webp?v=1" alt="" width="1600" height="1100" loading="lazy" decoding="async"></div><h3>Taglet <span aria-hidden="true">&rarr;</span></h3><p>A browser app that tags your own music for Spotify Local Files</p></a></li>
+    </ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-cta">
+      <p>Hiring for a UX internship, or want to talk through a project?</p>
+      <a class="footer-mail" href="mailto:steviegmclane@gmail.com">steviegmclane@gmail.com</a>
+    </div>
+    <div class="footer-bottom">
+      <ul>
+        <li><a class="nav-link" href="/">Home</a></li>
+        <li><a class="nav-link" href="/about/">About me</a></li>
+        <li><button type="button" class="nav-link" data-open="resume-dialog">Resume</button></li>
+        <li><button type="button" class="nav-link" data-open="contact-dialog">Contact</button></li>
+      </ul>
+      <small>&copy; 2026 Stevie McLane</small>
+    </div>
+  </div>
+</footer>
+
+<!-- SHARED DIALOGS: keep identical on every page -->
+<dialog class="sheet" id="resume-dialog" aria-labelledby="resume-title">
+  <div class="sheet-inner">
+    <div class="sheet-head">
+      <h2 id="resume-title">Resume</h2>
+      <div class="sheet-tools">
+        <button type="button" class="icon-btn" data-fullscreen="resume-asset" aria-label="View resume full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+        <a class="icon-btn" href="/resume.pdf" download="StevieMcLane_Resume.pdf" aria-label="Download resume as PDF"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+        <button type="button" class="icon-btn" data-close aria-label="Close resume"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+    </div>
+    <figure class="asset resume-preview" id="resume-asset" data-title="Stevie McLane, resume">
+      <button type="button" class="asset-frame" aria-label="View resume full screen"><img src="/assets/img/resume.webp" alt="Resume of Stevie McLane, Creative Director and UX Designer" width="1700" height="2200" loading="lazy"></button>
+      <a hidden href="/resume.pdf" download="StevieMcLane_Resume.pdf" tabindex="-1">Download</a>
+    </figure>
+  </div>
+</dialog>
+
+<dialog class="sheet" id="contact-dialog" aria-labelledby="contact-title">
+  <div class="sheet-inner">
+    <div class="sheet-head">
+      <h2 id="contact-title">Get in touch</h2>
+      <div class="sheet-tools">
+        <button type="button" class="icon-btn" data-close aria-label="Close contact links"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+    </div>
+    <ul class="contact-list">
+      <li><a href="mailto:steviegmclane@gmail.com"><span class="k">Email</span><span class="v">steviegmclane@gmail.com</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></li>
+      <li><a href="https://www.linkedin.com/in/stevie-mclane-bb3a3337b/" target="_blank" rel="noopener"><span class="k">LinkedIn</span><span class="v">stevie-mclane</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></li>    </ul>
+  </div>
+</dialog>
+
+<dialog class="viewer" id="viewer" aria-label="Full screen view">
+  <div class="viewer-bg"></div>
+  <div class="viewer-scroll"><div class="viewer-pages"></div></div>
+  <div class="viewer-bar">
+    <p class="viewer-title"></p>
+    <div class="sheet-tools">
+      <a class="icon-btn" data-viewer-download href="#" download aria-label="Download this file"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+      <button type="button" class="icon-btn" data-viewer-close aria-label="Close full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+  </div>
+</dialog>
+<!-- /SHARED DIALOGS -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
+<script src="/assets/js/site.js?v=20261115"></script>
+</body>
+</html>
